@@ -1,0 +1,4 @@
+org\lordalex\bedwarshard\config\BedTeam.class
+org\lordalex\bedwarshard\BedWarsHard.class
+org\lordalex\bedwarshard\config\BedMap.class
+org\lordalex\bedwarshard\config\YmlParser.class
