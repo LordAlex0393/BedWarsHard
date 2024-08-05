@@ -3,13 +3,12 @@ package org.lordalex.bedwarshard.config;
 
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Game {
     private HashMap<Player, PlayerInfo> playerInfoMap;
-    private List<PlayerInfo> playerInfoList;
-    private List<Player> spectatorList;
+    private Set<PlayerInfo> playerInfoSet;
+    private Set<Player> spectatorSet;
     private GameState gameState = GameState.WAITING;
     private boolean kickOnLose = false;
     private boolean protectedWorld = true;
@@ -21,50 +20,58 @@ public class Game {
     private boolean limitPlayers = true;
     private int gameLength = 60;
 
+    public Game() {
+        playerInfoMap = new HashMap<>();
+        playerInfoSet = new HashSet<>();
+        spectatorSet = new HashSet<>();
+    }
 
     public PlayerInfo getPlayerInfo(Player player){
         return this.playerInfoMap.get(player);
     }
     public void removePlayerInfo(PlayerInfo playerInfo){
-        this.playerInfoList.remove(playerInfo);
+        this.playerInfoSet.remove(playerInfo);
         this.playerInfoMap.remove(playerInfo);
     }
     public void addPlayerInfo(Player player){
         PlayerInfo playerInfo = new PlayerInfo(player);
-        this.playerInfoList.add(playerInfo);
+        this.playerInfoSet.add(playerInfo);
         this.playerInfoMap.put(player, playerInfo);
+        System.out.println(playerInfoSet.toString());
     }
 
-    public List<PlayerInfo> getPlayerInfoList() {
-        return playerInfoList;
+    public Set<PlayerInfo> getPlayerInfoSet() {
+        return playerInfoSet;
     }
 
     public void addPlayerInfoList(PlayerInfo playerInfo) {
-        this.playerInfoList.add(playerInfo);
+        this.playerInfoSet.add(playerInfo);
     }
 
-    public void removePlayerInfoList(PlayerInfo playerInfo) {
-        this.playerInfoList.remove(playerInfo);
+    public void removePlayerInfoSet(PlayerInfo playerInfo) {
+        this.playerInfoSet.remove(playerInfo);
     }
 
-    public void setPlayerInfoList(List<PlayerInfo> playerInfoList) {
-        this.playerInfoList = playerInfoList;
+    public Set<Player> getSpectatorSet() {
+        return spectatorSet;
     }
 
-    public List<Player> getSpectatorList() {
-        return spectatorList;
+    public void addSpectatorSet(Player player) {
+        this.spectatorSet.add(player);
+        System.out.println(spectatorSet.toString());
     }
 
-    public void addSpectatorList(Player player) {
-        this.spectatorList.add(player);
+    public void removeSpectatorSet(Player player) {
+        this.spectatorSet.remove(player);
     }
 
-    public void removeSpectatorList(Player player) {
-        this.spectatorList.remove(player);
+
+    public HashMap<Player, PlayerInfo> getPlayerInfoMap() {
+        return playerInfoMap;
     }
 
-    public void setSpectatorList(List<Player> playerList) {
-        this.spectatorList = playerList;
+    public void setPlayerInfoMap(HashMap<Player, PlayerInfo> playerInfoMap) {
+        this.playerInfoMap = playerInfoMap;
     }
 
     public GameState getGameState() {

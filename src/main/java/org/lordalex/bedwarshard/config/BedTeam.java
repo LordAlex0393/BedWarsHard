@@ -75,4 +75,18 @@ public class BedTeam {
     public void setIronSpawns(List<String> ironSpawns) {
         this.ironSpawns = ironSpawns;
     }
+
+    @Override
+    public String toString() {
+        return "BedWarsTeam{" +
+                "names='" + names + '\'' +
+                ", color='" + color + '\'' +
+                ", wool=" + wool +
+                ", spawns=" + spawns +
+                ", bed=" + bed +
+                ", villagers=" + villagers +
+                ", bronzeSpawns=" + bronzeSpawns +
+                ", ironSpawns=" + ironSpawns +
+                '}';
+    }
 }

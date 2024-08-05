@@ -1,6 +1,7 @@
 package org.lordalex.bedwarshard.Utils;
 
 import org.bukkit.Bukkit;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -15,6 +16,7 @@ public class GameUtil {
         player.getInventory().setArmorContents(null);
         player.setHealth(20);
         player.setFoodLevel(20);
+        player.setGameMode(GameMode.ADVENTURE);
         player.setCustomName("§f" + player.getName());
         player.setCustomNameVisible(true);
     }

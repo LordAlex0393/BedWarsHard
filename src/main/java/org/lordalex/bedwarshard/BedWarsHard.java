@@ -13,7 +13,7 @@ import java.io.File;
 public final class BedWarsHard extends JavaPlugin {
     private static Plugin instance;
     private static MapConfig mapConfig;
-    private static Game game;
+    private static Game game = new Game();
 
     @Override
     public void onEnable() {
@@ -21,6 +21,8 @@ public final class BedWarsHard extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new OnJoin(), this);
         File file = new File("mapConfig.yml");
         mapConfig = YmlParser.parseMap(file);
+        System.out.println(game.getGameState());
+        System.out.println(game.getPlayerInfoSet());
     }
 
 

@@ -85,4 +85,19 @@ public class MapConfig {
     public void setTeams(HashMap<String, BedTeam> teams) {
         this.teams = teams;
     }
+
+    @Override
+    public String toString() {
+        return "MapConfig{" +
+                "name='" + name + '\n' +
+                ", world='" + world + '\n' +
+                ", lobby='" + lobby + '\n' +
+                ", teamPlayers=" + teamPlayers + '\n' +
+                ", bronzeFrequency=" + bronzeFrequency + '\n' +
+                ", ironFrequency=" + ironFrequency + '\n' +
+                ", goldFrequency=" + goldFrequency + '\n' +
+                ", goldSpawns=" + goldSpawns + '\n' +
+                ", teams=" + teams + '\n' +
+                '}';
+    }
 }
