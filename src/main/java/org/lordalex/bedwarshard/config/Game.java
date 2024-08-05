@@ -31,7 +31,6 @@ public class Game {
     }
     public void removePlayerInfo(PlayerInfo playerInfo){
         this.playerInfoSet.remove(playerInfo);
-        this.playerInfoMap.remove(playerInfo);
     }
     public void addPlayerInfo(Player player){
         PlayerInfo playerInfo = new PlayerInfo(player);
@@ -44,24 +43,20 @@ public class Game {
         return playerInfoSet;
     }
 
-    public void addPlayerInfoList(PlayerInfo playerInfo) {
+    public void addPlayerInfo(PlayerInfo playerInfo) {
         this.playerInfoSet.add(playerInfo);
-    }
-
-    public void removePlayerInfoSet(PlayerInfo playerInfo) {
-        this.playerInfoSet.remove(playerInfo);
     }
 
     public Set<Player> getSpectatorSet() {
         return spectatorSet;
     }
 
-    public void addSpectatorSet(Player player) {
+    public void addSpectator(Player player) {
         this.spectatorSet.add(player);
         System.out.println(spectatorSet.toString());
     }
 
-    public void removeSpectatorSet(Player player) {
+    public void removeSpectator(Player player) {
         this.spectatorSet.remove(player);
     }
 

@@ -17,7 +17,7 @@ import org.lordalex.bedwarshard.config.MapConfig;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
 
-public class OnJoin  implements Listener {
+public class OnJoin implements Listener {
     @EventHandler
     public void onLogin(PlayerLoginEvent e) {
         Game game = BedWarsHard.getGame();
@@ -43,21 +43,26 @@ public class OnJoin  implements Listener {
         GameState gameState = game.getGameState();
         MapConfig mapConfig = BedWarsHard.getMapConfig();
         int playersToStart = mapConfig.getTeamPlayers() * mapConfig.getTeams().size();
-        int currentMapOnline = game.getPlayerInfoSet().size() + game.getSpectatorSet().size();
+        int online = Bukkit.getOnlinePlayers().size();
+        PlayerInfo playerInfo = game.getPlayerInfo(player);
 
-        if(gameState == GameState.WAITING || ((gameState == GameState.STARTING) && (currentMapOnline < playersToStart))){
-            if (game.getPlayerInfo(player) == null){
+        if(gameState == GameState.WAITING || ((gameState == GameState.STARTING) && (Bukkit.getOnlinePlayers().size() < playersToStart))){
+            if (playerInfo == null){
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
-                game.addSpectatorSet(player);
+                game.addSpectator(player);
+                e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок " + player.getName() + " подключился"));
+            }
+            else{
+                e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f подключился"));
             }
 
             GameUtil.clearPlayer(player);
             GameUtil.giveWaitingItems(player);
-            e.setJoinMessage(ColorUtil.getMessage("[" + (currentMapOnline+1) + "/" + playersToStart + "] &e=> &fИгрок " + player.getName() + " подключился"));
+
         }
         else if(gameState == GameState.GAME){
-            PlayerInfo playerInfo = game.getPlayerInfo(player);
             if (playerInfo != null && GameUtil.hasBed(playerInfo.getTeam())){
+                e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f подключился"));
                 GameUtil.clearPlayer(player);
                 GameUtil.playerRespawn(playerInfo);
             }
@@ -65,7 +70,6 @@ public class OnJoin  implements Listener {
                 player.setGameMode(GameMode.SPECTATOR);
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
                 e.setJoinMessage(null);
-                e.setJoinMessage(ColorUtil.getMessage("[" + (currentMapOnline+1) + "/" + playersToStart + "] &e=> &fИгрок " + player.getName() + " подключился"));
             }
         }
     }
