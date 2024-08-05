@@ -3,7 +3,7 @@ package org.lordalex.bedwarshard.config;
 import java.util.HashMap;
 import java.util.List;
 
-public class BedMap {
+public class MapConfig {
     private String name;
     private String world;
     private String lobby;
