@@ -1,6 +1,9 @@
 package org.lordalex.bedwarshard.config;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class BedTeam {
     private String names;
@@ -11,6 +14,17 @@ public class BedTeam {
     private List<String> villagers;
     private List<String> bronzeSpawns;
     private List<String> ironSpawns;
+    private HashSet<PlayerInfo> playerSet = new HashSet<>();
+
+    public HashSet<PlayerInfo> getPlayerSet() {
+        return playerSet;
+    }
+    public void addPlayer(PlayerInfo playerInfo) {
+        playerSet.add(playerInfo);
+    }
+    public void removePlayer(PlayerInfo playerInfo) {
+        playerSet.remove(playerInfo);
+    }
 
     public String getNames() {
         return names;
@@ -74,19 +88,5 @@ public class BedTeam {
 
     public void setIronSpawns(List<String> ironSpawns) {
         this.ironSpawns = ironSpawns;
-    }
-
-    @Override
-    public String toString() {
-        return "BedWarsTeam{" +
-                "names='" + names + '\'' +
-                ", color='" + color + '\'' +
-                ", wool=" + wool +
-                ", spawns=" + spawns +
-                ", bed=" + bed +
-                ", villagers=" + villagers +
-                ", bronzeSpawns=" + bronzeSpawns +
-                ", ironSpawns=" + ironSpawns +
-                '}';
     }
 }

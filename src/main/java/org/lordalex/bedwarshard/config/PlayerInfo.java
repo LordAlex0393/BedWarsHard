@@ -18,6 +18,11 @@ public class PlayerInfo {
         this.player = player;
     }
 
+    public PlayerInfo(Player player, BedTeam team) {
+        this.player = player;
+        this.team = team;
+    }
+
     public Player getPlayer() {
         return player;
     }

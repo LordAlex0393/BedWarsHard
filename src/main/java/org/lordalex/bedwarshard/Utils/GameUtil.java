@@ -5,6 +5,7 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.lordalex.bedwarshard.Items.TeamSelector;
@@ -49,4 +50,13 @@ public class GameUtil {
         playerInfo.getPlayer().teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber)));
     }
 
+
+    public static boolean isEqualsItem(InventoryClickEvent e, String itemDisplayName){
+        if(e.getCurrentItem().getItemMeta().getDisplayName() != null) {
+            return e.getCurrentItem().getItemMeta().getDisplayName().equals(ColorUtil.getMessage(itemDisplayName));
+        }
+        else{
+            return false;
+        }
+    }
 }

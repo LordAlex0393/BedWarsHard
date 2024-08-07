@@ -1,20 +1,26 @@
 package org.lordalex.bedwarshard.Items;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.Utils.GameUtil;
 import org.lordalex.bedwarshard.config.BedTeam;
+import org.lordalex.bedwarshard.config.Game;
+import org.lordalex.bedwarshard.config.PlayerInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 
 public class TeamSelector implements Listener {
     public static void giveTeamSelector(Player player){
@@ -22,15 +28,14 @@ public class TeamSelector implements Listener {
         {
             ItemStack NameTagStack = new ItemStack(Material.NAME_TAG, 1);
             ItemMeta NameTagMeta = NameTagStack.getItemMeta();
-            NameTagMeta.setDisplayName(ColorUtil.getMessage("&eВыбор команды"));
+            NameTagMeta.setDisplayName(ColorUtil.getMessage("&f>> &e&lВыбор команды&f <<"));
             NameTagStack.setItemMeta(NameTagMeta);
             player.getInventory().addItem(NameTagStack);
         }
     }
 
-
     @EventHandler
-    public void onTeamMenuClick(PlayerInteractEvent e) {
+    public void onTeamMenuOpen(PlayerInteractEvent e) {
         Player player = e.getPlayer();
         if(e.getItem() == null) return;
         if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
@@ -52,19 +57,79 @@ public class TeamSelector implements Listener {
         }
 
         int i = 0;
-        for(String key : BedWarsHard.getMapConfig().getTeams().keySet()){
-            BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-            String fullStr = team.getNames();
-            String teamName = fullStr.substring(0, fullStr.indexOf(','));
+        for(String key : teamMap.keySet()){
+            BedTeam team = teamMap.get(key);
+            String[] teamNames = team.getNames().split(",");
 
 
             ItemStack woolStack = new ItemStack( Material.WOOL, 1, (byte)team.getWool());
             ItemMeta woolMeta = woolStack.getItemMeta();
-            woolMeta.setDisplayName(ColorUtil.getMessage("&" + team.getColor() + teamName + " команда"));
+            woolMeta.setDisplayName(ColorUtil.getMessage("&" + team.getColor() + teamNames[0] + " команда"));
+            List<String> woolList = new ArrayList<>();
+            //woolList.add(ColorUtil.getMessage("&dЦена: &f3 железа"));
+            HashSet<PlayerInfo> teamPlayerSet = team.getPlayerSet();
+            if(teamPlayerSet.size() < BedWarsHard.getMapConfig().getTeamPlayers()){
+                woolList.add(ColorUtil.getMessage("&e⇒&7 Нажмите для выбора"));
+            }
+            if(!teamPlayerSet.isEmpty()){
+                woolList.add(" ");
+            }
+            for(PlayerInfo playerInfo : teamPlayerSet){
+                woolList.add(ColorUtil.getMessage("&7" + playerInfo.getPlayer().getName()));
+            }
+            woolMeta.setLore(woolList);
             woolStack.setItemMeta(woolMeta);
             inv.setItem(slots[i], woolStack);
             i++;
         }
         player.openInventory(inv);
+        player.updateInventory();
+    }
+
+    @EventHandler
+    public void onTeamSelect(InventoryClickEvent e){
+        if(e == null) return;
+
+        Player player = (Player) e.getView().getPlayer();
+
+        HashMap<String, BedTeam> teamMap = BedWarsHard.getMapConfig().getTeams();
+
+        if(e.getView().getTitle().equals("Выбор команды")){
+            if(e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null){
+                for(String key : teamMap.keySet()){
+                    Game game = BedWarsHard.getGame();
+                    BedTeam team = teamMap.get(key);
+                    String[] teamNames = team.getNames().split(",");
+
+                    if(GameUtil.isEqualsItem(e, "&" + team.getColor() + teamNames[0] + " команда")){
+                        if(team.getPlayerSet().size() >= BedWarsHard.getMapConfig().getTeamPlayers()){
+                            e.setCancelled(true);
+                            return;
+                        }
+
+                        PlayerInfo playerInfo = game.getPlayerInfo(player);
+                        if(playerInfo == null) {
+                            playerInfo = new PlayerInfo(player, team);
+                        }
+                        else{
+                            for(String k : teamMap.keySet()){
+                                teamMap.get(k).removePlayer(playerInfo);
+                            }
+                        }
+
+                        playerInfo.setTeam(team);
+                        game.addPlayerInfo(playerInfo);
+                        team.addPlayer(playerInfo);
+
+                        player.setCustomName("§" + team.getColor() + player.getName());
+                        player.setCustomNameVisible(true);
+                        player.setPlayerListName(ColorUtil.getMessage("&" + team.getColor() + player.getName()));
+                        player.sendMessage(ColorUtil.getMessage("Вы играете за&" + team.getColor() +  teamNames[1] + " команду"));
+                    }
+                }
+            }
+            player.closeInventory();
+            e.setCancelled(true);
+        }
     }
 }
