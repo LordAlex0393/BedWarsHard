@@ -5,6 +5,9 @@ import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.lordalex.bedwarshard.Items.TeamSelector;
 import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
@@ -21,7 +24,7 @@ public class GameUtil {
         player.setCustomNameVisible(true);
     }
     public static void giveWaitingItems(Player player){
-
+        TeamSelector.giveTeamSelector(player);
     }
     public static void giveSpectatorItems(Player player){
 
@@ -45,4 +48,5 @@ public class GameUtil {
         int spawnNumber = rand.nextInt(team.getSpawns().size());
         playerInfo.getPlayer().teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber)));
     }
+
 }

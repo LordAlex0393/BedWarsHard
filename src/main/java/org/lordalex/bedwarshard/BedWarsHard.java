@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.lordalex.bedwarshard.Events.OnJoin;
 import org.lordalex.bedwarshard.Events.OnQuit;
+import org.lordalex.bedwarshard.Items.TeamSelector;
 import org.lordalex.bedwarshard.config.MapConfig;
 import org.lordalex.bedwarshard.config.Game;
 import org.lordalex.bedwarshard.Utils.YmlParser;
@@ -21,6 +22,7 @@ public final class BedWarsHard extends JavaPlugin {
         instance = this;
         Bukkit.getPluginManager().registerEvents(new OnJoin(), this);
         Bukkit.getPluginManager().registerEvents(new OnQuit(), this);
+        Bukkit.getPluginManager().registerEvents(new TeamSelector(), this);
         File file = new File("mapConfig.yml");
         mapConfig = YmlParser.parseMap(file);
         System.out.println(game.getGameState());
