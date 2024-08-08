@@ -2,6 +2,7 @@ package org.lordalex.bedwarshard.config;
 
 
 import org.bukkit.entity.Player;
+import org.lordalex.bedwarshard.BedWarsHard;
 
 import java.util.*;
 
@@ -31,6 +32,10 @@ public class Game {
     }
     public void removePlayer(Player player){
         this.playerSet.remove(player);
+        this.playerInfoMap.remove(player);
+        for (String k : BedWarsHard.getMapConfig().getTeams().keySet()) {
+            BedWarsHard.getMapConfig().getTeams().get(k).removePlayer(player);
+        }
     }
     public void addPlayerInfo(Player player){
         PlayerInfo playerInfo = new PlayerInfo(player);

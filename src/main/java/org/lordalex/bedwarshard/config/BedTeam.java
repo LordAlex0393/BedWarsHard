@@ -17,6 +17,7 @@ public class BedTeam {
     private List<String> bronzeSpawns;
     private List<String> ironSpawns;
     private HashSet<Player> playerSet = new HashSet<>();
+    private boolean BedState = true;
 
     public HashSet<Player> getPlayerSet() {
         return playerSet;
@@ -26,6 +27,14 @@ public class BedTeam {
     }
     public void removePlayer(Player player){
         playerSet.remove(player);
+    }
+
+    public boolean getBedState() {
+        return BedState;
+    }
+
+    public void setBedState(boolean bedState) {
+        BedState = bedState;
     }
 
     public String getNames() {

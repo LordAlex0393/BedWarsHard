@@ -6,12 +6,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.material.Bed;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.Utils.CustomScoreboard;
 import org.lordalex.bedwarshard.Utils.GameUtil;
-import org.lordalex.bedwarshard.config.Game;
-import org.lordalex.bedwarshard.config.MapConfig;
-import org.lordalex.bedwarshard.config.PlayerInfo;
+import org.lordalex.bedwarshard.config.*;
 
 public class OnQuit implements Listener {
     @EventHandler
@@ -26,8 +26,9 @@ public class OnQuit implements Listener {
 
         if (playerInfo != null) {
             e.setQuitMessage(ColorUtil.getMessage("[" + (online - 1) + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f вышел"));
-            if (!GameUtil.hasBed(playerInfo.getTeam())) {
+            if (!playerInfo.getTeam().getBedState() || BedWarsHard.getGame().getGameState() == GameState.WAITING || BedWarsHard.getGame().getGameState() == GameState.STARTING) {
                 game.removePlayer(player);
+                game.addSpectator(player);
             }
         } else {
             e.setQuitMessage(ColorUtil.getMessage("[" + (online - 1) + "/" + playersToStart + "] &e=> &fИгрок " + player.getName() + " вышел"));
@@ -35,6 +36,15 @@ public class OnQuit implements Listener {
         if (player.getGameMode() == GameMode.SPECTATOR) {
             e.setQuitMessage(null);
             game.removeSpectator(player);
+        }
+        for(Player all : Bukkit.getOnlinePlayers()){
+            CustomScoreboard.updateScoreboard(all);
+        }
+        for(String key : BedWarsHard.getMapConfig().getTeams().keySet()){
+            System.out.println(key + ":");
+            for(Player pl : BedWarsHard.getMapConfig().getTeams().get(key).getPlayerSet()){
+                System.out.println(pl.getName());
+            }
         }
     }
 }

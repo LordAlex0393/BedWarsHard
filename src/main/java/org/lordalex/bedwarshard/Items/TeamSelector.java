@@ -14,6 +14,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.Utils.CustomScoreboard;
 import org.lordalex.bedwarshard.Utils.GameUtil;
 import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.Game;
@@ -86,6 +87,9 @@ public class TeamSelector implements Listener {
                         player.setPlayerListName(ColorUtil.getMessage("&" + team.getColor() + player.getName()));
                         player.sendMessage(ColorUtil.getMessage("Вы играете за&" + team.getColor() + teamNames[1] + " команду"));
                         player.closeInventory();
+                        for(Player all : Bukkit.getOnlinePlayers()){
+                            CustomScoreboard.updateScoreboard(all);
+                        }
                     }
                     else if (GameUtil.isEqualsItem(e, "&fВыйти из команды")) {
                         for (String k : teamMap.keySet()) {
@@ -97,6 +101,9 @@ public class TeamSelector implements Listener {
                         player.setCustomName("§f" + player.getName());
                         player.setPlayerListName(ColorUtil.getMessage("&f" + player.getName()));
                         player.closeInventory();
+                        for(Player all : Bukkit.getOnlinePlayers()){
+                            CustomScoreboard.updateScoreboard(all);
+                        }
                     }
                 }
             }

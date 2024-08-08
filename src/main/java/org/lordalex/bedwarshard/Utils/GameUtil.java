@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Items.TeamSelector;
 import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.PlayerInfo;
@@ -37,9 +38,11 @@ public class GameUtil {
         for(String bedLoc : team.getBed()){
             Location loc = YmlParser.parseLocation(Bukkit.getWorld("world"), bedLoc);
             if(loc.getBlock().getType() != Material.BED_BLOCK) {
+                team.setBedState(false);
                 return false;
             }
         }
+        team.setBedState(true);
         return true;
     }
 

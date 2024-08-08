@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.Utils.CustomScoreboard;
 import org.lordalex.bedwarshard.Utils.GameUtil;
 import org.lordalex.bedwarshard.Utils.YmlParser;
 import org.lordalex.bedwarshard.config.Game;
@@ -71,6 +72,9 @@ public class OnJoin implements Listener {
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
                 e.setJoinMessage(null);
             }
+        }
+        for(Player all : Bukkit.getOnlinePlayers()){
+            CustomScoreboard.updateScoreboard(all);
         }
     }
 }
