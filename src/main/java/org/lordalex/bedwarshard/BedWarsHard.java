@@ -25,8 +25,6 @@ public final class BedWarsHard extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new TeamSelector(), this);
         File file = new File("mapConfig.yml");
         mapConfig = YmlParser.parseMap(file);
-        System.out.println(game.getGameState());
-        System.out.println(mapConfig.getTeams().get("red").getColor());
     }
 
 

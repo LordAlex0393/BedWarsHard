@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Game {
     private HashMap<Player, PlayerInfo> playerInfoMap;
-    private Set<PlayerInfo> playerInfoSet;
+    private Set<Player> playerSet;
     private Set<Player> spectatorSet;
     private GameState gameState = GameState.WAITING;
     private boolean kickOnLose = false;
@@ -22,29 +22,29 @@ public class Game {
 
     public Game() {
         playerInfoMap = new HashMap<>();
-        playerInfoSet = new HashSet<>();
+        playerSet = new HashSet<>();
         spectatorSet = new HashSet<>();
     }
 
-    public PlayerInfo getPlayerInfo(Player player){
+    public PlayerInfo getPlayer(Player player){
         return this.playerInfoMap.get(player);
     }
-    public void removePlayerInfo(PlayerInfo playerInfo){
-        this.playerInfoSet.remove(playerInfo);
+    public void removePlayer(Player player){
+        this.playerSet.remove(player);
     }
     public void addPlayerInfo(Player player){
         PlayerInfo playerInfo = new PlayerInfo(player);
-        this.playerInfoSet.add(playerInfo);
+        this.playerSet.add(player);
         this.playerInfoMap.put(player, playerInfo);
-        System.out.println(playerInfoSet.toString());
     }
 
-    public Set<PlayerInfo> getPlayerInfoSet() {
-        return playerInfoSet;
+    public Set<Player> getPlayerSet() {
+        return playerSet;
     }
 
     public void addPlayerInfo(PlayerInfo playerInfo) {
-        this.playerInfoSet.add(playerInfo);
+        this.playerSet.add(playerInfo.getPlayer());
+        this.playerInfoMap.put(playerInfo.getPlayer(), playerInfo);
     }
 
     public Set<Player> getSpectatorSet() {
@@ -53,7 +53,6 @@ public class Game {
 
     public void addSpectator(Player player) {
         this.spectatorSet.add(player);
-        System.out.println(spectatorSet.toString());
     }
 
     public void removeSpectator(Player player) {

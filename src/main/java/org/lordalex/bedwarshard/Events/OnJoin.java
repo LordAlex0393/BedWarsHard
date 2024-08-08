@@ -24,7 +24,7 @@ public class OnJoin implements Listener {
         GameState gameState = game.getGameState();
         MapConfig mapConfig = BedWarsHard.getMapConfig();
         int playersToStart = mapConfig.getTeamPlayers() * mapConfig.getTeams().size();
-        int currentMapOnline = game.getPlayerInfoSet().size() + game.getSpectatorSet().size();
+        int currentMapOnline = game.getPlayerSet().size() + game.getSpectatorSet().size();
 
         if((gameState == GameState.STARTING) && (currentMapOnline >= playersToStart)){
             e.setKickMessage(ColorUtil.getMessage("&c" + e.getHostname()));
@@ -44,7 +44,7 @@ public class OnJoin implements Listener {
         MapConfig mapConfig = BedWarsHard.getMapConfig();
         int playersToStart = mapConfig.getTeamPlayers() * mapConfig.getTeams().size();
         int online = Bukkit.getOnlinePlayers().size();
-        PlayerInfo playerInfo = game.getPlayerInfo(player);
+        PlayerInfo playerInfo = game.getPlayer(player);
 
         if(gameState == GameState.WAITING || ((gameState == GameState.STARTING) && (Bukkit.getOnlinePlayers().size() < playersToStart))){
             if (playerInfo == null){

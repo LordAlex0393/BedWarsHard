@@ -1,5 +1,7 @@
 package org.lordalex.bedwarshard.config;
 
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -14,16 +16,16 @@ public class BedTeam {
     private List<String> villagers;
     private List<String> bronzeSpawns;
     private List<String> ironSpawns;
-    private HashSet<PlayerInfo> playerSet = new HashSet<>();
+    private HashSet<Player> playerSet = new HashSet<>();
 
-    public HashSet<PlayerInfo> getPlayerSet() {
+    public HashSet<Player> getPlayerSet() {
         return playerSet;
     }
-    public void addPlayer(PlayerInfo playerInfo) {
-        playerSet.add(playerInfo);
+    public void addPlayer(Player player) {
+        playerSet.add(player);
     }
-    public void removePlayer(PlayerInfo playerInfo) {
-        playerSet.remove(playerInfo);
+    public void removePlayer(Player player){
+        playerSet.remove(player);
     }
 
     public String getNames() {

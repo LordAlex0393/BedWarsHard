@@ -22,12 +22,12 @@ public class OnQuit implements Listener {
         int playersToStart = mapConfig.getTeamPlayers() * mapConfig.getTeams().size();
         int online = Bukkit.getOnlinePlayers().size();
 
-        PlayerInfo playerInfo = game.getPlayerInfo(player);
+        PlayerInfo playerInfo = game.getPlayer(player);
 
         if (playerInfo != null) {
             e.setQuitMessage(ColorUtil.getMessage("[" + (online - 1) + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f вышел"));
             if (!GameUtil.hasBed(playerInfo.getTeam())) {
-                game.removePlayerInfo(playerInfo);
+                game.removePlayer(player);
             }
         } else {
             e.setQuitMessage(ColorUtil.getMessage("[" + (online - 1) + "/" + playersToStart + "] &e=> &fИгрок " + player.getName() + " вышел"));
