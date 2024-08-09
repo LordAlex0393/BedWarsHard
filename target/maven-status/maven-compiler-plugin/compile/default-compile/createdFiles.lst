@@ -9,4 +9,6 @@ org\lordalex\bedwarshard\config\GameState.class
 org\lordalex\bedwarshard\Events\OnQuit.class
 org\lordalex\bedwarshard\Events\OnJoin.class
 org\lordalex\bedwarshard\BedWarsHard.class
+org\lordalex\bedwarshard\Utils\CustomScoreboard.class
+org\lordalex\bedwarshard\Commands\GameCommands.class
 org\lordalex\bedwarshard\Utils\ColorUtil.class

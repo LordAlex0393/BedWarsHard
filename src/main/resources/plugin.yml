@@ -1,3 +1,6 @@
 name: BedWarsHard
 version: '${project.version}'
 main: org.lordalex.bedwarshard.BedWarsHard
+commands:
+  game:
+    description: "start"
