@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 
+import java.awt.*;
 import java.text.DecimalFormat;
 
 public class GameCommands implements CommandExecutor {
@@ -18,13 +19,30 @@ public class GameCommands implements CommandExecutor {
                 return true;
             }
         }
-        if (args[0].equalsIgnoreCase("flag")) {
+        else if (args[0].equalsIgnoreCase("flag")) {
             if (args.length > 1) {
-            } else if (sender instanceof Player) {
+                if(args[1].equalsIgnoreCase("kick-on-lose")){
+                    if(args[2].equalsIgnoreCase("on")){
+                        BedWarsHard.getGame().setKickOnLose(true);
+                    }
+                    else if(args[2].equalsIgnoreCase("off")){
+                        BedWarsHard.getGame().setKickOnLose(true);
+                    }
+
+                }
+
+
+
+
+
+            }
+            else if (sender instanceof Player) {
                 Player p = (Player) sender;
                 printFlagInfo(p);
             }
         }
+
+
         return true;
     }
 
@@ -45,6 +63,8 @@ public class GameCommands implements CommandExecutor {
         String no = "&cвыключено";
         String kickOnLose = "&dkick-on-lose&f (&7Кикать с сервера после поражения&f): ";
         kickOnLose += BedWarsHard.getGame().isKickOnLose()? yes : no;
+
+
 
         String protectedWorld = "&dprotected-world&f (&7Защита мира от ломания&f): ";
         protectedWorld += BedWarsHard.getGame().isProtectedWorld()? yes : no;

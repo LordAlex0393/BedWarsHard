@@ -1,3 +1,6 @@
 name: BedWarsHard
 version: '1.0-SNAPSHOT'
 main: org.lordalex.bedwarshard.BedWarsHard
+commands:
+  game:
+    description: "start"
