@@ -28,21 +28,103 @@ public class GameCommands implements CommandExecutor {
                     else if(args[2].equalsIgnoreCase("off")){
                         BedWarsHard.getGame().setKickOnLose(true);
                     }
-
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dkick-on-lose&f:&a on&f,&c off"));
+                    }
                 }
-
-
-
-
-
+                else if(args[1].equalsIgnoreCase("protected-world")){
+                    if(args[2].equalsIgnoreCase("on")){
+                        BedWarsHard.getGame().setProtectedWorld(true);
+                    }
+                    else if(args[2].equalsIgnoreCase("off")){
+                        BedWarsHard.getGame().setProtectedWorld(true);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dprotected-world&f:&a on&f,&c off"));
+                    }
+                }
+                else if(args[1].equalsIgnoreCase("edit-shop")){
+                    if(args[2].equalsIgnoreCase("on")){
+                        BedWarsHard.getGame().setEditShop(true);
+                    }
+                    else if(args[2].equalsIgnoreCase("off")){
+                        BedWarsHard.getGame().setEditShop(true);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dedit-shop&f:&a on&f,&c off"));
+                    }
+                }
+                else if(args[1].equalsIgnoreCase("limit-players")){
+                    if(args[2].equalsIgnoreCase("on")){
+                        BedWarsHard.getGame().setLimitPlayers(true);
+                    }
+                    else if(args[2].equalsIgnoreCase("off")){
+                        BedWarsHard.getGame().setLimitPlayers(true);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dlimit-players&f:&a on&f,&c off"));
+                    }
+                }
+                else if(args[1].equalsIgnoreCase("bronze-rate")){
+                    float input = Float.parseFloat(args[2]);
+                    if(input > 0.25f && input < 4.0f){
+                        BedWarsHard.getGame().setBronzeRate(input);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 4.0"));
+                    }
+                }
+                else if(args[1].equalsIgnoreCase("iron-rate")){
+                    float input = Float.parseFloat(args[2]);
+                    if(input > 0.25f && input < 4.0f){
+                        BedWarsHard.getGame().setIronRate(input);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 4.0"));
+                    }
+                }
+                else if(args[1].equalsIgnoreCase("gold-rate")){
+                    float input = Float.parseFloat(args[2]);
+                    if(input > 0.25f && input < 4.0f){
+                        BedWarsHard.getGame().setGoldRate(input);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 4.0"));
+                    }
+                }
+                else if(args[1].equalsIgnoreCase("final-dm")){
+                    int input = Integer.parseInt(args[2]);
+                    if(input >= 0 && input <= 30){
+                        BedWarsHard.getGame().setFinalDM(input);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0 до 30"));
+                    }
+                }
+                else if(args[1].equalsIgnoreCase("game-length")){
+                    int input = Integer.parseInt(args[2]);
+                    if(input >= 1 && input <= 90){
+                        BedWarsHard.getGame().setGameLength(input);
+                    }
+                    else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до 90"));
+                    }
+                }
             }
             else if (sender instanceof Player) {
                 Player p = (Player) sender;
                 printFlagInfo(p);
             }
         }
-
-
         return true;
     }
 
@@ -63,8 +145,6 @@ public class GameCommands implements CommandExecutor {
         String no = "&cвыключено";
         String kickOnLose = "&dkick-on-lose&f (&7Кикать с сервера после поражения&f): ";
         kickOnLose += BedWarsHard.getGame().isKickOnLose()? yes : no;
-
-
 
         String protectedWorld = "&dprotected-world&f (&7Защита мира от ломания&f): ";
         protectedWorld += BedWarsHard.getGame().isProtectedWorld()? yes : no;
