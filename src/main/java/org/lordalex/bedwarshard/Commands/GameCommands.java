@@ -1,5 +1,6 @@
 package org.lordalex.bedwarshard.Commands;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,6 +18,10 @@ public class GameCommands implements CommandExecutor{
                 Player p = (Player) sender;
                 printCommandInfo(p);
                 return true;
+            }
+        } else if (args[0].equalsIgnoreCase("kick")) {
+            if (args.length > 1 && args[1] != null) {
+                Bukkit.getPlayer(args[1]).kickPlayer("Вы были кикнуты управляющим");
             }
         } else if (args[0].equalsIgnoreCase("flag")) {
             if (args.length > 1) {
