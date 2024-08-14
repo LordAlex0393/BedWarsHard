@@ -1,3 +1,4 @@
+org\lordalex\bedwarshard\Commands\GameTabCompleter.class
 org\lordalex\bedwarshard\config\BedTeam.class
 org\lordalex\bedwarshard\Items\TeamSelector.class
 org\lordalex\bedwarshard\config\PlayerInfo.class
