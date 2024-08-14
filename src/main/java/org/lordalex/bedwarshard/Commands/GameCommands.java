@@ -23,6 +23,12 @@ public class GameCommands implements CommandExecutor{
             if (args.length > 1 && args[1] != null) {
                 Bukkit.getPlayer(args[1]).kickPlayer("Вы были кикнуты управляющим");
             }
+        } else if (args[0].equalsIgnoreCase("list") && sender instanceof Player) {
+            Player p = (Player) sender;
+            p.sendMessage("Онлайн игроков на сервере: " + Bukkit.getServer().getWorld("world").getPlayers().size());
+            for (Player all : Bukkit.getServer().getWorld("world").getPlayers()) {
+                p.sendMessage(all.getName());
+            }
         } else if (args[0].equalsIgnoreCase("flag")) {
             if (args.length > 1) {
                 if (args[1].equalsIgnoreCase("kick-on-lose") && args.length == 3) {
