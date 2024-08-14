@@ -16,6 +16,8 @@ import org.lordalex.bedwarshard.config.PlayerInfo;
 import java.util.Random;
 
 public class GameUtil {
+
+
     public static void clearPlayer(Player player){
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
@@ -28,6 +30,7 @@ public class GameUtil {
     public static void giveWaitingItems(Player player){
         TeamSelector.giveTeamSelector(player);
     }
+
     public static void giveSpectatorItems(Player player){
 
     }
@@ -38,11 +41,11 @@ public class GameUtil {
         for(String bedLoc : team.getBed()){
             Location loc = YmlParser.parseLocation(Bukkit.getWorld("world"), bedLoc);
             if(loc.getBlock().getType() != Material.BED_BLOCK) {
-                team.setBedState(false);
+                team.setBedStatus(false);
                 return false;
             }
         }
-        team.setBedState(true);
+        team.setBedStatus(true);
         return true;
     }
 

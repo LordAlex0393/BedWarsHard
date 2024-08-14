@@ -63,8 +63,8 @@ public class TeamSelector implements Listener {
                     BedTeam team = teamMap.get(key);
                     String[] teamNames = team.getNames().split(",");
 
-                    if (GameUtil.isEqualsItem(e, "&" + team.getColor() + teamNames[0] + " команда&f [" + team.getPlayerSet().size() + "/" + teamSize + "]")) {
-                        if (team.getPlayerSet().size() >= BedWarsHard.getMapConfig().getTeamPlayers()) {
+                    if (GameUtil.isEqualsItem(e, "&" + team.getColor() + teamNames[0] + " команда&f [" + team.getAlivePlayersInfo().size() + "/" + teamSize + "]")) {
+                        if (team.getAlivePlayersInfo().size() >= BedWarsHard.getMapConfig().getTeamPlayers()) {
                             return;
                         }
 
@@ -133,7 +133,7 @@ public class TeamSelector implements Listener {
 
             ItemStack woolStack = new ItemStack(Material.WOOL, 1, (byte) team.getWool());
             ItemMeta woolMeta = woolStack.getItemMeta();
-            woolMeta.setDisplayName(ColorUtil.getMessage("&" + team.getColor() + teamNames[0] + " команда&f [" + team.getPlayerSet().size() + "/" + teamSize + "]"));
+            woolMeta.setDisplayName(ColorUtil.getMessage("&" + team.getColor() + teamNames[0] + " команда&f [" + team.getAlivePlayersInfo().size() + "/" + teamSize + "]"));
             List<String> woolList = new ArrayList<>();
             HashSet<Player> teamPlayerSet = team.getPlayerSet();
             if (teamPlayerSet.size() < teamSize) {
