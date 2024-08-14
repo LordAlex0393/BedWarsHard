@@ -2,7 +2,9 @@ C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarsha
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\config\MapConfig.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\config\GameState.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Events\OnQuit.java
+C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Commands\GameCommands.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Items\TeamSelector.java
+C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Commands\GameTabCompleter.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Events\OnJoin.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Utils\ColorUtil.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Utils\YmlParser.java

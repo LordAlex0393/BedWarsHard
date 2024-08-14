@@ -12,7 +12,7 @@ public class PlayerInfo {
     private int kills = 0;
     private int death = 0;
     private int brokenBeds = 0;
-    private boolean dead = false;
+    private boolean alive = true;
 
     public PlayerInfo(Player player) {
         this.player = player;
@@ -91,11 +91,11 @@ public class PlayerInfo {
         this.brokenBeds = brokenBeds;
     }
 
-    public boolean isDead() {
-        return dead;
+    public boolean isAlive() {
+        return alive;
     }
 
-    public void setDead(boolean dead) {
-        this.dead = dead;
+    public void setAlive(boolean dead) {
+        this.alive = alive;
     }
 }

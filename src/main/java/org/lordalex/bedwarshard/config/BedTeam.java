@@ -1,11 +1,10 @@
 package org.lordalex.bedwarshard.config;
 
 import org.bukkit.entity.Player;
+import org.lordalex.bedwarshard.BedWarsHard;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class BedTeam {
     private String names;
@@ -17,24 +16,26 @@ public class BedTeam {
     private List<String> bronzeSpawns;
     private List<String> ironSpawns;
     private HashSet<Player> playerSet = new HashSet<>();
-    private boolean BedState = true;
+    private boolean BedStatus = true;
 
     public HashSet<Player> getPlayerSet() {
         return playerSet;
     }
+
     public void addPlayer(Player player) {
         playerSet.add(player);
     }
-    public void removePlayer(Player player){
+
+    public void removePlayer(Player player) {
         playerSet.remove(player);
     }
 
-    public boolean getBedState() {
-        return BedState;
+    public boolean getBedStatus() {
+        return BedStatus;
     }
 
-    public void setBedState(boolean bedState) {
-        BedState = bedState;
+    public void setBedStatus(boolean bedStatus) {
+        BedStatus = bedStatus;
     }
 
     public String getNames() {
@@ -99,5 +100,17 @@ public class BedTeam {
 
     public void setIronSpawns(List<String> ironSpawns) {
         this.ironSpawns = ironSpawns;
+    }
+
+
+    public HashSet<PlayerInfo> getAlivePlayersInfo() {
+        HashSet<PlayerInfo> playerInfoHashSet = new HashSet<>();
+        for (Player player : playerSet) {
+            PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
+            if (playerInfo.isAlive()) {
+                playerInfoHashSet.add(playerInfo);
+            }
+        }
+        return playerInfoHashSet;
     }
 }
