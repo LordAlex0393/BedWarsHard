@@ -26,7 +26,7 @@ public class OnQuit implements Listener {
 
         if (playerInfo != null) {
             e.setQuitMessage(ColorUtil.getMessage("[" + (online - 1) + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f вышел"));
-            if (!playerInfo.getTeam().getBedState() || BedWarsHard.getGame().getGameState() == GameState.WAITING || BedWarsHard.getGame().getGameState() == GameState.STARTING) {
+            if (!playerInfo.getTeam().getBedStatus() || BedWarsHard.getGame().getGameState() == GameState.WAITING || BedWarsHard.getGame().getGameState() == GameState.STARTING) {
                 game.removePlayer(player);
                 game.addSpectator(player);
             }

@@ -8,16 +8,55 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Items.TeamSelector;
 import org.lordalex.bedwarshard.config.BedTeam;
+import org.lordalex.bedwarshard.config.GameState;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class GameUtil {
+    private static int delay = 10;
 
+    public static void start() {
+        HashMap<Integer, String> timerStrings = new HashMap<>();
+        timerStrings.put(10, "");
+        timerStrings.put(5, "");
+        timerStrings.put(4, "ы");
+        timerStrings.put(3, "ы");
+        timerStrings.put(2, "ы");
+        timerStrings.put(1, "у");
 
+        BedWarsHard.getGame().setGameState(GameState.STARTING);
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                if(timerStrings.containsKey(delay)){
+                    for (Player all : Bukkit.getOnlinePlayers()) {
+                        all.sendMessage(ColorUtil.getMessage("&fИгра начнется через &e" + delay + "&f секунд" + timerStrings.get(delay)));
+                    }
+                }
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    CustomScoreboard.updateScoreboard(all);
+                }
+                if(delay <= 0){
+                    delay = BedWarsHard.getGame().getStartingDelay();
+                    game();
+                    cancel();
+                }
+                delay--;
+            }
+        }.runTaskTimer(BedWarsHard.getInstance(), 0, 20);
+    }
+    public static void game() {
+        BedWarsHard.getGame().setGameState(GameState.GAME);
+        for (Player all : Bukkit.getOnlinePlayers()) {
+            CustomScoreboard.updateScoreboard(all);
+        }
+    }
     public static void clearPlayer(Player player){
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
@@ -64,5 +103,13 @@ public class GameUtil {
         else{
             return false;
         }
+    }
+
+    public static int getDelay() {
+        return delay;
+    }
+
+    public static void setDelay(int delay) {
+        GameUtil.delay = delay;
     }
 }

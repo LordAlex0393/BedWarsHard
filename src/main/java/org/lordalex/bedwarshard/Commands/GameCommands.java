@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.Utils.GameUtil;
 
 import java.text.DecimalFormat;
 
@@ -19,6 +20,8 @@ public class GameCommands implements CommandExecutor{
                 printCommandInfo(p);
                 return true;
             }
+        } else if (args[0].equalsIgnoreCase("start")) {
+            GameUtil.start();
         } else if (args[0].equalsIgnoreCase("kick")) {
             if (args.length > 1 && args[1] != null) {
                 Bukkit.getPlayer(args[1]).kickPlayer("Вы были кикнуты управляющим");

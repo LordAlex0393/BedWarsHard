@@ -20,6 +20,7 @@ public class Game {
     private boolean editShop = false;
     private boolean limitPlayers = true;
     private int gameLength = 60;
+    private int startingDelay = 10;
 
     public Game() {
         playerInfoMap = new HashMap<>();
@@ -151,5 +152,13 @@ public class Game {
 
     public void setGameLength(int gameLength) {
         this.gameLength = gameLength;
+    }
+
+    public int getStartingDelay() {
+        return startingDelay;
+    }
+
+    public void setStartingDelay(int startingDelay) {
+        this.startingDelay = startingDelay;
     }
 }
