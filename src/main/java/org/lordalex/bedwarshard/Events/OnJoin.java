@@ -45,7 +45,7 @@ public class OnJoin implements Listener {
         MapConfig mapConfig = BedWarsHard.getMapConfig();
         int playersToStart = mapConfig.getTeamPlayers() * mapConfig.getTeams().size();
         int online = Bukkit.getOnlinePlayers().size();
-        PlayerInfo playerInfo = game.getPlayer(player);
+        PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
 
         if(gameState == GameState.WAITING || ((gameState == GameState.STARTING) && (Bukkit.getOnlinePlayers().size() < playersToStart))){
             if (playerInfo == null){
@@ -62,7 +62,11 @@ public class OnJoin implements Listener {
 
         }
         else if(gameState == GameState.GAME){
-            if (playerInfo != null && GameUtil.hasBed(playerInfo.getTeam())){
+            System.out.println(playerInfo);
+            if (playerInfo != null && playerInfo.getTeam().getBedStatus()){
+                player.setCustomName("§" + playerInfo.getTeam().getColor() + player.getName());
+                player.setCustomNameVisible(true);
+                player.setPlayerListName(ColorUtil.getMessage("&" + playerInfo.getTeam().getColor() + player.getName()));
                 e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f подключился"));
                 GameUtil.clearPlayer(player);
                 GameUtil.playerRespawn(playerInfo);

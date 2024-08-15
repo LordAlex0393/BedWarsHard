@@ -7,7 +7,7 @@ import org.lordalex.bedwarshard.BedWarsHard;
 import java.util.*;
 
 public class Game {
-    private HashMap<Player, PlayerInfo> playerInfoMap;
+    private HashMap<UUID, PlayerInfo> playerInfoMap;
     private Set<Player> playerSet;
     private Set<Player> spectatorSet;
     private GameState gameState = GameState.WAITING;
@@ -29,28 +29,22 @@ public class Game {
     }
 
     public PlayerInfo getPlayer(Player player){
-        return this.playerInfoMap.get(player);
+        return this.playerInfoMap.get(player.getUniqueId());
     }
     public void removePlayer(Player player){
         this.playerSet.remove(player);
-        this.playerInfoMap.remove(player);
+        this.playerInfoMap.remove(player.getUniqueId());
         for (String k : BedWarsHard.getMapConfig().getTeams().keySet()) {
             BedWarsHard.getMapConfig().getTeams().get(k).removePlayer(player);
         }
     }
-    public void addPlayerInfo(Player player){
-        PlayerInfo playerInfo = new PlayerInfo(player);
-        this.playerSet.add(player);
-        this.playerInfoMap.put(player, playerInfo);
-    }
-
     public Set<Player> getPlayerSet() {
         return playerSet;
     }
 
     public void addPlayerInfo(PlayerInfo playerInfo) {
         this.playerSet.add(playerInfo.getPlayer());
-        this.playerInfoMap.put(playerInfo.getPlayer(), playerInfo);
+        this.playerInfoMap.put(playerInfo.getPlayer().getUniqueId(), playerInfo);
     }
 
     public Set<Player> getSpectatorSet() {
@@ -66,12 +60,8 @@ public class Game {
     }
 
 
-    public HashMap<Player, PlayerInfo> getPlayerInfoMap() {
+    public HashMap<UUID, PlayerInfo> getPlayerInfoMap() {
         return playerInfoMap;
-    }
-
-    public void setPlayerInfoMap(HashMap<Player, PlayerInfo> playerInfoMap) {
-        this.playerInfoMap = playerInfoMap;
     }
 
     public GameState getGameState() {

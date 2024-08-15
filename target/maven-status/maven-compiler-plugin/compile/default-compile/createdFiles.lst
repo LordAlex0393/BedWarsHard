@@ -6,6 +6,7 @@ org\lordalex\bedwarshard\config\Game.class
 org\lordalex\bedwarshard\Utils\YmlParser.class
 org\lordalex\bedwarshard\Utils\GameUtil.class
 org\lordalex\bedwarshard\config\MapConfig.class
+org\lordalex\bedwarshard\Utils\GameUtil$1.class
 org\lordalex\bedwarshard\config\GameState.class
 org\lordalex\bedwarshard\Events\OnQuit.class
 org\lordalex\bedwarshard\Events\OnJoin.class
