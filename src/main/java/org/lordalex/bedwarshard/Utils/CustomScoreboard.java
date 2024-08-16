@@ -28,7 +28,7 @@ public class CustomScoreboard {
             i--;
         }
         //objective.getScore(" ").setScore(2);
-        objective.getScore(ColorUtil.getMessage("&a&lYouTube.com/@LordAlex")).setScore(i);
+        objective.getScore(ColorUtil.getMessage("&a&l@LordAlex")).setScore(i);
 
         return scoreboard;
     }

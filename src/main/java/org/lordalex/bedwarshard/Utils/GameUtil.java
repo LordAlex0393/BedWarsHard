@@ -15,11 +15,13 @@ import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.GameState;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class GameUtil {
-    private static int delay = 10;
+    private static int delay = BedWarsHard.getGame().getStartingDelay();
 
     public static void start() {
         HashMap<Integer, String> timerStrings = new HashMap<>();
@@ -101,13 +103,22 @@ public class GameUtil {
     }
 
     public static void giveStartKit(Player player) {
-        ItemStack swordStack = new ItemStack(Material.STONE_SWORD, 1);
-        swordStack.setDurability((short) -1);
-        player.getInventory().setItem(0, swordStack);
+        ItemStack stoneSwordStack = new ItemStack(Material.STONE_SWORD, 1);
+        ItemMeta stoneSwordMeta = stoneSwordStack.getItemMeta();
+        List<String> stoneSwordList = new ArrayList<>();
+        stoneSwordList.add(ChatColor.GOLD + "Начальный предмет");
+        stoneSwordMeta.setLore(stoneSwordList);
+        stoneSwordMeta.spigot().setUnbreakable(true);
+        stoneSwordStack.setItemMeta(stoneSwordMeta);
+        player.getInventory().setItem(0, stoneSwordStack);
 
         ItemStack bootsStack = new ItemStack(Material.LEATHER_BOOTS, 1, (byte) BedWarsHard.getGame().getPlayer(player).getTeam().getWool());
         LeatherArmorMeta bootsMeta = (LeatherArmorMeta) bootsStack.getItemMeta();
         bootsMeta.setColor(ColorUtil.translateChatColorToColor(BedWarsHard.getGame().getPlayer(player).getTeam().getNames().split(",")[3]));
+        List<String> bootsList = new ArrayList<>();
+        bootsList.add(ChatColor.GOLD + "Начальный предмет");
+        bootsMeta.setLore(bootsList);
+        bootsMeta.spigot().setUnbreakable(true);
         bootsStack.setItemMeta(bootsMeta);
         bootsStack.setDurability((short) -1);
         player.getInventory().setBoots(bootsStack);
@@ -115,6 +126,10 @@ public class GameUtil {
         ItemStack leggingsStack = new ItemStack(Material.LEATHER_LEGGINGS, 1, (byte) BedWarsHard.getGame().getPlayer(player).getTeam().getWool());
         LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggingsStack.getItemMeta();
         leggingsMeta.setColor(ColorUtil.translateChatColorToColor(BedWarsHard.getGame().getPlayer(player).getTeam().getNames().split(",")[3]));
+        List<String> leggingsList = new ArrayList<>();
+        leggingsList.add(ChatColor.GOLD + "Начальный предмет");
+        leggingsMeta.setLore(leggingsList);
+        leggingsMeta.spigot().setUnbreakable(true);
         leggingsStack.setItemMeta(leggingsMeta);
         leggingsStack.setDurability((short) -1);
         player.getInventory().setLeggings(leggingsStack);
@@ -122,9 +137,24 @@ public class GameUtil {
         ItemStack chestplateStack = new ItemStack(Material.LEATHER_CHESTPLATE, 1, (byte) BedWarsHard.getGame().getPlayer(player).getTeam().getWool());
         LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplateStack.getItemMeta();
         chestplateMeta.setColor(ColorUtil.translateChatColorToColor(BedWarsHard.getGame().getPlayer(player).getTeam().getNames().split(",")[3]));
+        List<String> chestplateList = new ArrayList<>();
+        chestplateList.add(ChatColor.GOLD + "Начальный предмет");
+        chestplateMeta.setLore(chestplateList);
+        chestplateMeta.spigot().setUnbreakable(true);
         chestplateStack.setItemMeta(chestplateMeta);
         chestplateStack.setDurability((short) -1);
         player.getInventory().setChestplate(chestplateStack);
+
+        ItemStack helmetStack = new ItemStack(Material.LEATHER_HELMET, 1, (byte) BedWarsHard.getGame().getPlayer(player).getTeam().getWool());
+        LeatherArmorMeta helmetMeta = (LeatherArmorMeta) helmetStack.getItemMeta();
+        helmetMeta.setColor(ColorUtil.translateChatColorToColor(BedWarsHard.getGame().getPlayer(player).getTeam().getNames().split(",")[3]));
+        List<String> helmetList = new ArrayList<>();
+        helmetList.add(ChatColor.GOLD + "Начальный предмет");
+        helmetMeta.setLore(helmetList);
+        helmetMeta.spigot().setUnbreakable(true);
+        helmetStack.setItemMeta(helmetMeta);
+        helmetStack.setDurability((short) -1);
+        player.getInventory().setHelmet(helmetStack);
     }
 
     private static void spawnBronzeResource() {

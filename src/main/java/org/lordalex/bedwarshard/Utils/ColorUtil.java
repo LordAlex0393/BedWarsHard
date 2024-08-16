@@ -9,7 +9,7 @@ public class ColorUtil {
     }
     public static Color translateChatColorToColor(String color)
     {
-        switch (color.toUpperCase()) {
+        switch (color.toUpperCase().trim()) {
             case "AQUA":
                 return Color.AQUA;
             case "BLACK":

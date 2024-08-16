@@ -20,7 +20,7 @@ public class Game {
     private boolean editShop = false;
     private boolean limitPlayers = true;
     private int gameLength = 60;
-    private int startingDelay = 10;
+    private int startingDelay = 3;
 
     public Game() {
         playerInfoMap = new HashMap<>();
