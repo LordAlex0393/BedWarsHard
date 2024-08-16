@@ -1,13 +1,13 @@
 package org.lordalex.bedwarshard.Utils;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Items.TeamSelector;
@@ -34,7 +34,7 @@ public class GameUtil {
         new BukkitRunnable() {
             @Override
             public void run() {
-                if(timerStrings.containsKey(delay)){
+                if (timerStrings.containsKey(delay)) {
                     for (Player all : Bukkit.getOnlinePlayers()) {
                         all.sendMessage(ColorUtil.getMessage("&fИгра начнется через &e" + delay + "&f секунд" + timerStrings.get(delay)));
                     }
@@ -42,7 +42,7 @@ public class GameUtil {
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     CustomScoreboard.updateScoreboard(all);
                 }
-                if(delay <= 0){
+                if (delay <= 0) {
                     delay = BedWarsHard.getGame().getStartingDelay();
                     game();
                     cancel();
@@ -51,13 +51,42 @@ public class GameUtil {
             }
         }.runTaskTimer(BedWarsHard.getInstance(), 0, 20);
     }
+
     public static void game() {
         BedWarsHard.getGame().setGameState(GameState.GAME);
         for (Player all : Bukkit.getOnlinePlayers()) {
             CustomScoreboard.updateScoreboard(all);
+            clearPlayer(all);
+
+            if (BedWarsHard.getGame().getPlayer(all) != null) {
+                all.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getGame().getPlayer(all).getTeam().getSpawns().get(0)));
+                giveStartKit(all);
+            }
         }
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                spawnBronzeResource();
+            }
+        }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getBronzeFrequency());
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                spawnIronResource();
+            }
+        }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getIronFrequency());
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                spawnGoldResource();
+            }
+        }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getGoldFrequency());
     }
-    public static void clearPlayer(Player player){
+
+    public static void clearPlayer(Player player) {
+        for(PotionEffect potionEffect : player.getActivePotionEffects()){
+            player.removePotionEffect(potionEffect.getType());
+        }
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
         player.setHealth(20);
@@ -66,29 +95,92 @@ public class GameUtil {
         player.setCustomName("§f" + player.getName());
         player.setCustomNameVisible(true);
     }
-    public static void giveWaitingItems(Player player){
+
+    public static void giveWaitingItems(Player player) {
         TeamSelector.giveTeamSelector(player);
     }
 
-    public static void giveSpectatorItems(Player player){
+    public static void giveStartKit(Player player) {
+        ItemStack swordStack = new ItemStack(Material.STONE_SWORD, 1);
+        swordStack.setDurability((short) -1);
+        player.getInventory().setItem(0, swordStack);
 
-    }
-    public static void giveStartKit(Player player){
+        ItemStack bootsStack = new ItemStack(Material.LEATHER_BOOTS, 1, (byte) BedWarsHard.getGame().getPlayer(player).getTeam().getWool());
+        LeatherArmorMeta bootsMeta = (LeatherArmorMeta) bootsStack.getItemMeta();
+        bootsMeta.setColor(ColorUtil.translateChatColorToColor(BedWarsHard.getGame().getPlayer(player).getTeam().getNames().split(",")[3]));
+        bootsStack.setItemMeta(bootsMeta);
+        bootsStack.setDurability((short) -1);
+        player.getInventory().setBoots(bootsStack);
 
+        ItemStack leggingsStack = new ItemStack(Material.LEATHER_LEGGINGS, 1, (byte) BedWarsHard.getGame().getPlayer(player).getTeam().getWool());
+        LeatherArmorMeta leggingsMeta = (LeatherArmorMeta) leggingsStack.getItemMeta();
+        leggingsMeta.setColor(ColorUtil.translateChatColorToColor(BedWarsHard.getGame().getPlayer(player).getTeam().getNames().split(",")[3]));
+        leggingsStack.setItemMeta(leggingsMeta);
+        leggingsStack.setDurability((short) -1);
+        player.getInventory().setLeggings(leggingsStack);
+
+        ItemStack chestplateStack = new ItemStack(Material.LEATHER_CHESTPLATE, 1, (byte) BedWarsHard.getGame().getPlayer(player).getTeam().getWool());
+        LeatherArmorMeta chestplateMeta = (LeatherArmorMeta) chestplateStack.getItemMeta();
+        chestplateMeta.setColor(ColorUtil.translateChatColorToColor(BedWarsHard.getGame().getPlayer(player).getTeam().getNames().split(",")[3]));
+        chestplateStack.setItemMeta(chestplateMeta);
+        chestplateStack.setDurability((short) -1);
+        player.getInventory().setChestplate(chestplateStack);
     }
-    public static boolean hasBed(BedTeam team){
-        for(String bedLoc : team.getBed()){
-            Location loc = YmlParser.parseLocation(Bukkit.getWorld("world"), bedLoc);
-            if(loc.getBlock().getType() != Material.BED_BLOCK) {
-                team.setBedStatus(false);
-                return false;
+
+    private static void spawnBronzeResource() {
+        for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
+            BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
+            if (team.getBedStatus()) {
+                for (String position : team.getBronzeSpawns()) {
+                    Location location = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
+
+                    ItemStack bronzeStack = new ItemStack(Material.CLAY_BRICK, 1);
+                    ItemMeta bronzeMeta = bronzeStack.getItemMeta();
+                    bronzeMeta.setDisplayName(ChatColor.GOLD + "Бронза");
+                    bronzeStack.setItemMeta(bronzeMeta);
+
+                    Item dropitem = Bukkit.getWorld("world").dropItem(location, bronzeStack);
+                    dropitem.setVelocity(dropitem.getVelocity().zero());
+                }
             }
         }
-        team.setBedStatus(true);
-        return true;
     }
 
-    public static void playerRespawn(PlayerInfo playerInfo){
+    private static void spawnIronResource() {
+        for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
+            BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
+            if (team.getBedStatus()) {
+                for (String position : team.getIronSpawns()) {
+                    Location location = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
+
+                    ItemStack ironStack = new ItemStack(Material.IRON_INGOT, 1);
+                    ItemMeta ironMeta = ironStack.getItemMeta();
+                    ironMeta.setDisplayName(ChatColor.WHITE + "Железо");
+                    ironStack.setItemMeta(ironMeta);
+
+                    Item dropitem = Bukkit.getWorld("world").dropItem(location, ironStack);
+                    dropitem.setVelocity(dropitem.getVelocity().zero());
+                }
+            }
+        }
+    }
+
+    private static void spawnGoldResource() {
+        for (String position : BedWarsHard.getMapConfig().getGoldSpawns()) {
+            Location location = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
+
+            ItemStack goldStack = new ItemStack(Material.GOLD_INGOT, 1);
+            ItemMeta goldMeta = goldStack.getItemMeta();
+            goldMeta.setDisplayName(ChatColor.YELLOW + "Золото");
+            goldStack.setItemMeta(goldMeta);
+
+            Item dropitem = Bukkit.getWorld("world").dropItem(location, goldStack);
+            dropitem.setVelocity(dropitem.getVelocity().zero());
+
+        }
+    }
+
+    public static void playerRespawn(PlayerInfo playerInfo) {
         BedTeam team = playerInfo.getTeam();
         Random rand = new Random();
         int spawnNumber = rand.nextInt(team.getSpawns().size());
@@ -96,11 +188,10 @@ public class GameUtil {
     }
 
 
-    public static boolean isEqualsItem(InventoryClickEvent e, String itemDisplayName){
-        if(e.getCurrentItem().getItemMeta().getDisplayName() != null) {
+    public static boolean isEqualsItem(InventoryClickEvent e, String itemDisplayName) {
+        if (e.getCurrentItem().getItemMeta().getDisplayName() != null) {
             return e.getCurrentItem().getItemMeta().getDisplayName().equals(ColorUtil.getMessage(itemDisplayName));
-        }
-        else{
+        } else {
             return false;
         }
     }
