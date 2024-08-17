@@ -12,10 +12,9 @@ import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.CustomScoreboard;
 import org.lordalex.bedwarshard.Utils.GameUtil;
 import org.lordalex.bedwarshard.Utils.YmlParser;
-import org.lordalex.bedwarshard.config.Game;
-import org.lordalex.bedwarshard.config.GameState;
-import org.lordalex.bedwarshard.config.MapConfig;
-import org.lordalex.bedwarshard.config.PlayerInfo;
+import org.lordalex.bedwarshard.config.*;
+
+import java.util.Random;
 
 
 public class OnJoin implements Listener {
@@ -62,13 +61,19 @@ public class OnJoin implements Listener {
 
         }
         else if(gameState == GameState.GAME){
+            GameUtil.clearPlayer(player);
             if (playerInfo != null && playerInfo.getTeam().getBedStatus()){
                 player.setCustomName("§" + playerInfo.getTeam().getColor() + player.getName());
                 player.setCustomNameVisible(true);
                 player.setPlayerListName(ColorUtil.getMessage("&" + playerInfo.getTeam().getColor() + player.getName()));
                 e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f подключился"));
-                GameUtil.clearPlayer(player);
-                GameUtil.playerRespawn(playerInfo);
+                BedTeam team = playerInfo.getTeam();
+                player.sendMessage("Вы переподключились к игре");
+
+                Random rand = new Random();
+                int spawnNumber = rand.nextInt(team.getSpawns().size());
+                player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber)));
+                GameUtil.giveStartKit(player);
             }
             else{
                 player.setGameMode(GameMode.SPECTATOR);
