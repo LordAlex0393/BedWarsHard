@@ -3,4 +3,6 @@ version: '${project.version}'
 main: org.lordalex.bedwarshard.BedWarsHard
 commands:
   game:
-    description: "start"
+    description: "start/stop/kick/list/flag"
+  bw:
+    description: "clear"
