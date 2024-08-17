@@ -7,6 +7,7 @@ import org.lordalex.bedwarshard.Commands.GameCommands;
 import org.lordalex.bedwarshard.Commands.GameTabCompleter;
 import org.lordalex.bedwarshard.Events.OnJoin;
 import org.lordalex.bedwarshard.Events.OnQuit;
+import org.lordalex.bedwarshard.Events.onDropItem;
 import org.lordalex.bedwarshard.Items.TeamSelector;
 import org.lordalex.bedwarshard.config.MapConfig;
 import org.lordalex.bedwarshard.config.Game;
@@ -22,9 +23,7 @@ public final class BedWarsHard extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
-        Bukkit.getPluginManager().registerEvents(new OnJoin(), this);
-        Bukkit.getPluginManager().registerEvents(new OnQuit(), this);
-        Bukkit.getPluginManager().registerEvents(new TeamSelector(), this);
+        registerAllEvents();
         getCommand("game").setExecutor(new GameCommands());
         getCommand("game").setTabCompleter(new GameTabCompleter());
         File file = new File("mapConfig.yml");
@@ -36,28 +35,22 @@ public final class BedWarsHard extends JavaPlugin {
     public void onDisable() {
         // Plugin shutdown logic
     }
-
-
+    private void registerAllEvents(){
+        Bukkit.getPluginManager().registerEvents(new OnJoin(), this);
+        Bukkit.getPluginManager().registerEvents(new OnQuit(), this);
+        Bukkit.getPluginManager().registerEvents(new TeamSelector(), this);
+        Bukkit.getPluginManager().registerEvents(new onDropItem(), this);
+    }
     public static Plugin getInstance(){
         return instance;
-    }
-
-    public static void setInstance(Plugin instance) {
-        BedWarsHard.instance = instance;
     }
 
     public static MapConfig getMapConfig() {
         return mapConfig;
     }
-
-    public static void setMapConfig(MapConfig mapConfig) {
-        BedWarsHard.mapConfig = mapConfig;
-    }
-
     public static Game getGame() {
         return game;
     }
-
     public static void setGame(Game game) {
         BedWarsHard.game = game;
     }

@@ -62,7 +62,6 @@ public class OnJoin implements Listener {
 
         }
         else if(gameState == GameState.GAME){
-            System.out.println(playerInfo);
             if (playerInfo != null && playerInfo.getTeam().getBedStatus()){
                 player.setCustomName("§" + playerInfo.getTeam().getColor() + player.getName());
                 player.setCustomNameVisible(true);
@@ -73,6 +72,7 @@ public class OnJoin implements Listener {
             }
             else{
                 player.setGameMode(GameMode.SPECTATOR);
+                player.setPlayerListName(null);
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
                 e.setJoinMessage(null);
             }

@@ -25,6 +25,9 @@ public class GameUtil {
 
     public static void start() {
         HashMap<Integer, String> timerStrings = new HashMap<>();
+        timerStrings.put(100, "");
+        timerStrings.put(60, "");
+        timerStrings.put(30, "");
         timerStrings.put(10, "");
         timerStrings.put(5, "");
         timerStrings.put(4, "ы");
@@ -33,25 +36,30 @@ public class GameUtil {
         timerStrings.put(1, "у");
 
         BedWarsHard.getGame().setGameState(GameState.STARTING);
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (timerStrings.containsKey(delay)) {
-                    for (Player all : Bukkit.getOnlinePlayers()) {
-                        all.sendMessage(ColorUtil.getMessage("&fИгра начнется через &e" + delay + "&f секунд" + timerStrings.get(delay)));
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if(BedWarsHard.getGame().getGameState() == GameState.STARTING){
+                        if (timerStrings.containsKey(delay)) {
+                            for (Player all : Bukkit.getOnlinePlayers()) {
+                                all.sendMessage(ColorUtil.getMessage("&fИгра начнется через &e" + delay + "&f секунд" + timerStrings.get(delay)));
+                            }
+                        }
+                        for (Player all : Bukkit.getOnlinePlayers()) {
+                            CustomScoreboard.updateScoreboard(all);
+                        }
+                        if (delay <= 0) {
+                            delay = BedWarsHard.getGame().getStartingDelay();
+                            game();
+                            cancel();
+                        }
+                        delay--;
+                    }
+                    else{
+                        cancel();
                     }
                 }
-                for (Player all : Bukkit.getOnlinePlayers()) {
-                    CustomScoreboard.updateScoreboard(all);
-                }
-                if (delay <= 0) {
-                    delay = BedWarsHard.getGame().getStartingDelay();
-                    game();
-                    cancel();
-                }
-                delay--;
-            }
-        }.runTaskTimer(BedWarsHard.getInstance(), 0, 20);
+            }.runTaskTimer(BedWarsHard.getInstance(), 0, 20);
     }
 
     public static void game() {
@@ -61,32 +69,46 @@ public class GameUtil {
             clearPlayer(all);
 
             if (BedWarsHard.getGame().getPlayer(all) != null) {
-                all.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getGame().getPlayer(all).getTeam().getSpawns().get(0)));
-                giveStartKit(all);
+                playerRespawn(BedWarsHard.getGame().getPlayer(all));
             }
         }
         new BukkitRunnable() {
             @Override
             public void run() {
-                spawnBronzeResource();
+                if(BedWarsHard.getGame().getGameState() == GameState.GAME){
+                    spawnBronzeResource();
+                }
+                else{
+                    cancel();
+                }
             }
         }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getBronzeFrequency());
         new BukkitRunnable() {
             @Override
             public void run() {
-                spawnIronResource();
+                if (BedWarsHard.getGame().getGameState() == GameState.GAME){
+                    spawnIronResource();
+                }
+                else{
+                    cancel();
+                }
             }
         }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getIronFrequency());
         new BukkitRunnable() {
             @Override
             public void run() {
-                spawnGoldResource();
+                if (BedWarsHard.getGame().getGameState() == GameState.GAME){
+                    spawnGoldResource();
+                }
+                else{
+                    cancel();
+                }
             }
         }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getGoldFrequency());
     }
 
     public static void clearPlayer(Player player) {
-        for(PotionEffect potionEffect : player.getActivePotionEffects()){
+        for (PotionEffect potionEffect : player.getActivePotionEffects()) {
             player.removePotionEffect(potionEffect.getType());
         }
         player.getInventory().clear();
@@ -215,6 +237,7 @@ public class GameUtil {
         Random rand = new Random();
         int spawnNumber = rand.nextInt(team.getSpawns().size());
         playerInfo.getPlayer().teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber)));
+        giveStartKit(playerInfo.getPlayer());
     }
 
 
@@ -228,9 +251,5 @@ public class GameUtil {
 
     public static int getDelay() {
         return delay;
-    }
-
-    public static void setDelay(int delay) {
-        GameUtil.delay = delay;
     }
 }

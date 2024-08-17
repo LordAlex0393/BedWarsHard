@@ -40,11 +40,5 @@ public class OnQuit implements Listener {
         for(Player all : Bukkit.getOnlinePlayers()){
             CustomScoreboard.updateScoreboard(all);
         }
-        for(String key : BedWarsHard.getMapConfig().getTeams().keySet()){
-            System.out.println(key + ":");
-            for(Player pl : BedWarsHard.getMapConfig().getTeams().get(key).getPlayerSet()){
-                System.out.println(pl.getName());
-            }
-        }
     }
 }
