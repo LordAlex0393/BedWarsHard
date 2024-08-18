@@ -46,7 +46,7 @@ public class OnJoin implements Listener {
         int online = Bukkit.getOnlinePlayers().size();
         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
 
-        if(gameState == GameState.WAITING || ((gameState == GameState.STARTING) && (Bukkit.getOnlinePlayers().size() < playersToStart))){
+        if(gameState == GameState.WAITING || gameState == GameState.STARTING){
             if (playerInfo == null){
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
                 game.addSpectator(player);
@@ -59,6 +59,9 @@ public class OnJoin implements Listener {
             GameUtil.clearPlayer(player);
             GameUtil.giveWaitingItems(player);
 
+            if (Bukkit.getOnlinePlayers().size() >= playersToStart) {
+                GameUtil.start();
+            }
         }
         else if(gameState == GameState.GAME){
             GameUtil.clearPlayer(player);
@@ -81,6 +84,10 @@ public class OnJoin implements Listener {
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
                 e.setJoinMessage(null);
             }
+        }
+        else if(Bukkit.getOnlinePlayers().size() >= playersToStart){
+            GameUtil.start();
+            return;
         }
         for(Player all : Bukkit.getOnlinePlayers()){
             CustomScoreboard.updateScoreboard(all);

@@ -22,6 +22,8 @@ public class GameCommands implements CommandExecutor{
             }
         } else if (args[0].equalsIgnoreCase("start")) {
             GameUtil.start();
+        } else if (args[0].equalsIgnoreCase("stop")) {
+            GameUtil.stop();
         } else if (args[0].equalsIgnoreCase("kick")) {
             if (args.length > 1 && args[1] != null) {
                 Bukkit.getPlayer(args[1]).kickPlayer("Вы были кикнуты управляющим");

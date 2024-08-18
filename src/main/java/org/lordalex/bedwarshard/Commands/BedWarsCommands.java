@@ -9,6 +9,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.Utils.GameUtil;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class BedWarsCommands implements CommandExecutor {
                 printBWCommandInfo(p);
             }
         } else if (args[0].equalsIgnoreCase("clear")) {
-            clearDroppedItems();
+            GameUtil.clearAllEntities();
         }
         return true;
     }
@@ -32,15 +33,5 @@ public class BedWarsCommands implements CommandExecutor {
                 "&e/bw &7trader&f: заспавнить торговца\n" +
                 "&e/bw &7kit&f: получить тестовый набор");
         player.sendMessage(COMMAND_LIST);
-    }
-
-    private void clearDroppedItems() {
-        World world = Bukkit.getWorld("world");
-        List<Entity> entList = world.getEntities();
-        for (Entity current : entList) {
-            if (current.getType() == EntityType.DROPPED_ITEM) {
-                current.remove();
-            }
-        }
     }
 }

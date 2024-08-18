@@ -37,6 +37,9 @@ public class OnQuit implements Listener {
             e.setQuitMessage(null);
             game.removeSpectator(player);
         }
+        if(BedWarsHard.getGame().getGameState() == GameState.STARTING && ((online-1) < playersToStart* 0.875)){
+            GameUtil.interrupt();
+        }
         for(Player all : Bukkit.getOnlinePlayers()){
             CustomScoreboard.updateScoreboard(all);
         }

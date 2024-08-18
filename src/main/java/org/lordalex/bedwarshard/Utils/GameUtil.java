@@ -1,6 +1,8 @@
 package org.lordalex.bedwarshard.Utils;
 
 import org.bukkit.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -62,6 +64,14 @@ public class GameUtil {
             }.runTaskTimer(BedWarsHard.getInstance(), 0, 20);
     }
 
+    public static void interrupt(){
+        BedWarsHard.getGame().setGameState(GameState.WAITING);
+        delay = BedWarsHard.getGame().getStartingDelay();
+        for (Player all : Bukkit.getOnlinePlayers()) {
+            CustomScoreboard.updateScoreboard(all);
+        }
+    }
+
     public static void game() {
         BedWarsHard.getGame().setGameState(GameState.GAME);
         for (Player all : Bukkit.getOnlinePlayers()) {
@@ -70,6 +80,7 @@ public class GameUtil {
 
             if (BedWarsHard.getGame().getPlayer(all) != null) {
                 playerRespawn(BedWarsHard.getGame().getPlayer(all));
+                all.setGameMode(GameMode.SURVIVAL);
             }
         }
         new BukkitRunnable() {
@@ -105,6 +116,9 @@ public class GameUtil {
                 }
             }
         }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getGoldFrequency());
+    }
+    public static void stop(){
+        BedWarsHard.getGame().setGameState(GameState.ENDING);
     }
 
     public static void clearPlayer(Player player) {
@@ -246,6 +260,16 @@ public class GameUtil {
             return e.getCurrentItem().getItemMeta().getDisplayName().equals(ColorUtil.getMessage(itemDisplayName));
         } else {
             return false;
+        }
+    }
+
+    public static void clearAllEntities() {
+        World world = Bukkit.getWorld("world");
+        List<Entity> entList = world.getEntities();
+        for (Entity current : entList) {
+            if (current.getType() == EntityType.DROPPED_ITEM) {
+                current.remove();
+            }
         }
     }
 
