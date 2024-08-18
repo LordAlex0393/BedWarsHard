@@ -178,7 +178,7 @@ public class TeamSelector implements Listener {
         player.setCustomName("§" + team.getColor() + player.getName());
         player.setCustomNameVisible(true);
         player.setPlayerListName(ColorUtil.getMessage("&" + team.getColor() + player.getName()));
-        player.sendMessage(ColorUtil.getMessage("Вы играете за& " + team.getColor() + team.getNames().split(", ")[1] + " команду"));
+        player.sendMessage(ColorUtil.getMessage("Вы играете за&" + team.getColor() + team.getNames().split(",")[1] + " команду"));
     }
 
     private static <T> T getByRandomClass(Set<T> set) {

@@ -36,6 +36,7 @@ public class GameUtil {
         timerStrings.put(1, "у");
 
         BedWarsHard.getGame().setGameState(GameState.STARTING);
+        GameUtil.clearAllEntities();
             new BukkitRunnable() {
                 @Override
                 public void run() {
