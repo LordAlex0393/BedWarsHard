@@ -47,14 +47,9 @@ public class OnJoin implements Listener {
         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
 
         if(gameState == GameState.WAITING || gameState == GameState.STARTING){
-            if (playerInfo == null){
-                player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
-                game.addSpectator(player);
-                e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок " + player.getName() + " подключился"));
-            }
-            else{
-                e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок &" + playerInfo.getTeam().getColor() + player.getName() + "&f подключился"));
-            }
+            player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
+            game.addSpectator(player);
+            e.setJoinMessage(ColorUtil.getMessage("[" + online + "/" + playersToStart + "] &e=> &fИгрок " + player.getName() + " подключился"));
 
             GameUtil.clearPlayer(player);
             GameUtil.giveWaitingItems(player);
@@ -77,6 +72,7 @@ public class OnJoin implements Listener {
                 int spawnNumber = rand.nextInt(team.getSpawns().size());
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber)));
                 GameUtil.giveStartKit(player);
+                //GameUtil.playerRespawn(playerInfo);
             }
             else{
                 player.setGameMode(GameMode.SPECTATOR);

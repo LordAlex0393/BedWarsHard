@@ -17,10 +17,8 @@ import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.GameState;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GameUtil {
     private static int delay = BedWarsHard.getGame().getStartingDelay();
@@ -52,6 +50,14 @@ public class GameUtil {
                         }
                         if (delay <= 0) {
                             delay = BedWarsHard.getGame().getStartingDelay();
+
+                            for(Player all : Bukkit.getOnlinePlayers()){
+                                int playersToStart = BedWarsHard.getMapConfig().getTeamPlayers() * BedWarsHard.getMapConfig().getTeams().size();
+                                if(BedWarsHard.getGame().getPlayer(all) == null && BedWarsHard.getGame().getPlayerInfoMap().size() < playersToStart){
+                                    TeamSelector.randomizeTeam(all);
+                                }
+                            }
+
                             game();
                             cancel();
                         }

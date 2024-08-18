@@ -20,10 +20,7 @@ import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.Game;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 public class TeamSelector implements Listener {
     public static void giveTeamSelector(Player player) {
@@ -73,8 +70,6 @@ public class TeamSelector implements Listener {
                         }
                         PlayerInfo playerInfo = new PlayerInfo(player, team);
                         game.addPlayerInfo(playerInfo);
-                        team.addPlayer(player);
-                        game.removeSpectator(player);
 
                         for (Player p : Bukkit.getOnlinePlayers()) {
                             if (e.getInventory().getTitle().equals(p.getOpenInventory().getTitle())) {
@@ -82,10 +77,8 @@ public class TeamSelector implements Listener {
                             }
                         }
 
-                        player.setCustomName("§" + team.getColor() + player.getName());
-                        player.setCustomNameVisible(true);
-                        player.setPlayerListName(ColorUtil.getMessage("&" + team.getColor() + player.getName()));
-                        player.sendMessage(ColorUtil.getMessage("Вы играете за&" + team.getColor() + teamNames[1] + " команду"));
+                        setPlayerTeam(player, team);
+
                         player.closeInventory();
                         for(Player all : Bukkit.getOnlinePlayers()){
                             CustomScoreboard.updateScoreboard(all);
@@ -163,5 +156,43 @@ public class TeamSelector implements Listener {
         inv.setItem(31, barrierStack);
 
         return inv;
+    }
+    public static void randomizeTeam(Player player){
+        BedTeam team = BedWarsHard.getMapConfig().getTeams().get(getByRandomClass(BedWarsHard.getMapConfig().getTeams().keySet()));
+        int minSize = team.getAlivePlayersInfo().size();
+
+        for(String key : BedWarsHard.getMapConfig().getTeams().keySet()){
+            BedTeam tempTeam = BedWarsHard.getMapConfig().getTeams().get(key);
+            int tempMin = tempTeam.getAlivePlayersInfo().size();
+            if(tempMin < minSize){
+                team = tempTeam;
+                minSize = tempMin;
+            }
+        }
+        setPlayerTeam(player, team);
+    }
+
+    public static void setPlayerTeam(Player player, BedTeam team){
+        BedWarsHard.getGame().addPlayerInfo(new PlayerInfo(player, team));
+
+        player.setCustomName("§" + team.getColor() + player.getName());
+        player.setCustomNameVisible(true);
+        player.setPlayerListName(ColorUtil.getMessage("&" + team.getColor() + player.getName()));
+        player.sendMessage(ColorUtil.getMessage("Вы играете за& " + team.getColor() + team.getNames().split(", ")[1] + " команду"));
+    }
+
+    private static <T> T getByRandomClass(Set<T> set) {
+        if (set == null || set.isEmpty()) {
+            throw new IllegalArgumentException("The Set cannot be empty.");
+        }
+        int randomIndex = new Random().nextInt(set.size());
+        int i = 0;
+        for (T element : set) {
+            if (i == randomIndex) {
+                return element;
+            }
+            i++;
+        }
+        throw new IllegalStateException("Something went wrong while picking a random element.");
     }
 }
