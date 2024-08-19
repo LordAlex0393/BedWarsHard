@@ -81,7 +81,6 @@ public class GameUtil {
 
     public static void game() {
         BedWarsHard.getGame().setGameState(GameState.GAME);
-        GameUtil.clearAllEntities();
         for (Player all : Bukkit.getOnlinePlayers()) {
             CustomScoreboard.updateScoreboard(all);
             clearPlayer(all);
@@ -91,6 +90,7 @@ public class GameUtil {
                 all.setGameMode(GameMode.SURVIVAL);
             }
         }
+        GameUtil.clearAllEntities();
         new BukkitRunnable() {
             @Override
             public void run() {

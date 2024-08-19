@@ -47,12 +47,12 @@ public class Game {
         return this.playerInfoMap.get(player.getUniqueId());
     }
     public void removePlayer(Player player){
-        getPlayer(player).getTeam().removePlayer(player);
+        //getPlayer(player).getTeam().removePlayer(player);
         this.playerSet.remove(player);
         this.playerInfoMap.remove(player.getUniqueId());
-//        for (String k : BedWarsHard.getMapConfig().getTeams().keySet()) {
-//            BedWarsHard.getMapConfig().getTeams().get(k).removePlayer(player);
-//        }
+        for (String k : BedWarsHard.getMapConfig().getTeams().keySet()) {
+            BedWarsHard.getMapConfig().getTeams().get(k).removePlayer(player);
+        }
     }
     public Set<Player> getPlayerSet() {
         return playerSet;

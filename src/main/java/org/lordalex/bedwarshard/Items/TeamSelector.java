@@ -17,7 +17,6 @@ import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.CustomScoreboard;
 import org.lordalex.bedwarshard.Utils.GameUtil;
 import org.lordalex.bedwarshard.config.BedTeam;
-import org.lordalex.bedwarshard.config.Game;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
 import java.util.*;
