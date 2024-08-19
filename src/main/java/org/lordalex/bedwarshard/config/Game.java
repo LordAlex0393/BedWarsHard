@@ -1,6 +1,8 @@
 package org.lordalex.bedwarshard.config;
 
 
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.lordalex.bedwarshard.BedWarsHard;
 
@@ -10,6 +12,7 @@ public class Game {
     private HashMap<UUID, PlayerInfo> playerInfoMap;
     private Set<Player> playerSet;
     private Set<Player> spectatorSet;
+    private Set<Location> blocksLocationSet;
     private GameState gameState = GameState.WAITING;
     private boolean kickOnLose = false;
     private boolean protectedWorld = true;
@@ -26,6 +29,18 @@ public class Game {
         playerInfoMap = new HashMap<>();
         playerSet = new HashSet<>();
         spectatorSet = new HashSet<>();
+        blocksLocationSet = new HashSet<>();
+    }
+
+    public void addBlock(Location location){
+        blocksLocationSet.add(location);
+    }
+    public void removeBlockLocation(Location location){
+        blocksLocationSet.remove(location);
+    }
+
+    public Set<Location> getBlocksLocationsSet() {
+        return blocksLocationSet;
     }
 
     public PlayerInfo getPlayer(Player player){

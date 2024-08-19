@@ -56,7 +56,6 @@ public class TeamSelector implements Listener {
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
                 e.setCancelled(true);
                 for (String key : teamMap.keySet()) {
-                    Game game = BedWarsHard.getGame();
                     BedTeam team = teamMap.get(key);
                     String[] teamNames = team.getNames().split(",");
 
@@ -69,7 +68,7 @@ public class TeamSelector implements Listener {
                             teamMap.get(k).removePlayer(player);
                         }
                         PlayerInfo playerInfo = new PlayerInfo(player, team);
-                        game.addPlayerInfo(playerInfo);
+                        BedWarsHard.getGame().addPlayerInfo(playerInfo);
 
                         for (Player p : Bukkit.getOnlinePlayers()) {
                             if (e.getInventory().getTitle().equals(p.getOpenInventory().getTitle())) {
@@ -88,8 +87,7 @@ public class TeamSelector implements Listener {
                         for (String k : teamMap.keySet()) {
                             teamMap.get(k).removePlayer(player);
                         }
-                        game.removePlayer(player);
-                        game.addSpectator(player);
+                        BedWarsHard.getGame().removePlayer(player);
 
                         player.setCustomName("§f" + player.getName());
                         player.setPlayerListName(ColorUtil.getMessage("&f" + player.getName()));
