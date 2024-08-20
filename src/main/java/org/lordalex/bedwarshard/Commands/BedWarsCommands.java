@@ -28,7 +28,7 @@ public class BedWarsCommands implements CommandExecutor {
     }
 
     private static void printBWCommandInfo(Player player) {
-        String COMMAND_LIST = ColorUtil.getMessage("&e---------- &dУправление игрой&f (&e/game&f)&e ----------\n" +
+        String COMMAND_LIST = ColorUtil.getMessage("&e---------- &dУправление игрой&f (&e/bw&f)&e ----------\n" +
                 "&e/bw &7clear&f: очистить карту BedWars\n" +
                 "&e/bw &7trader&f: заспавнить торговца\n" +
                 "&e/bw &7kit&f: получить тестовый набор");

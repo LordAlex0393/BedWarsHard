@@ -121,6 +121,14 @@ public class GameCommands implements CommandExecutor{
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до 90"));
                     }
+                } else if (args[1].equalsIgnoreCase("starting-delay") && args.length == 3) {
+                    int input = Integer.parseInt(args[2]);
+                    if (input >= 1 && input <= 300) {
+                        BedWarsHard.getGame().setStartingDelay(input);
+                    } else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до 300"));
+                    }
                 }
             } else if (sender instanceof Player) {
                 Player p = (Player) sender;
@@ -170,6 +178,7 @@ public class GameCommands implements CommandExecutor{
         p.sendMessage(ColorUtil.getMessage(editShop));
         p.sendMessage(ColorUtil.getMessage(limitPlayers));
         p.sendMessage(ColorUtil.getMessage("&dgame-length&f (&7Установить длительность игры (минуты)&f): " + BedWarsHard.getGame().getGameLength()));
+        p.sendMessage(ColorUtil.getMessage("&dstarting-delay&f (&7Установить время до старта (секунды)&f): " + BedWarsHard.getGame().getStartingDelay()));
         p.sendMessage(ColorUtil.getMessage(bedDrop));
     }
 }

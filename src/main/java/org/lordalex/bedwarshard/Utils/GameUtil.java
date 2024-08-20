@@ -25,6 +25,10 @@ public class GameUtil {
 
     public static void start() {
         HashMap<Integer, String> timerStrings = new HashMap<>();
+        timerStrings.put(300, "");
+        timerStrings.put(250, "");
+        timerStrings.put(200, "");
+        timerStrings.put(150, "");
         timerStrings.put(100, "");
         timerStrings.put(60, "");
         timerStrings.put(30, "");
