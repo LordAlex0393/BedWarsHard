@@ -56,9 +56,28 @@ public class onBlockInteraction implements Listener {
         Player player = e.getPlayer();
         if (BedWarsHard.getGame().getGameState() == GameState.WAITING || BedWarsHard.getGame().getGameState() == GameState.STARTING && player.getGameMode() != GameMode.CREATIVE) {
             e.setCancelled(true);
-        } else {
+        }
+        else {
             BedWarsHard.getGame().addBlock(e.getBlock().getLocation());
             player.sendMessage(e.getBlock().getLocation().toString());
+        }
+        for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
+            BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
+            for (String loc : team.getBed()) {
+                Location bedLocation = YmlParser.parseLocation(Bukkit.getWorld("world"), loc);
+                if (bedLocation.getBlockX() == e.getBlock().getLocation().getBlockX() &&
+                        bedLocation.getBlockY() == e.getBlock().getLocation().getBlockY()) {
+                    PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
+                    String colorCode = "&";
+                    if (playerInfo != null) colorCode += playerInfo.getTeam().getColor();
+
+                    for (Player all : e.getBlock().getWorld().getPlayers()) {
+                        all.sendMessage(ColorUtil.getMessage("Игрок " + colorCode + player.getName() + "&f восстановил&" + team.getColor() + team.getNames().split(",")[1]) + " кровать");
+                    }
+                    team.setBedStatus(true);
+                    return;
+                }
+            }
         }
 
     }
