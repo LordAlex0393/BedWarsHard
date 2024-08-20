@@ -72,6 +72,15 @@ public class GameCommands implements CommandExecutor{
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dlimit-players&f:&a on&f,&c off"));
                     }
+                } else if (args[1].equalsIgnoreCase("bed-drop") && args.length == 3) {
+                    if (args[2].equalsIgnoreCase("on")) {
+                        BedWarsHard.getGame().setBedDrop(true);
+                    } else if (args[2].equalsIgnoreCase("off")) {
+                        BedWarsHard.getGame().setBedDrop(true);
+                    } else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dbed-drop&f:&a on&f,&c off"));
+                    }
                 } else if (args[1].equalsIgnoreCase("bronze-rate") && args.length == 3) {
                     float input = Float.parseFloat(args[2]);
                     if (input > 0.25f && input < 4.0f) {
@@ -146,6 +155,9 @@ public class GameCommands implements CommandExecutor{
         String limitPlayers = "&dlimit-players&f (&7Отключить лимит игроков в команде&f): ";
         limitPlayers += BedWarsHard.getGame().isLimitPlayers() ? yes : no;
 
+        String bedDrop = "&dbed-drop&f (&7Выпадение кровати при ломании&f): ";
+        bedDrop += BedWarsHard.getGame().isBedDrop() ? yes : no;
+
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
         p.sendMessage(ColorUtil.getMessage("&e---------- &dНастройки сервера&f (&e/game flag&f)&e ---------------"));
@@ -158,5 +170,6 @@ public class GameCommands implements CommandExecutor{
         p.sendMessage(ColorUtil.getMessage(editShop));
         p.sendMessage(ColorUtil.getMessage(limitPlayers));
         p.sendMessage(ColorUtil.getMessage("&dgame-length&f (&7Установить длительность игры (минуты)&f): " + BedWarsHard.getGame().getGameLength()));
+        p.sendMessage(ColorUtil.getMessage(bedDrop));
     }
 }

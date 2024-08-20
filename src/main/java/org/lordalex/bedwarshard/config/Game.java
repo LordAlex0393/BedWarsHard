@@ -24,12 +24,21 @@ public class Game {
     private boolean limitPlayers = true;
     private int gameLength = 60;
     private int startingDelay = 1;
+    private boolean bedDrop = false;
 
     public Game() {
         playerInfoMap = new HashMap<>();
         playerSet = new HashSet<>();
         spectatorSet = new HashSet<>();
         blocksLocationSet = new HashSet<>();
+    }
+
+    public boolean isBedDrop() {
+        return bedDrop;
+    }
+
+    public void setBedDrop(boolean bedDrop) {
+        this.bedDrop = bedDrop;
     }
 
     public void addBlock(Location location){

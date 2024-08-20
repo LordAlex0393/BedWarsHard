@@ -26,6 +26,7 @@ public final class BedWarsHard extends JavaPlugin {
         getCommand("game").setExecutor(new GameCommands());
         getCommand("bw").setExecutor(new BedWarsCommands());
         getCommand("game").setTabCompleter(new GameTabCompleter());
+        Bukkit.getWorld("world").setAutoSave(false);
         File file = new File("mapConfig.yml");
         mapConfig = YmlParser.parseMap(file);
     }
