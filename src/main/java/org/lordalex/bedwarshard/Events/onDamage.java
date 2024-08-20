@@ -52,38 +52,6 @@ public class onDamage implements Listener {
     }
 
     @EventHandler
-    public void onPlayerDeathEvent(PlayerDeathEvent e) {
-        if (e.getEntity() == null) return;
-        if (e.getEntity().getPlayer() == null) return;
-
-        Player victim = e.getEntity().getPlayer();
-        victim.getInventory().clear();
-        if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
-            PlayerInfo victimInfo = BedWarsHard.getGame().getPlayer(victim);
-//            if(e.getEntity().getLastDamageCause().getCause() != EntityDamageEvent.DamageCause.CONTACT){
-//                e.setDeathMessage(null);
-//                victimInfo.setDeaths(victimInfo.getDeaths() + 1);
-//                CustomScoreboard.updateScoreboard(victim);
-//            }
-            if (e.getEntity().getKiller() instanceof Player && BedWarsHard.getGame().getPlayer(e.getEntity().getKiller()) != null) {
-                Player killer = e.getEntity().getKiller();
-                PlayerInfo killerInfo = BedWarsHard.getGame().getPlayer(killer);
-
-                killerInfo.setKills(killerInfo.getKills() + 1);
-                killer.setLevel(killer.getLevel() + 1);
-                CustomScoreboard.updateScoreboard(killer);
-
-                if (!(victim.equals(killer))) {
-                    e.setDeathMessage(ColorUtil.getMessage("Игрок &" + victimInfo.getTeam().getColor() + victim.getName() + "&f убит игроком &" + killerInfo.getTeam().getColor() + killer.getName()));
-                }
-            } else {
-                e.setDeathMessage(null);
-            }
-        }
-        victim.spigot().respawn();
-    }
-
-    @EventHandler
     public void onEntityDamage(EntityDamageEvent e) {
         if (BedWarsHard.getGame().getGameState() != GameState.GAME) {
             e.setCancelled(true);
@@ -95,21 +63,27 @@ public class onDamage implements Listener {
     @EventHandler
     public void onPlayerRespawnEvent(PlayerRespawnEvent e) {
         //GameUtil.playerRespawn(e.getPlayer());
-        Player player = e.getPlayer();
-        PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
+        if(BedWarsHard.getGame().getPlayer(e.getPlayer()) != null){
+            GameUtil.playerRespawn(BedWarsHard.getGame().getPlayer(e.getPlayer()));
+        }
+    }
 
+    @EventHandler
+    public void onPlayerDeathEvent(PlayerDeathEvent e) {
 
+        Player victim = e.getEntity();
+        Player killer = e.getEntity().getKiller();
 
-        Random rand = new Random();
-        int spawnNumber = rand.nextInt(playerInfo.getTeam().getSpawns().size());
+        if(e.getEntity().getKiller() instanceof Player && BedWarsHard.getGame().getPlayerInfoMap().containsKey(victim.getUniqueId()) && BedWarsHard.getGame().getPlayerInfoMap().containsKey(killer.getUniqueId())){
+            PlayerInfo victimInfo = BedWarsHard.getGame().getPlayer(victim);
+            PlayerInfo killerInfo = BedWarsHard.getGame().getPlayer(killer);
+            e.setDeathMessage(ColorUtil.getMessage("Игрок &" + victimInfo.getTeam().getColor() + victim.getName() +
+                    "&f убит игроком &" + killerInfo.getTeam().getColor() + killer.getName()));
+        }
+        else{
+            e.setDeathMessage(null);
+        }
+        victim.spigot().respawn();
 
-        Location loc = YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber));
-        loc.setPitch(0);
-
-        playerInfo.getPlayer().teleport(loc);
-
-        playerInfo.getPlayer().setBedSpawnLocation(loc, true);
-
-        e.setRespawnLocation(loc);
     }
 }

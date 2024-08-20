@@ -68,10 +68,8 @@ public class OnJoin implements Listener {
                 BedTeam team = playerInfo.getTeam();
                 player.sendMessage("Вы переподключились к игре");
 
-                Random rand = new Random();
-                int spawnNumber = rand.nextInt(team.getSpawns().size());
-                player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber)));
-                GameUtil.giveStartKit(player);
+                player.teleport(GameUtil.getRandomSpawnLocation(playerInfo));
+                GameUtil.giveKit(player);
                 //GameUtil.playerRespawn(playerInfo);
             }
             else{
