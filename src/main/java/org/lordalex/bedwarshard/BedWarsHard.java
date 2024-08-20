@@ -6,10 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.lordalex.bedwarshard.Commands.BedWarsCommands;
 import org.lordalex.bedwarshard.Commands.GameCommands;
 import org.lordalex.bedwarshard.Commands.GameTabCompleter;
-import org.lordalex.bedwarshard.Events.OnJoin;
-import org.lordalex.bedwarshard.Events.OnQuit;
-import org.lordalex.bedwarshard.Events.onBlockInteraction;
-import org.lordalex.bedwarshard.Events.onDropItem;
+import org.lordalex.bedwarshard.Events.*;
 import org.lordalex.bedwarshard.Items.TeamSelector;
 import org.lordalex.bedwarshard.config.MapConfig;
 import org.lordalex.bedwarshard.config.Game;
@@ -44,6 +41,7 @@ public final class BedWarsHard extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new TeamSelector(), this);
         Bukkit.getPluginManager().registerEvents(new onDropItem(), this);
         Bukkit.getPluginManager().registerEvents(new onBlockInteraction(), this);
+        Bukkit.getPluginManager().registerEvents(new ClosedEvents(), this);
     }
     public static Plugin getInstance(){
         return instance;
