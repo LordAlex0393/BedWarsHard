@@ -10,7 +10,7 @@ public class PlayerInfo {
     private int spentBronze = 0;
     private int aliveTime = 0;
     private int kills = 0;
-    private int death = 0;
+    private int deaths = 0;
     private int brokenBeds = 0;
     private boolean alive = true;
 
@@ -75,12 +75,12 @@ public class PlayerInfo {
         this.kills = kills;
     }
 
-    public int getDeath() {
-        return death;
+    public int getDeaths() {
+        return deaths;
     }
 
-    public void setDeath(int death) {
-        this.death = death;
+    public void setDeaths(int death) {
+        this.deaths = deaths;
     }
 
     public int getBrokenBeds() {

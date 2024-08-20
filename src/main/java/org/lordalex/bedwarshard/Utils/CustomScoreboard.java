@@ -112,6 +112,12 @@ public class CustomScoreboard {
             scores.add(ColorUtil.getMessage(teamStr));
         }
         scores.add("  ");
+        if(BedWarsHard.getGame().getPlayer(p) != null){
+            scores.add(ColorUtil.getMessage("&6★&f Убийств:&e " + BedWarsHard.getGame().getPlayer(p).getKills()));
+            scores.add(ColorUtil.getMessage("&6★&f Смертей:&e " + BedWarsHard.getGame().getPlayer(p).getDeaths()));
+            scores.add(ColorUtil.getMessage("&6★&f Кроватей:&e " + BedWarsHard.getGame().getPlayer(p).getBrokenBeds()));
+            scores.add("   ");
+        }
         Scoreboard scoreboard = CustomScoreboard.createScoreboard(scores);
         p.setScoreboard(scoreboard);
     }

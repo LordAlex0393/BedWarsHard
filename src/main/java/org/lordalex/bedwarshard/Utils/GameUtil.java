@@ -90,7 +90,7 @@ public class GameUtil {
             clearPlayer(all);
 
             if (BedWarsHard.getGame().getPlayer(all) != null) {
-                playerRespawn(BedWarsHard.getGame().getPlayer(all));
+                playerRespawn(all);
                 all.setGameMode(GameMode.SURVIVAL);
             }
         }
@@ -258,12 +258,23 @@ public class GameUtil {
         }
     }
 
-    public static void playerRespawn(PlayerInfo playerInfo) {
-        BedTeam team = playerInfo.getTeam();
-        Random rand = new Random();
-        int spawnNumber = rand.nextInt(team.getSpawns().size());
-        playerInfo.getPlayer().teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber)));
-        giveStartKit(playerInfo.getPlayer());
+    public static void playerRespawn(Player player) {
+        PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
+        if(playerInfo != null){
+            player.setGameMode(GameMode.SURVIVAL);
+            player.getInventory().clear();
+            giveStartKit(playerInfo.getPlayer());
+            Random rand = new Random();
+            int spawnNumber = rand.nextInt(playerInfo.getTeam().getSpawns().size());
+            Location loc = YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber));
+            loc.setPitch(0);
+            playerInfo.getPlayer().teleport(loc);
+            playerInfo.getPlayer().setBedSpawnLocation(loc, true);
+        }
+        else{
+            player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
+            player.setGameMode(GameMode.SPECTATOR);
+        }
     }
 
 

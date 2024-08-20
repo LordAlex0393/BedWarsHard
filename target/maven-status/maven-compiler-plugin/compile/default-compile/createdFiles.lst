@@ -20,4 +20,5 @@ org\lordalex\bedwarshard\Utils\GameUtil$1.class
 org\lordalex\bedwarshard\config\GameState.class
 org\lordalex\bedwarshard\Events\ClosedEvents.class
 org\lordalex\bedwarshard\Events\OnJoin.class
+org\lordalex\bedwarshard\Events\onDamage.class
 org\lordalex\bedwarshard\Utils\ColorUtil.class

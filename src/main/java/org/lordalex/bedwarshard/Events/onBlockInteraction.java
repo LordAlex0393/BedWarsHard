@@ -33,14 +33,12 @@ public class onBlockInteraction implements Listener {
                     if (bedLocation.getBlockX() == e.getBlock().getLocation().getBlockX()
                             && bedLocation.getBlockY() == e.getBlock().getLocation().getBlockY()
                             && bedLocation.getBlockZ() == e.getBlock().getLocation().getBlockZ()) {
-                        System.out.println(1);
 
                         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
                         String colorCode = "&";
                         if (playerInfo != null) colorCode += playerInfo.getTeam().getColor();
 
                         if ((playerInfo != null && team != playerInfo.getTeam()) || player.getGameMode() == GameMode.CREATIVE) {
-                            System.out.println(2);
                             if(!BedWarsHard.getGame().isBedDrop()){
                                 for (String locTemp : team.getBed()) {
                                     Location bedLocationTemp = YmlParser.parseLocation(Bukkit.getWorld("world"), locTemp);
