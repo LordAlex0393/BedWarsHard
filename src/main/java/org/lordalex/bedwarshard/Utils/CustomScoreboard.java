@@ -104,12 +104,14 @@ public class CustomScoreboard {
         scores.add(" ");
         for(String key : BedWarsHard.getMapConfig().getTeams().keySet()){
             BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-            String info = team.getBedStatus() ? "✔" : "✘";
-            String teamStr = "&" + team.getColor() + info + team.getNames().split(",")[2] + "&7 (" + team.getAlivePlayersInfo().size() + "/" + BedWarsHard.getMapConfig().getTeamPlayers() + ")";
-            if(team.getPlayerSet().contains(p)){
-                teamStr += "&7 ⇐ Вы";
+            if(team.getAlivePlayersInfo().size() > 0) {
+                String info = team.getBedStatus() ? "✔" : "✘";
+                String teamStr = "&" + team.getColor() + info + team.getNames().split(",")[2] + "&7 (" + team.getAlivePlayersInfo().size() + "/" + BedWarsHard.getMapConfig().getTeamPlayers() + ")";
+                if (team.getPlayerSet().contains(p)) {
+                    teamStr += "&7 ⇐ Вы";
+                }
+                scores.add(ColorUtil.getMessage(teamStr));
             }
-            scores.add(ColorUtil.getMessage(teamStr));
         }
         scores.add("  ");
         if(BedWarsHard.getGame().getPlayer(p) != null){

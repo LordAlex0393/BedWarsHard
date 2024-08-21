@@ -102,7 +102,6 @@ public class BedTeam {
         this.ironSpawns = ironSpawns;
     }
 
-
     public HashSet<PlayerInfo> getAlivePlayersInfo() {
         HashSet<PlayerInfo> playerInfoHashSet = new HashSet<>();
         for (Player player : playerSet) {

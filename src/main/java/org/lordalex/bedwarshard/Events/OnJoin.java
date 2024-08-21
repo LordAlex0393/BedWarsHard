@@ -74,7 +74,7 @@ public class OnJoin implements Listener {
             }
             else{
                 player.setGameMode(GameMode.SPECTATOR);
-                player.setPlayerListName(null);
+                player.setPlayerListName("[Dead] " + player.getName());
                 player.teleport(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWarsHard.getMapConfig().getLobby()));
                 e.setJoinMessage(null);
             }

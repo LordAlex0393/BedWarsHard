@@ -213,7 +213,7 @@ public class GameUtil {
     private static void spawnBronzeResource() {
         for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
             BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-            if (team.getBedStatus()) {
+            if (team.getAlivePlayersInfo().size() > 0) {
                 for (String position : team.getBronzeSpawns()) {
                     Location location = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
 
@@ -232,7 +232,7 @@ public class GameUtil {
     private static void spawnIronResource() {
         for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
             BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-            if (team.getBedStatus()) {
+            if (team.getAlivePlayersInfo().size() > 0) {
                 for (String position : team.getIronSpawns()) {
                     Location location = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
 
