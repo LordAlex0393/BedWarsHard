@@ -35,8 +35,8 @@ public class onBlockInteraction implements Listener {
                             && bedLocation.getBlockZ() == e.getBlock().getLocation().getBlockZ()) {
 
                         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
-                        String colorCode = "&";
-                        if (playerInfo != null) colorCode += playerInfo.getTeam().getColor();
+                        String colorCode = "";
+                        if (playerInfo != null) colorCode += ("&" + playerInfo.getTeam().getColor());
 
                         if ((playerInfo != null && team != playerInfo.getTeam()) || player.getGameMode() == GameMode.CREATIVE) {
                             if(!BedWarsHard.getGame().isBedDrop()){
@@ -78,10 +78,15 @@ public class onBlockInteraction implements Listener {
                             && bedLocation.getBlockY() == e.getBlock().getLocation().getBlockY()
                             && bedLocation.getBlockZ() == e.getBlock().getLocation().getBlockZ()) {
                         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
-                        String colorCode = "&";
-                        if (playerInfo != null) colorCode += playerInfo.getTeam().getColor();
+                        String colorCode = "";
+                        if (playerInfo != null) colorCode += ("&" + playerInfo.getTeam().getColor());
 
                         team.setBedStatus(true);
+                        for(Player teamPlayer : team.getPlayerSet()){
+                            if(teamPlayer.getGameMode() == GameMode.SPECTATOR){
+                                teamPlayer.spigot().respawn();
+                            }
+                        }
                         for (Player all : e.getBlock().getWorld().getPlayers()) {
                             all.sendMessage(ColorUtil.getMessage("Игрок " + colorCode + player.getName() + "&f восстановил&" + team.getColor() + team.getNames().split(",")[1]) + " кровать");
                             CustomScoreboard.updateScoreboard(all);

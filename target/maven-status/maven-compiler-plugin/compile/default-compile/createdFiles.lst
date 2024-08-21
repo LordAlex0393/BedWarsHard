@@ -5,6 +5,7 @@ org\lordalex\bedwarshard\config\PlayerInfo.class
 org\lordalex\bedwarshard\config\Game.class
 org\lordalex\bedwarshard\Utils\GameUtil.class
 org\lordalex\bedwarshard\config\MapConfig.class
+org\lordalex\bedwarshard\Events\onDamage$1.class
 org\lordalex\bedwarshard\Events\OnQuit.class
 org\lordalex\bedwarshard\BedWarsHard.class
 org\lordalex\bedwarshard\Utils\GameUtil$4.class
