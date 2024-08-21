@@ -85,6 +85,8 @@ public class GameUtil {
 
     public static void game() {
         BedWarsHard.getGame().setGameState(GameState.GAME);
+        BedWarsHard.getGame().setStartTime(System.currentTimeMillis() / 1000L);
+        System.out.println(System.currentTimeMillis() / 1000L);
         for (Player all : Bukkit.getOnlinePlayers()) {
             CustomScoreboard.updateScoreboard(all);
             clearPlayer(all);

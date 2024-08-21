@@ -25,12 +25,21 @@ public class Game {
     private int gameLength = 60;
     private int startingDelay = 1;
     private boolean bedDrop = false;
+    private long startTime = -1;
 
     public Game() {
         playerInfoMap = new HashMap<>();
         playerSet = new HashSet<>();
         spectatorSet = new HashSet<>();
         blocksLocationSet = new HashSet<>();
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
     public boolean isBedDrop() {

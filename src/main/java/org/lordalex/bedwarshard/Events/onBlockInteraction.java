@@ -46,6 +46,7 @@ public class onBlockInteraction implements Listener {
                                 }
                             }
                             team.setBedStatus(false);
+                            playerInfo.setBrokenBeds(playerInfo.getBrokenBeds()+1);
                             for (Player all : e.getBlock().getWorld().getPlayers()) {
                                 all.sendMessage(ColorUtil.getMessage("Игрок " + colorCode + player.getName() + "&f сломал&" + team.getColor() + team.getNames().split(",")[1]) + " кровать");
                                 CustomScoreboard.updateScoreboard(all);

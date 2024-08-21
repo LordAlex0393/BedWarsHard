@@ -83,6 +83,7 @@ public class onDamage implements Listener {
             PlayerInfo victimInfo = BedWarsHard.getGame().getPlayer(victim);
             if (!victimInfo.getTeam().getBedStatus()) {
                 victimInfo.setAlive(false);
+                victimInfo.setAliveTime((int) ((System.currentTimeMillis()/1000) - BedWarsHard.getGame().getStartTime()));
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     CustomScoreboard.updateScoreboard(all);
                 }
