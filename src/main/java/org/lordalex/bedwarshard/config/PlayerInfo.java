@@ -80,7 +80,7 @@ public class PlayerInfo {
     }
 
     public void setDeaths(int death) {
-        this.deaths = deaths;
+        this.deaths = death;
     }
 
     public int getBrokenBeds() {
@@ -95,7 +95,7 @@ public class PlayerInfo {
         return alive;
     }
 
-    public void setAlive(boolean dead) {
+    public void setAlive(boolean alive) {
         this.alive = alive;
     }
 }

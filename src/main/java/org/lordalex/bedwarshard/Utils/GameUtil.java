@@ -40,6 +40,7 @@ public class GameUtil {
         timerStrings.put(1, "у");
 
         BedWarsHard.getGame().setGameState(GameState.STARTING);
+        delay = BedWarsHard.getGame().getStartingDelay();
         GameUtil.clearAllEntities();
         new BukkitRunnable() {
             @Override
