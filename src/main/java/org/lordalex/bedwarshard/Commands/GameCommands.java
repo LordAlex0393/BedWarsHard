@@ -83,27 +83,27 @@ public class GameCommands implements CommandExecutor{
                     }
                 } else if (args[1].equalsIgnoreCase("bronze-rate") && args.length == 3) {
                     float input = Float.parseFloat(args[2]);
-                    if (input >= 0.25f && input <= 1000.0f) {
+                    if (input >= 0.25f && input <= 10.0f) {
                         BedWarsHard.getGame().setBronzeRate(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 4.0"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 10.0"));
                     }
                 } else if (args[1].equalsIgnoreCase("iron-rate") && args.length == 3) {
                     float input = Float.parseFloat(args[2]);
-                    if (input >= 0.25f && input <= 1000.0f) {
+                    if (input >= 0.25f && input <= 50.0f) {
                         BedWarsHard.getGame().setIronRate(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 4.0"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 50.0"));
                     }
                 } else if (args[1].equalsIgnoreCase("gold-rate") && args.length == 3) {
                     float input = Float.parseFloat(args[2]);
-                    if (input >= 0.25f && input <= 1000.0f) {
+                    if (input >= 0.25f && input <= 100.0f) {
                         BedWarsHard.getGame().setGoldRate(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 4.0"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 100.0"));
                     }
                 } else if (args[1].equalsIgnoreCase("final-dm") && args.length == 3) {
                     int input = Integer.parseInt(args[2]);
