@@ -25,6 +25,9 @@ public class BedWarsCommands implements CommandExecutor {
         } else if (args[0].equalsIgnoreCase("clear")) {
             ResourceUtil.clearAllEntities();
         }
+        else if (args[0].equalsIgnoreCase("trader")) {
+            GameUtil.spawnTraders();
+        }
         return true;
     }
 

@@ -13,6 +13,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Items.TeamSelector;
+import org.lordalex.bedwarshard.Items.Trader;
 import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.GameState;
 import org.lordalex.bedwarshard.config.PlayerInfo;
@@ -101,6 +102,14 @@ public class GameUtil {
         ResourceUtil.activateBronzeSpawners();
         ResourceUtil.activateIronSpawners();
         ResourceUtil.activateGoldSpawners();
+
+        Bukkit.getScheduler().scheduleSyncDelayedTask(BedWarsHard.getInstance(), new Runnable() {
+            @Override
+            public void run() {
+                spawnTraders();
+            }
+        }, 20);
+
     }
 
     public static void stop() {
@@ -192,7 +201,16 @@ public class GameUtil {
         Location loc = getRandomSpawnLocation(playerInfo);
         playerInfo.getPlayer().teleport(loc);
         playerInfo.getPlayer().setBedSpawnLocation(loc, true);
+    }
 
+    public static void spawnTraders(){
+        for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
+            BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
+            for(String position : team.getVillagers()){
+                Location traderSpawnLocation = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
+                Trader.spawn(traderSpawnLocation);
+            }
+        }
     }
 
     public static Location getRandomSpawnLocation(PlayerInfo playerInfo) {
