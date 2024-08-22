@@ -10,6 +10,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.GameUtil;
+import org.lordalex.bedwarshard.Utils.ResourceUtil;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class BedWarsCommands implements CommandExecutor {
                 printBWCommandInfo(p);
             }
         } else if (args[0].equalsIgnoreCase("clear")) {
-            GameUtil.clearAllEntities();
+            ResourceUtil.clearAllEntities();
         }
         return true;
     }

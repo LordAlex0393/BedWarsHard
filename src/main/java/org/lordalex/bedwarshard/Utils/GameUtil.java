@@ -41,7 +41,7 @@ public class GameUtil {
 
         BedWarsHard.getGame().setGameState(GameState.STARTING);
         delay = BedWarsHard.getGame().getStartingDelay();
-        GameUtil.clearAllEntities();
+        ResourceUtil.clearAllEntities();
         new BukkitRunnable() {
             @Override
             public void run() {
@@ -96,30 +96,11 @@ public class GameUtil {
                 all.setGameMode(GameMode.SURVIVAL);
             }
         }
-        GameUtil.clearAllEntities();
+        ResourceUtil.clearAllEntities();
 
-        activateBronzeSpawners();
-
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
-                    spawnIronResource();
-                } else {
-                    cancel();
-                }
-            }
-        }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getIronFrequency());
-        new BukkitRunnable() {
-            @Override
-            public void run() {
-                if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
-                    spawnGoldResource();
-                } else {
-                    cancel();
-                }
-            }
-        }.runTaskTimer(BedWarsHard.getInstance(), 0, BedWarsHard.getMapConfig().getGoldFrequency());
+        ResourceUtil.activateBronzeSpawners();
+        ResourceUtil.activateIronSpawners();
+        ResourceUtil.activateGoldSpawners();
     }
 
     public static void stop() {
@@ -203,72 +184,6 @@ public class GameUtil {
         player.getInventory().setHelmet(helmetStack);
     }
 
-    private static void spawnBronzeResource(Location dropLocation) {
-        ItemStack bronzeStack = new ItemStack(Material.CLAY_BRICK, 1);
-        ItemMeta bronzeMeta = bronzeStack.getItemMeta();
-        bronzeMeta.setDisplayName(ChatColor.GOLD + "Бронза");
-        bronzeStack.setItemMeta(bronzeMeta);
-
-        Item dropitem = Bukkit.getWorld("world").dropItem(dropLocation, bronzeStack);
-        dropitem.setPickupDelay(dropitem.getPickupDelay()/3);
-        dropitem.setVelocity(dropitem.getVelocity().zero());
-    }
-
-    private static void spawnIronResource() {
-        for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
-            BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-            if (team.getAlivePlayersInfo().size() > 0) {
-                for (String position : team.getIronSpawns()) {
-                    Location location = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
-
-                    ItemStack ironStack = new ItemStack(Material.IRON_INGOT, 1);
-                    ItemMeta ironMeta = ironStack.getItemMeta();
-                    ironMeta.setDisplayName(ChatColor.WHITE + "Железо");
-                    ironStack.setItemMeta(ironMeta);
-
-                    Item dropitem = Bukkit.getWorld("world").dropItem(location, ironStack);
-                    dropitem.setVelocity(dropitem.getVelocity().zero());
-                }
-            }
-        }
-    }
-
-    private static void spawnGoldResource() {
-        for (String position : BedWarsHard.getMapConfig().getGoldSpawns()) {
-            Location location = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
-
-            ItemStack goldStack = new ItemStack(Material.GOLD_INGOT, 1);
-            ItemMeta goldMeta = goldStack.getItemMeta();
-            goldMeta.setDisplayName(ChatColor.YELLOW + "Золото");
-            goldStack.setItemMeta(goldMeta);
-
-            Item dropitem = Bukkit.getWorld("world").dropItem(location, goldStack);
-            dropitem.setVelocity(dropitem.getVelocity().zero());
-
-        }
-    }
-    private static void activateBronzeSpawners(){
-        for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
-            BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-            if (team.getAlivePlayersInfo().size() > 0) {
-                for (int i = 0; i < team.getBronzeSpawns().size(); i++) {
-                    String position = team.getBronzeSpawns().get(i);
-                    Location dropLocation = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
-                    new BukkitRunnable() {
-                        @Override
-                        public void run() {
-                            if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
-                                spawnBronzeResource(dropLocation);
-                            } else {
-                                cancel();
-                            }
-                        }
-                    }.runTaskTimer(BedWarsHard.getInstance(), (BedWarsHard.getMapConfig().getBronzeFrequency()/team.getBronzeSpawns().size())*i, BedWarsHard.getMapConfig().getBronzeFrequency());
-                }
-            }
-        }
-    }
-
     public static void playerRespawn(PlayerInfo playerInfo) {
         Player player = playerInfo.getPlayer();
         player.getInventory().clear();
@@ -284,25 +199,6 @@ public class GameUtil {
         Random rand = new Random();
         int spawnNumber = rand.nextInt(playerInfo.getTeam().getSpawns().size());
         return YmlParser.parseLocation(Bukkit.getWorld("world"), playerInfo.getTeam().getSpawns().get(spawnNumber));
-    }
-
-
-    public static boolean isEqualsItem(InventoryClickEvent e, String itemDisplayName) {
-        if (e.getCurrentItem().getItemMeta().getDisplayName() != null) {
-            return e.getCurrentItem().getItemMeta().getDisplayName().equals(ColorUtil.getMessage(itemDisplayName));
-        } else {
-            return false;
-        }
-    }
-
-    public static void clearAllEntities() {
-        World world = Bukkit.getWorld("world");
-        List<Entity> entList = world.getEntities();
-        for (Entity current : entList) {
-            if (current.getType() == EntityType.DROPPED_ITEM) {
-                current.remove();
-            }
-        }
     }
 
     public static int getDelay() {

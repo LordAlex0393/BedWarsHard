@@ -16,6 +16,7 @@ import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.CustomScoreboard;
 import org.lordalex.bedwarshard.Utils.GameUtil;
+import org.lordalex.bedwarshard.Utils.ResourceUtil;
 import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
@@ -58,7 +59,7 @@ public class TeamSelector implements Listener {
                     BedTeam team = teamMap.get(key);
                     String[] teamNames = team.getNames().split(",");
 
-                    if (GameUtil.isEqualsItem(e, "&" + team.getColor() + teamNames[0] + " команда&f [" + team.getAlivePlayersInfo().size() + "/" + teamSize + "]")) {
+                    if (ResourceUtil.isEqualsItem(e, "&" + team.getColor() + teamNames[0] + " команда&f [" + team.getAlivePlayersInfo().size() + "/" + teamSize + "]")) {
                         if (team.getAlivePlayersInfo().size() >= BedWarsHard.getMapConfig().getTeamPlayers()) {
                             return;
                         }
@@ -82,7 +83,7 @@ public class TeamSelector implements Listener {
                             CustomScoreboard.updateScoreboard(all);
                         }
                     }
-                    else if (GameUtil.isEqualsItem(e, "&fВыйти из команды")) {
+                    else if (ResourceUtil.isEqualsItem(e, "&fВыйти из команды")) {
                         for (String k : teamMap.keySet()) {
                             teamMap.get(k).removePlayer(player);
                         }

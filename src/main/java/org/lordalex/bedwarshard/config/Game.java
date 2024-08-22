@@ -16,9 +16,9 @@ public class Game {
     private GameState gameState = GameState.WAITING;
     private boolean kickOnLose = false;
     private boolean protectedWorld = true;
-    private float goldRate = 2.5f;
-    private float ironRate = 2.5f;
-    private float bronzeRate = 2.5f;
+    private float goldRate = 2.0f;
+    private float ironRate = 2.0f;
+    private float bronzeRate = 2.0f;
     private int finalDM = 0;
     private boolean editShop = false;
     private boolean limitPlayers = true;
