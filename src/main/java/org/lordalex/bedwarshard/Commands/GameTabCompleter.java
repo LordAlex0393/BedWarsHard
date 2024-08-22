@@ -22,6 +22,7 @@ public class GameTabCompleter implements TabCompleter {
             list.add("edit-shop");
             list.add("limit-players");
             list.add("game-length");
+            list.add("starting-delay");
             list.add("bed-drop");
         } else if(args.length < 2){
             list.add("start");
