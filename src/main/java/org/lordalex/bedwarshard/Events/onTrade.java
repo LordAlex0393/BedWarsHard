@@ -82,19 +82,22 @@ public class onTrade implements Listener {
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
 
                 if (isEqualsItem(e, "&fЖелезный сет")) {
-                    ItemStack ironLegsStack = new ItemStack(Material.IRON_LEGGINGS, 1);
-                    ItemMeta ironLegsMeta = ironLegsStack.getItemMeta();
-                    ironLegsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-                    ironLegsStack.setItemMeta(ironLegsMeta);
-
                     ItemStack ironBootsStack = new ItemStack(Material.IRON_BOOTS, 1);
                     ItemMeta ironBootsMeta = ironBootsStack.getItemMeta();
                     ironBootsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+                    ironBootsMeta.spigot().setUnbreakable(true);
                     ironBootsStack.setItemMeta(ironBootsMeta);
+
+                    ItemStack ironLegsStack = new ItemStack(Material.IRON_LEGGINGS, 1);
+                    ItemMeta ironLegsMeta = ironLegsStack.getItemMeta();
+                    ironLegsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+                    ironLegsMeta.spigot().setUnbreakable(true);
+                    ironLegsStack.setItemMeta(ironLegsMeta);
 
                     ItemStack ironHelmetStack = new ItemStack(Material.IRON_HELMET, 1);
                     ItemMeta ironHelmetMeta = ironHelmetStack.getItemMeta();
                     ironHelmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+                    ironHelmetMeta.spigot().setUnbreakable(true);
                     ironHelmetStack.setItemMeta(ironHelmetMeta);
 
                     List<ItemStack> ironArmorList = new ArrayList<>();
@@ -106,6 +109,7 @@ public class onTrade implements Listener {
                     ItemStack ironChestplateStack = new ItemStack(Material.IRON_CHESTPLATE, 1);
                     ItemMeta ironChestplateMeta = ironChestplateStack.getItemMeta();
                     ironChestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+                    ironChestplateMeta.spigot().setUnbreakable(true);
                     ironChestplateStack.setItemMeta(ironChestplateMeta);
                     buyArmor(e, IRON, 1, ironChestplateStack, 1);
                 } else if (isEqualsItem(e, "&f← &eНазад")) {
@@ -152,16 +156,18 @@ public class onTrade implements Listener {
                     ironSwordMeta.setDisplayName(ColorUtil.getMessage("&bЖелезный меч"));
                     ironSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
                     ironSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                    ironSwordMeta.spigot().setUnbreakable(true);
                     ironSwordStack.setItemMeta(ironSwordMeta);
-                    buyItem(e, BRONZE, 3, ironSwordStack, 1);
+                    buySword(e, BRONZE, 3, ironSwordStack, 1);
                 } else if (isEqualsItem(e, "&aАлмеч")) {
                     ItemStack diamondSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
                     ItemMeta diamondSwordMeta = diamondSwordStack.getItemMeta();
                     diamondSwordMeta.setDisplayName(ColorUtil.getMessage("&aАлмеч"));
                     diamondSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
                     diamondSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+                    diamondSwordMeta.spigot().setUnbreakable(true);
                     diamondSwordStack.setItemMeta(diamondSwordMeta);
-                    buyItem(e, IRON, 1, diamondSwordStack, 1);
+                    buySword(e, IRON, 1, diamondSwordStack, 1);
                 } else if (isEqualsItem(e, "&bЭкскалибур")) {
                     ItemStack excaliburSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
                     ItemMeta excaliburSwordMeta = excaliburSwordStack.getItemMeta();
@@ -169,8 +175,9 @@ public class onTrade implements Listener {
                     excaliburSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
                     excaliburSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                     excaliburSwordMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
+                    excaliburSwordMeta.spigot().setUnbreakable(true);
                     excaliburSwordStack.setItemMeta(excaliburSwordMeta);
-                    buyItem(e, IRON, 5, excaliburSwordStack, 1);
+                    buySword(e, IRON, 5, excaliburSwordStack, 1);
                 } else if (isEqualsItem(e, "&6Смертоносец")) {
                     ItemStack deathBringerSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
                     ItemMeta deathBringerSwordMeta = deathBringerSwordStack.getItemMeta();
@@ -178,8 +185,9 @@ public class onTrade implements Listener {
                     deathBringerSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
                     deathBringerSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                     deathBringerSwordMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
+                    deathBringerSwordMeta.spigot().setUnbreakable(true);
                     deathBringerSwordStack.setItemMeta(deathBringerSwordMeta);
-                    buyItem(e, GOLD, 6, deathBringerSwordStack, 1);
+                    buySword(e, GOLD, 6, deathBringerSwordStack, 1);
                 } else if (isEqualsItem(e, "&cКиллмагедон")) {
                     ItemStack killmagedonSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
                     ItemMeta killmagedonSwordMeta = killmagedonSwordStack.getItemMeta();
@@ -188,8 +196,9 @@ public class onTrade implements Listener {
                     killmagedonSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
                     killmagedonSwordMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
                     killmagedonSwordMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
+                    killmagedonSwordMeta.spigot().setUnbreakable(true);
                     killmagedonSwordStack.setItemMeta(killmagedonSwordMeta);
-                    buyItem(e, GOLD, 30, killmagedonSwordStack, 1);
+                    buySword(e, GOLD, 30, killmagedonSwordStack, 1);
                 } else if (isEqualsItem(e, "&f← &eНазад")) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }
@@ -279,27 +288,23 @@ public class onTrade implements Listener {
         }
     }
 
-    private boolean buyItemShift(Player p, ItemStack resourceItemStack, ItemStack productItemStack, int resourceAmount, int productAmount) {
+    private void buyItemShift(Player p, ItemStack resourceItemStack, ItemStack productItemStack, int resourceAmount, int productAmount) {
         int factor = 10;
         for (factor = 10; factor > 0; factor--) {
             buyItemNormal(p, resourceItemStack, productItemStack, resourceAmount, productAmount);
         }
-        return true;
     }
 
-    private boolean buyItemNormal(Player p, ItemStack resourceItemStack, ItemStack productItemStack, int resourceAmount, int productAmount) {
+    private void buyItemNormal(Player p, ItemStack resourceItemStack, ItemStack productItemStack, int resourceAmount, int productAmount) {
         if (checkItem(p, resourceItemStack, resourceAmount)) {
             resourceItemStack.setAmount(resourceAmount);
             p.getInventory().removeItem(resourceItemStack);
             productItemStack.setAmount(productAmount);
             p.getInventory().addItem(productItemStack);
-            return true;
-        } else {
-            return false;
         }
     }
 
-    private boolean buyItem(InventoryClickEvent e, ItemStack resourceItemStack, int resourceAmount, ItemStack productItemStack, int productAmount) {
+    private void buyItem(InventoryClickEvent e, ItemStack resourceItemStack, int resourceAmount, ItemStack productItemStack, int productAmount) {
         Player p = (Player) e.getView().getPlayer();
         if (isShiftClick(e)) {
             buyItemShift(p, resourceItemStack, productItemStack, resourceAmount, productAmount);
@@ -307,10 +312,9 @@ public class onTrade implements Listener {
             buyItemNormal(p, resourceItemStack, productItemStack, resourceAmount, productAmount);
         }
         e.setCancelled(true);
-        return true;
     }
 
-    private boolean buyItem(InventoryClickEvent e, ItemStack resourceItemsStack, int resourceAmount, List<ItemStack> productItemStack, int productAmount) {
+    private void buyItem(InventoryClickEvent e, ItemStack resourceItemsStack, int resourceAmount, List<ItemStack> productItemStack, int productAmount) {
         Player p = (Player) e.getView().getPlayer();
         e.setCancelled(true);
         if (checkItem(p, resourceItemsStack, resourceAmount)) {
@@ -320,73 +324,71 @@ public class onTrade implements Listener {
                 product.setAmount(productAmount);
                 p.getInventory().addItem(product);
             }
-            return true;
-        } else {
-            return false;
         }
     }
 
-    private boolean buyArmor(InventoryClickEvent e, ItemStack resourceItemsStack, int resourceAmount, List<ItemStack> productItemStack, int productAmount) {
+    private void buyArmor(InventoryClickEvent e, ItemStack resourceItemsStack, int resourceAmount, List<ItemStack> productItemStack, int productAmount) {
         Player p = (Player) e.getView().getPlayer();
-        e.setCancelled(true);
+        List<Material> bootsMaterials = new ArrayList<>();
+        bootsMaterials.add(Material.IRON_BOOTS);
+        bootsMaterials.add(Material.DIAMOND_BOOTS);
+
+        List<Material> leggingsMaterials = new ArrayList<>();
+        leggingsMaterials.add(Material.IRON_LEGGINGS);
+        leggingsMaterials.add(Material.DIAMOND_LEGGINGS);
+
+        List<Material> helmetMaterials = new ArrayList<>();
+        helmetMaterials.add(Material.IRON_HELMET);
+        helmetMaterials.add(Material.DIAMOND_HELMET);
 
         resourceItemsStack.setAmount(resourceAmount);
         p.getInventory().removeItem(resourceItemsStack);
         for (ItemStack product : productItemStack) {
             product.setAmount(productAmount);
-            if (product.getType() == Material.IRON_BOOTS || product.getType() == Material.DIAMOND_BOOTS) {
+            if (bootsMaterials.contains(product.getType()) && (p.getInventory().getBoots() == null || p.getInventory().getBoots().getType() == Material.LEATHER_BOOTS)) {
                 p.getInventory().setBoots(product);
-            } else if (product.getType() == Material.IRON_LEGGINGS || product.getType() == Material.DIAMOND_LEGGINGS) {
+            } else if (leggingsMaterials.contains(product.getType()) && (p.getInventory().getLeggings() == null || p.getInventory().getLeggings().getType() == Material.LEATHER_LEGGINGS)) {
                 p.getInventory().setLeggings(product);
-            } else if (product.getType() == Material.IRON_HELMET || product.getType() == Material.DIAMOND_HELMET) {
+            } else if (helmetMaterials.contains(product.getType()) && (p.getInventory().getHelmet() == null || p.getInventory().getHelmet().getType() == Material.LEATHER_HELMET)) {
                 p.getInventory().setHelmet(product);
             } else {
                 p.getInventory().addItem(product);
             }
         }
-        return true;
     }
 
-    private boolean buyArmor(InventoryClickEvent e, ItemStack resourceItemStack, int resourceAmount, ItemStack productItemStack, int productAmount) {
+    private void buyArmor(InventoryClickEvent e, ItemStack resourceItemStack, int resourceAmount, ItemStack productItemStack, int productAmount) {
         Player p = (Player) e.getView().getPlayer();
         if (checkItem(p, resourceItemStack, resourceAmount)) {
             resourceItemStack.setAmount(resourceAmount);
             p.getInventory().removeItem(resourceItemStack);
             productItemStack.setAmount(productAmount);
-            if (p.getInventory().getChestplate().getType() == Material.IRON_CHESTPLATE || p.getInventory().getChestplate().getType() == null) {
+            if (p.getInventory().getChestplate() == null || p.getInventory().getChestplate().getType()==Material.LEATHER_CHESTPLATE) {
                 p.getInventory().setChestplate(productItemStack);
             } else {
                 p.getInventory().addItem(resourceItemStack);
             }
-            return true;
-        } else {
-            return false;
         }
     }
 
-//    private boolean buySword(InventoryClickEvent e, ItemStack resourceItemStack, int resourceAmount, ItemStack productItemStack, int productAmount) {
-//        Player p = (Player) e.getView().getPlayer();
-//        if (checkItem(p, resourceItemStack, resourceAmount)) {
-//            resourceItemStack.setAmount(resourceAmount);
-//            p.getInventory().removeItem(resourceItemStack);
-//            productItemStack.setAmount(productAmount);
-//            if (p.getInventory().contains(Material.STONE_SWORD)) {
-//                for (ItemStack slotStack : p.getInventory().getContents()) {
-//                    if (slotStack.getType() == Material.STONE_SWORD) {
-//                        slotStack.setType(productItemStack.getType());
-//                        slotStack.setItemMeta(productItemStack.getItemMeta());
-//                        slotStack.setData(productItemStack.getData());
-//                        slotStack.setDurability(productItemStack.getDurability());
-//                        slotStack.setAmount(productAmount);
-//                        p.updateInventory();
-//                    }
-//                }
-//            } else {
-//                p.getInventory().addItem(resourceItemStack);
-//            }
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+    private void buySword(InventoryClickEvent e, ItemStack resourceItemStack, int resourceAmount, ItemStack productItemStack, int productAmount) {
+        Player p = (Player) e.getView().getPlayer();
+        if (checkItem(p, resourceItemStack, resourceAmount)) {
+            resourceItemStack.setAmount(resourceAmount);
+            p.getInventory().removeItem(resourceItemStack);
+            productItemStack.setAmount(productAmount);
+            if (p.getInventory().contains(Material.STONE_SWORD)) {
+                for (ItemStack slotStack : p.getInventory().getContents()) {
+                    if (slotStack != null && slotStack.getType() == Material.STONE_SWORD) {
+                        slotStack.setType(productItemStack.getType());
+                        slotStack.setItemMeta(productItemStack.getItemMeta());
+                        p.updateInventory();
+                        return;
+                    }
+                }
+            } else {
+                p.getInventory().addItem(productItemStack);
+            }
+        }
+    }
 }
