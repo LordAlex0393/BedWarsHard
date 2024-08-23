@@ -13,8 +13,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Items.Trader;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.config.PlayerInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +74,13 @@ public class onTrade implements Listener {
                 } else if (isEqualsItem(e, "&fСветящийся камень")) {
                     buyItem(e, BRONZE, 16, new ItemStack(Material.GLOWSTONE), 4);
                 } else if (isEqualsItem(e, "&fСтекло")) {
-                    buyItem(e, BRONZE, 4, new ItemStack(Material.GLASS), 1);
+                    if(BedWarsHard.getGame().getPlayer(p) != null){
+                        PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(p);
+                        ItemStack glassStack = new ItemStack(Material.STAINED_GLASS, 1, (byte) playerInfo.getTeam().getWool());
+                        buyItem(e, BRONZE, 4, glassStack, 1);
+                    } else{
+                        buyItem(e, BRONZE, 4, new ItemStack(Material.GLASS), 1);
+                    }
                 } else if (isEqualsItem(e, "&f← &eНазад")) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }

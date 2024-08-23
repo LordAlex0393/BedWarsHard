@@ -9,7 +9,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Sandstone;
+import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.config.PlayerInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -175,37 +177,44 @@ public class Trader {
         sandstoneStairsMeta.setLore(sandstoneStairsList);
         sandstoneStairsStack.setItemMeta(sandstoneStairsMeta);
 
-        ItemStack enderstoneStairsStack = new ItemStack(Material.ENDER_STONE, 1);
-        ItemMeta enderstoneStairsMeta = enderstoneStairsStack.getItemMeta();
-        enderstoneStairsMeta.setDisplayName(ColorUtil.getMessage("&fЭндерняк"));
-        List<String> enderstoneStairsList = new ArrayList<>();
-        enderstoneStairsList.add(ColorUtil.getMessage("&dЦена: &67 бронзы"));
-        enderstoneStairsMeta.setLore(enderstoneStairsList);
-        enderstoneStairsStack.setItemMeta(enderstoneStairsMeta);
+        ItemStack enderstoneStack = new ItemStack(Material.ENDER_STONE, 1);
+        ItemMeta enderstoneMeta = enderstoneStack.getItemMeta();
+        enderstoneMeta.setDisplayName(ColorUtil.getMessage("&fЭндерняк"));
+        List<String> enderstoneList = new ArrayList<>();
+        enderstoneList.add(ColorUtil.getMessage("&dЦена: &67 бронзы"));
+        enderstoneMeta.setLore(enderstoneList);
+        enderstoneStack.setItemMeta(enderstoneMeta);
 
-        ItemStack ironblockStairsStack = new ItemStack(Material.IRON_BLOCK, 1);
-        ItemMeta ironblockStairsMeta = ironblockStairsStack.getItemMeta();
-        ironblockStairsMeta.setDisplayName(ColorUtil.getMessage("&fЖелезный блок"));
-        List<String> ironblockStairsList = new ArrayList<>();
-        ironblockStairsList.add(ColorUtil.getMessage("&dЦена: &f3 железа"));
-        ironblockStairsMeta.setLore(ironblockStairsList);
-        ironblockStairsStack.setItemMeta(ironblockStairsMeta);
+        ItemStack ironblockStack = new ItemStack(Material.IRON_BLOCK, 1);
+        ItemMeta ironblockMeta = ironblockStack.getItemMeta();
+        ironblockMeta.setDisplayName(ColorUtil.getMessage("&fЖелезный блок"));
+        List<String> ironblockList = new ArrayList<>();
+        ironblockList.add(ColorUtil.getMessage("&dЦена: &f3 железа"));
+        ironblockMeta.setLore(ironblockList);
+        ironblockStack.setItemMeta(ironblockMeta);
 
-        ItemStack glowstoneStairsStack = new ItemStack(Material.GLOWSTONE, 4);
-        ItemMeta glowstoneStairsMeta = glowstoneStairsStack.getItemMeta();
-        glowstoneStairsMeta.setDisplayName(ColorUtil.getMessage("&fСветящийся камень"));
-        List<String> glowstoneStairsList = new ArrayList<>();
-        glowstoneStairsList.add(ColorUtil.getMessage("&dЦена: &616 бронзы"));
-        glowstoneStairsMeta.setLore(glowstoneStairsList);
-        glowstoneStairsStack.setItemMeta(glowstoneStairsMeta);
+        ItemStack glowstoneStack = new ItemStack(Material.GLOWSTONE, 4);
+        ItemMeta glowstoneMeta = glowstoneStack.getItemMeta();
+        glowstoneMeta.setDisplayName(ColorUtil.getMessage("&fСветящийся камень"));
+        List<String> glowstoneList = new ArrayList<>();
+        glowstoneList.add(ColorUtil.getMessage("&dЦена: &616 бронзы"));
+        glowstoneMeta.setLore(glowstoneList);
+        glowstoneStack.setItemMeta(glowstoneMeta);
 
-        ItemStack glassStairsStack = new ItemStack(Material.GLASS, 1);
-        ItemMeta glassStairsMeta = glassStairsStack.getItemMeta();
-        glassStairsMeta.setDisplayName(ColorUtil.getMessage("&fСтекло"));
-        List<String> glassStairsList = new ArrayList<>();
-        glassStairsList.add(ColorUtil.getMessage("&dЦена: &64 бронзы"));
-        glassStairsMeta.setLore(glassStairsList);
-        glassStairsStack.setItemMeta(glassStairsMeta);
+        ItemStack glassStack;
+        if(BedWarsHard.getGame().getPlayer(p)!=null){
+            PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(p);
+            glassStack = new ItemStack(Material.STAINED_GLASS, 1, (byte) playerInfo.getTeam().getWool());
+        }
+        else{
+            glassStack = new ItemStack(Material.GLASS, 1);
+        }
+        ItemMeta glassMeta = glassStack.getItemMeta();
+        glassMeta.setDisplayName(ColorUtil.getMessage("&fСтекло"));
+        List<String> glassList = new ArrayList<>();
+        glassList.add(ColorUtil.getMessage("&dЦена: &64 бронзы"));
+        glassMeta.setLore(glassList);
+        glassStack.setItemMeta(glassMeta);
 
         ItemStack bedStack = new ItemStack(Material.BED, 1);
         ItemMeta bedMeta = bedStack.getItemMeta();
@@ -214,10 +223,10 @@ public class Trader {
 
         inv.setItem(0, sandstoneStack);
         inv.setItem(1, sandstoneStairsStack);
-        inv.setItem(2, enderstoneStairsStack);
-        inv.setItem(3, ironblockStairsStack);
-        inv.setItem(4, glowstoneStairsStack);
-        inv.setItem(5, glassStairsStack);
+        inv.setItem(2, enderstoneStack);
+        inv.setItem(3, ironblockStack);
+        inv.setItem(4, glowstoneStack);
+        inv.setItem(5, glassStack);
         inv.setItem(13, bedStack);
 
         p.openInventory(inv);
