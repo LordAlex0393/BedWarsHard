@@ -14,6 +14,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.lordalex.bedwarshard.BedWarsHard;
+import org.lordalex.bedwarshard.Items.ShopItem;
 import org.lordalex.bedwarshard.Items.Trader;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.config.PlayerInfo;
@@ -44,17 +45,17 @@ public class onTrade implements Listener {
 
         if (e.getView().getTitle().equals("Торговец")) {
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
-                if (isEqualsItem(e, "&l&bБлоки")) {
+                if (e.getCurrentItem().equals(ShopItem.blocksMenuStack())) {
                     Trader.openBlocksMenu((Player) e.getView().getPlayer());
-                } else if (isEqualsItem(e, "&l&bБроня")) {
+                } else if (e.getCurrentItem().equals(ShopItem.armorMenuStack())) {
                     Trader.openArmorMenu((Player) e.getView().getPlayer());
-                } else if (isEqualsItem(e, "&l&bКирки")) {
+                } else if (e.getCurrentItem().equals(ShopItem.pickaxeMenuStack())) {
                     Trader.openPickaxeMenu((Player) e.getView().getPlayer());
-                } else if (isEqualsItem(e, "&l&bМечи")) {
+                } else if (e.getCurrentItem().equals(ShopItem.swordMenuStack())) {
                     Trader.openSwordMenu((Player) e.getView().getPlayer());
-                } else if (isEqualsItem(e, "&l&bЕда")) {
+                } else if (e.getCurrentItem().equals(ShopItem.foodMenuStack())) {
                     Trader.openFoodMenu((Player) e.getView().getPlayer());
-                } else if (isEqualsItem(e, "&l&bСпециальное")) {
+                } else if (e.getCurrentItem().equals(ShopItem.specialMenuStack())) {
                     Trader.openSpecialMenu((Player) e.getView().getPlayer());
                 }
                 e.setCancelled(true);
