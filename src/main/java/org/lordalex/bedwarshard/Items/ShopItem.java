@@ -2,15 +2,41 @@ package org.lordalex.bedwarshard.Items;
 
 import org.bukkit.Material;
 import org.bukkit.SandstoneType;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Sandstone;
+import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
+import org.lordalex.bedwarshard.config.PlayerInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ShopItem {
+    public static ItemStack returnButtonStack(){
+        ItemStack bedStack = new ItemStack(Material.BED, 1);
+        ItemMeta bedMeta = bedStack.getItemMeta();
+        bedMeta.setDisplayName(ColorUtil.getMessage("&f← &eНазад"));
+        bedStack.setItemMeta(bedMeta);
+        return bedStack;
+    }
+
+    public static List<ItemStack> globalMenuStacks(){
+        List<ItemStack> globalMenuStacks = new ArrayList<>();
+        globalMenuStacks.add(blocksMenuStack());
+        globalMenuStacks.add(armorMenuStack());
+        globalMenuStacks.add(pickaxeMenuStack());
+        globalMenuStacks.add(swordMenuStack());
+        globalMenuStacks.add(bowMenuStack());
+        globalMenuStacks.add(foodMenuStack());
+        globalMenuStacks.add(chestsMenuStack());
+        globalMenuStacks.add(potionMenuStack());
+        globalMenuStacks.add(specialMenuStack());
+        globalMenuStacks.add(exchangerMenuStack());
+        return globalMenuStacks;
+    }
+
     public static ItemStack blocksMenuStack(){
         ItemStack blocksMenuStack = new ItemStack(Material.SANDSTONE, 1, (byte) 2);
         ItemMeta blocksMenuMeta = blocksMenuStack.getItemMeta();
@@ -156,4 +182,79 @@ public class ShopItem {
         exchangerMenuStack.setItemMeta(exchangerMenuMeta);
         return exchangerMenuStack;
     }
+
+
+    public static ItemStack sandstone(){
+        ItemStack sandstoneStack = new ItemStack(Material.SANDSTONE, 2, (byte) 2);
+        ItemMeta sandstoneMeta = sandstoneStack.getItemMeta();
+        sandstoneMeta.setDisplayName(ColorUtil.getMessage("&fГладкий песчаник"));
+        List<String> sandstoneList = new ArrayList<>();
+        sandstoneList.add(ColorUtil.getMessage("&dЦена: &61 бронза"));
+        sandstoneMeta.setLore(sandstoneList);
+        sandstoneStack.setItemMeta(sandstoneMeta);
+        return sandstoneStack;
+    }
+    public static ItemStack sandstoneStairs(){
+        ItemStack sandstoneStairsStack = new ItemStack(Material.SANDSTONE_STAIRS, 2);
+        ItemMeta sandstoneStairsMeta = sandstoneStairsStack.getItemMeta();
+        sandstoneStairsMeta.setDisplayName(ColorUtil.getMessage("&fСтупеньки из песчаника"));
+        List<String> sandstoneStairsList = new ArrayList<>();
+        sandstoneStairsList.add(ColorUtil.getMessage("&dЦена: &63 бронзы"));
+        sandstoneStairsMeta.setLore(sandstoneStairsList);
+        sandstoneStairsStack.setItemMeta(sandstoneStairsMeta);
+        return sandstoneStairsStack;
+    }
+    public static ItemStack enderStone(){
+        ItemStack enderstoneStack = new ItemStack(Material.ENDER_STONE, 1);
+        ItemMeta enderstoneMeta = enderstoneStack.getItemMeta();
+        enderstoneMeta.setDisplayName(ColorUtil.getMessage("&fЭндерняк"));
+        List<String> enderstoneList = new ArrayList<>();
+        enderstoneList.add(ColorUtil.getMessage("&dЦена: &67 бронзы"));
+        enderstoneMeta.setLore(enderstoneList);
+        enderstoneStack.setItemMeta(enderstoneMeta);
+        return enderstoneStack;
+    }
+    public static ItemStack ironBlock(){
+        ItemStack ironblockStack = new ItemStack(Material.IRON_BLOCK, 1);
+        ItemMeta ironblockMeta = ironblockStack.getItemMeta();
+        ironblockMeta.setDisplayName(ColorUtil.getMessage("&fЖелезный блок"));
+        List<String> ironblockList = new ArrayList<>();
+        ironblockList.add(ColorUtil.getMessage("&dЦена: &f3 железа"));
+        ironblockMeta.setLore(ironblockList);
+        ironblockStack.setItemMeta(ironblockMeta);
+        return ironblockStack;
+    }
+    public static ItemStack glowStone(){
+        ItemStack glowstoneStack = new ItemStack(Material.GLOWSTONE, 4);
+        ItemMeta glowstoneMeta = glowstoneStack.getItemMeta();
+        glowstoneMeta.setDisplayName(ColorUtil.getMessage("&fСветящийся камень"));
+        List<String> glowstoneList = new ArrayList<>();
+        glowstoneList.add(ColorUtil.getMessage("&dЦена: &616 бронзы"));
+        glowstoneMeta.setLore(glowstoneList);
+        glowstoneStack.setItemMeta(glowstoneMeta);
+        return glowstoneStack;
+    }
+    public static ItemStack coloredGlass(Player p){
+        ItemStack glassStack;
+        if(BedWarsHard.getGame().getPlayer(p)!=null){
+            PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(p);
+            glassStack = new ItemStack(Material.STAINED_GLASS, 1, (byte) playerInfo.getTeam().getWool());
+        }
+        else{
+            glassStack = new ItemStack(Material.GLASS, 1);
+        }
+        ItemMeta glassMeta = glassStack.getItemMeta();
+        //glassMeta.setDisplayName(ColorUtil.getMessage("&fСтекло"));
+        List<String> glassList = new ArrayList<>();
+        glassList.add(ColorUtil.getMessage("&dЦена: &64 бронзы"));
+        glassMeta.setLore(glassList);
+        glassStack.setItemMeta(glassMeta);
+        return glassStack;
+    }
+
+//    public static ItemStack (){
+//
+//        return ;
+//    }
+
 }

@@ -62,27 +62,19 @@ public class onTrade implements Listener {
             }
         } else if (e.getView().getTitle().equals("Блоки")) {
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
-
-                if (isEqualsItem(e, "&fГладкий песчаник")) {
-                    ItemStack sandstoneItem = new ItemStack(Material.SANDSTONE, 1, (byte) 2);
-                    buyItem(e, BRONZE, 1, sandstoneItem, 2);
-                } else if (isEqualsItem(e, "&fСтупеньки из песчаника")) {
+                if (e.getCurrentItem().equals(ShopItem.sandstone())) {
+                    buyItem(e, BRONZE, 1, new ItemStack(Material.SANDSTONE, 1, (byte) 2), 2);
+                } else if (e.getCurrentItem().equals(ShopItem.sandstoneStairs())) {
                     buyItem(e, BRONZE, 3, new ItemStack(Material.SANDSTONE_STAIRS), 2);
-                } else if (isEqualsItem(e, "&fЭндерняк")) {
+                } else if (e.getCurrentItem().equals(ShopItem.enderStone())) {
                     buyItem(e, BRONZE, 7, new ItemStack(Material.ENDER_STONE), 1);
-                } else if (isEqualsItem(e, "&fЖелезный блок")) {
+                } else if (e.getCurrentItem().equals(ShopItem.ironBlock())) {
                     buyItem(e, IRON, 3, new ItemStack(Material.IRON_BLOCK), 1);
-                } else if (isEqualsItem(e, "&fСветящийся камень")) {
+                } else if (e.getCurrentItem().equals(ShopItem.glowStone())) {
                     buyItem(e, BRONZE, 16, new ItemStack(Material.GLOWSTONE), 4);
-                } else if (isEqualsItem(e, "&fСтекло")) {
-                    if(BedWarsHard.getGame().getPlayer(p) != null){
-                        PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(p);
-                        ItemStack glassStack = new ItemStack(Material.STAINED_GLASS, 1, (byte) playerInfo.getTeam().getWool());
-                        buyItem(e, BRONZE, 4, glassStack, 1);
-                    } else{
-                        buyItem(e, BRONZE, 4, new ItemStack(Material.GLASS), 1);
-                    }
-                } else if (isEqualsItem(e, "&f← &eНазад")) {
+                } else if (e.getCurrentItem().equals(ShopItem.coloredGlass(p))) {
+                    buyItem(e, BRONZE, 4, ShopItem.coloredGlass(p), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }
                 e.setCancelled(true);
@@ -282,7 +274,12 @@ public class onTrade implements Listener {
 //    }
 
     private boolean checkItem(Player p, ItemStack itemStack, int amount) {
-        return p.getInventory().containsAtLeast(itemStack, amount);
+        if(p.getInventory().firstEmpty() != -1){
+            return p.getInventory().containsAtLeast(itemStack, amount);
+        }
+        else{
+            return false;
+        }
     }
 
     private boolean isShiftClick(InventoryClickEvent e) {

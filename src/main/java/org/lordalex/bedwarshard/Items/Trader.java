@@ -29,80 +29,22 @@ public class Trader {
         inv.setItem(7, ShopItem.potionMenuStack());
         inv.setItem(8, ShopItem.specialMenuStack());
         inv.setItem(13, ShopItem.exchangerMenuStack());
+//        for(int i = 0; i < ShopItem.globalMenuStacks().size()-1; i++){
+//            inv.setItem(i, ShopItem.globalMenuStacks().get(i));
+//        }
+//        inv.setItem(13, ShopItem.globalMenuStacks().get(ShopItem.globalMenuStacks().size()-1));
         p.openInventory(inv);
     }
 
     public static void openBlocksMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 18, "Блоки");
-
-        ItemStack sandstoneStack = new ItemStack(Material.SANDSTONE, 2, (byte) 2);
-        ItemMeta sandstoneMeta = sandstoneStack.getItemMeta();
-        sandstoneMeta.setDisplayName(ColorUtil.getMessage("&fГладкий песчаник"));
-        List<String> sandstoneList = new ArrayList<>();
-        sandstoneList.add(ColorUtil.getMessage("&dЦена: &61 бронза"));
-        sandstoneMeta.setLore(sandstoneList);
-        sandstoneStack.setItemMeta(sandstoneMeta);
-
-        ItemStack sandstoneStairsStack = new ItemStack(Material.SANDSTONE_STAIRS, 2);
-        ItemMeta sandstoneStairsMeta = sandstoneStairsStack.getItemMeta();
-        sandstoneStairsMeta.setDisplayName(ColorUtil.getMessage("&fСтупеньки из песчаника"));
-        List<String> sandstoneStairsList = new ArrayList<>();
-        sandstoneStairsList.add(ColorUtil.getMessage("&dЦена: &63 бронзы"));
-        sandstoneStairsMeta.setLore(sandstoneStairsList);
-        sandstoneStairsStack.setItemMeta(sandstoneStairsMeta);
-
-        ItemStack enderstoneStack = new ItemStack(Material.ENDER_STONE, 1);
-        ItemMeta enderstoneMeta = enderstoneStack.getItemMeta();
-        enderstoneMeta.setDisplayName(ColorUtil.getMessage("&fЭндерняк"));
-        List<String> enderstoneList = new ArrayList<>();
-        enderstoneList.add(ColorUtil.getMessage("&dЦена: &67 бронзы"));
-        enderstoneMeta.setLore(enderstoneList);
-        enderstoneStack.setItemMeta(enderstoneMeta);
-
-        ItemStack ironblockStack = new ItemStack(Material.IRON_BLOCK, 1);
-        ItemMeta ironblockMeta = ironblockStack.getItemMeta();
-        ironblockMeta.setDisplayName(ColorUtil.getMessage("&fЖелезный блок"));
-        List<String> ironblockList = new ArrayList<>();
-        ironblockList.add(ColorUtil.getMessage("&dЦена: &f3 железа"));
-        ironblockMeta.setLore(ironblockList);
-        ironblockStack.setItemMeta(ironblockMeta);
-
-        ItemStack glowstoneStack = new ItemStack(Material.GLOWSTONE, 4);
-        ItemMeta glowstoneMeta = glowstoneStack.getItemMeta();
-        glowstoneMeta.setDisplayName(ColorUtil.getMessage("&fСветящийся камень"));
-        List<String> glowstoneList = new ArrayList<>();
-        glowstoneList.add(ColorUtil.getMessage("&dЦена: &616 бронзы"));
-        glowstoneMeta.setLore(glowstoneList);
-        glowstoneStack.setItemMeta(glowstoneMeta);
-
-        ItemStack glassStack;
-        if(BedWarsHard.getGame().getPlayer(p)!=null){
-            PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(p);
-            glassStack = new ItemStack(Material.STAINED_GLASS, 1, (byte) playerInfo.getTeam().getWool());
-        }
-        else{
-            glassStack = new ItemStack(Material.GLASS, 1);
-        }
-        ItemMeta glassMeta = glassStack.getItemMeta();
-        glassMeta.setDisplayName(ColorUtil.getMessage("&fСтекло"));
-        List<String> glassList = new ArrayList<>();
-        glassList.add(ColorUtil.getMessage("&dЦена: &64 бронзы"));
-        glassMeta.setLore(glassList);
-        glassStack.setItemMeta(glassMeta);
-
-        ItemStack bedStack = new ItemStack(Material.BED, 1);
-        ItemMeta bedMeta = bedStack.getItemMeta();
-        bedMeta.setDisplayName(ColorUtil.getMessage("&f← &eНазад"));
-        bedStack.setItemMeta(bedMeta);
-
-        inv.setItem(0, sandstoneStack);
-        inv.setItem(1, sandstoneStairsStack);
-        inv.setItem(2, enderstoneStack);
-        inv.setItem(3, ironblockStack);
-        inv.setItem(4, glowstoneStack);
-        inv.setItem(5, glassStack);
-        inv.setItem(13, bedStack);
-
+        inv.setItem(0, ShopItem.sandstone());
+        inv.setItem(1, ShopItem.sandstoneStairs());
+        inv.setItem(2, ShopItem.enderStone());
+        inv.setItem(3, ShopItem.ironBlock());
+        inv.setItem(4, ShopItem.glowStone());
+        inv.setItem(5, ShopItem.coloredGlass(p));
+        inv.setItem(13, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }
     public static void openArmorMenu(Player p){
