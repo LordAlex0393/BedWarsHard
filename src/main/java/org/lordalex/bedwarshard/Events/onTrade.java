@@ -59,6 +59,8 @@ public class onTrade implements Listener {
                     Trader.openBowMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.foodMenuStack())) {
                     Trader.openFoodMenu((Player) e.getView().getPlayer());
+                } else if (e.getCurrentItem().equals(ShopItem.chestsMenuStack())) {
+                    Trader.openChestMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.specialMenuStack())) {
                     Trader.openSpecialMenu((Player) e.getView().getPlayer());
                 }
@@ -167,6 +169,17 @@ public class onTrade implements Listener {
                     buyItem(e, IRON, 1, ShopItem.cake(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.goldenApple())) {
                     buyItem(e, GOLD, 2, ShopItem.goldenApple(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
+                    Trader.openGlobalMenu((Player) e.getView().getPlayer());
+                }
+            }
+        } else if (e.getView().getTitle().equals("Сундуки")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
+                if (e.getCurrentItem().equals(ShopItem.chest())) {
+                    buyItem(e, IRON, 1, ShopItem.chest(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.enderChest())) {
+                    buyItem(e, GOLD, 1, ShopItem.enderChest(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }

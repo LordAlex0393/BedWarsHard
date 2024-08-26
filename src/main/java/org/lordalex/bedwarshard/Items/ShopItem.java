@@ -640,6 +640,28 @@ public class ShopItem {
         return goldenAppleStack;
     }
 
+
+    public static ItemStack chest(){
+        ItemStack chestStack = new ItemStack(Material.CHEST, 1);
+        ItemMeta chestMeta = chestStack.getItemMeta();
+        chestMeta.setDisplayName(ColorUtil.getMessage("&aСундук"));
+        List<String> chestList = new ArrayList<>();
+        chestList.add(ColorUtil.getMessage("&dЦена: &f1 железо"));
+        chestMeta.setLore(chestList);
+        chestStack.setItemMeta(chestMeta);
+        return chestStack;
+    }
+    public static ItemStack enderChest(){
+        ItemStack enderChestStack = new ItemStack(Material.ENDER_CHEST, 1);
+        ItemMeta enderChestMeta = enderChestStack.getItemMeta();
+        enderChestMeta.setDisplayName(ColorUtil.getMessage("&aКомандный сундук"));
+        List<String> enderChestList = new ArrayList<>();
+        enderChestList.add(ColorUtil.getMessage("&dЦена: &e1 золото"));
+        enderChestMeta.setLore(enderChestList);
+        enderChestStack.setItemMeta(enderChestMeta);
+        return enderChestStack;
+    }
+
 //    public static ItemStack (){
 //
 //        return ;

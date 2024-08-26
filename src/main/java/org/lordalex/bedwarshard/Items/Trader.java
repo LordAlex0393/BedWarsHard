@@ -99,6 +99,13 @@ public class Trader {
         inv.setItem(13, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }
+    public static void openChestMenu(Player p){
+        Inventory inv = Bukkit.createInventory(null, 18, "Сундуки");
+        inv.setItem(0, ShopItem.chest());
+        inv.setItem(1, ShopItem.enderChest());
+        inv.setItem(13, ShopItem.returnButtonStack());
+        p.openInventory(inv);
+    }
     public static void openSpecialMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 18, "Специальное");
 
