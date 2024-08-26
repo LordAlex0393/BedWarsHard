@@ -532,6 +532,71 @@ public class ShopItem {
         return killmagedonSwordStack;
     }
 
+    public static ItemStack bow1(){
+        ItemStack bowStack = new ItemStack(Material.BOW, 1);
+        ItemMeta bowMeta = bowStack.getItemMeta();
+        bowMeta.setDisplayName(ColorUtil.getMessage("&aЛук уровень 1"));
+        List<String> bowList = new ArrayList<>();
+        bowList.add(ColorUtil.getMessage("&dЦена: &f7 железа"));
+        bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+        bowMeta.setLore(bowList);
+        bowMeta.spigot().setUnbreakable(true);
+        bowStack.setItemMeta(bowMeta);
+        return bowStack;
+    }
+    public static ItemStack bow2(){
+        ItemStack bowStack = new ItemStack(Material.BOW, 1);
+        ItemMeta bowMeta = bowStack.getItemMeta();
+        bowMeta.setDisplayName(ColorUtil.getMessage("&bЛук уровень 2"));
+        List<String> bowList = new ArrayList<>();
+        bowList.add(ColorUtil.getMessage("&dЦена: &e1 золото"));
+        bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+        bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+        bowMeta.setLore(bowList);
+        bowMeta.spigot().setUnbreakable(true);
+        bowStack.setItemMeta(bowMeta);
+        return bowStack;
+    }
+    public static ItemStack bow3(){
+        ItemStack bowStack = new ItemStack(Material.BOW, 1);
+        ItemMeta bowMeta = bowStack.getItemMeta();
+        bowMeta.setDisplayName(ColorUtil.getMessage("&cЛук уровень 3"));
+        List<String> bowList = new ArrayList<>();
+        bowList.add(ColorUtil.getMessage("&dЦена: &e9 золота"));
+        bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+        bowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
+        bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+        bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+        bowMeta.setLore(bowList);
+        bowMeta.spigot().setUnbreakable(true);
+        bowStack.setItemMeta(bowMeta);
+        return bowStack;
+    }
+    public static ItemStack bow4(){
+        ItemStack bowStack = new ItemStack(Material.BOW, 1);
+        ItemMeta bowMeta = bowStack.getItemMeta();
+        bowMeta.setDisplayName(ColorUtil.getMessage("&cЛукер"));
+        List<String> bowList = new ArrayList<>();
+        bowList.add(ColorUtil.getMessage("&dЦена: &e30 золота"));
+        bowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
+        bowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
+        bowMeta.addEnchant(Enchantment.ARROW_FIRE, 1, true);
+        bowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+        bowMeta.setLore(bowList);
+        bowMeta.spigot().setUnbreakable(true);
+        bowStack.setItemMeta(bowMeta);
+        return bowStack;
+    }
+    public static ItemStack arrow(){
+        ItemStack arrowStack = new ItemStack(Material.ARROW, 1);
+        ItemMeta arrowMeta = arrowStack.getItemMeta();
+        arrowMeta.setDisplayName(ColorUtil.getMessage("&fСтрела"));
+        List<String> arrowList = new ArrayList<>();
+        arrowList.add(ColorUtil.getMessage("&dЦена: &e1 золото"));
+        arrowMeta.setLore(arrowList);
+        arrowStack.setItemMeta(arrowMeta);
+        return arrowStack;
+    }
 //    public static ItemStack (){
 //
 //        return ;

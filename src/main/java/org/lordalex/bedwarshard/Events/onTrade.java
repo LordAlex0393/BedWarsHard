@@ -55,6 +55,8 @@ public class onTrade implements Listener {
                     Trader.openPickaxeMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.swordMenuStack())) {
                     Trader.openSwordMenu((Player) e.getView().getPlayer());
+                } else if (e.getCurrentItem().equals(ShopItem.bowMenuStack())) {
+                    Trader.openBowMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.foodMenuStack())) {
                     Trader.openFoodMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.specialMenuStack())) {
@@ -133,6 +135,23 @@ public class onTrade implements Listener {
                     buySword(e, GOLD, 8, ShopItem.deathBringer(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.killmagedon())) {
                     buySword(e, GOLD, 30, ShopItem.killmagedon(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
+                    Trader.openGlobalMenu((Player) e.getView().getPlayer());
+                }
+            }
+        } else if (e.getView().getTitle().equals("Луки")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
+                if (e.getCurrentItem().equals(ShopItem.bow1())) {
+                    buyItem(e, IRON, 4, ShopItem.bow1(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.bow2())) {
+                    buyItem(e, GOLD, 4, ShopItem.bow2(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.bow3())) {
+                    buyItem(e, GOLD, 4, ShopItem.bow3(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.bow4())) {
+                    buyItem(e, GOLD, 4, ShopItem.bow4(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.arrow())) {
+                    buyItem(e, GOLD, 4, ShopItem.arrow(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }
@@ -333,17 +352,17 @@ public class onTrade implements Listener {
             resourceItemStack.setAmount(resourceAmount);
             p.getInventory().removeItem(resourceItemStack);
             productItemStack.setAmount(productAmount);
+            ItemMeta productItemMeta = productItemStack.getItemMeta();
+            if(productItemMeta.hasLore()){
+                List<String> lore = productItemMeta.getLore();
+                lore.removeIf(s -> s.contains("Цена: "));
+                productItemMeta.setLore(lore);
+                productItemStack.setItemMeta(productItemMeta);
+            }
             if (p.getInventory().contains(Material.STONE_SWORD)) {
                 for (ItemStack slotStack : p.getInventory().getContents()) {
                     if (slotStack != null && slotStack.getType() == Material.STONE_SWORD) {
                         slotStack.setType(productItemStack.getType());
-                        ItemMeta productItemMeta = productItemStack.getItemMeta();
-                        if(productItemMeta.hasLore()){
-                            List<String> lore = productItemMeta.getLore();
-                            lore.removeIf(s -> s.contains("Цена: "));
-                            productItemMeta.setLore(lore);
-                            productItemStack.setItemMeta(productItemMeta);
-                        }
                         slotStack.setItemMeta(productItemMeta);
                         p.updateInventory();
                         return;

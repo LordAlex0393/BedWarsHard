@@ -72,14 +72,22 @@ public class Trader {
     }
     public static void openSwordMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 18, "Мечи");
-
         inv.setItem(0, ShopItem.ironSword());
         inv.setItem(1, ShopItem.diamondSword());
         inv.setItem(2, ShopItem.excalibur());
         inv.setItem(3, ShopItem.deathBringer());
         inv.setItem(4, ShopItem.killmagedon());
         inv.setItem(13, ShopItem.returnButtonStack());
-
+        p.openInventory(inv);
+    }
+    public static void openBowMenu(Player p){
+        Inventory inv = Bukkit.createInventory(null, 18, "Луки");
+        inv.setItem(0, ShopItem.bow1());
+        inv.setItem(1, ShopItem.bow2());
+        inv.setItem(2, ShopItem.bow3());
+        inv.setItem(3, ShopItem.bow4());
+        inv.setItem(4, ShopItem.arrow());
+        inv.setItem(13, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }
     public static void openFoodMenu(Player p){
