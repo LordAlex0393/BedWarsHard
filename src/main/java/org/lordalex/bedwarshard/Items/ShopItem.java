@@ -2,6 +2,7 @@ package org.lordalex.bedwarshard.Items;
 
 import org.bukkit.Material;
 import org.bukkit.SandstoneType;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -187,7 +188,6 @@ public class ShopItem {
     public static ItemStack sandstone(){
         ItemStack sandstoneStack = new ItemStack(Material.SANDSTONE, 2, (byte) 2);
         ItemMeta sandstoneMeta = sandstoneStack.getItemMeta();
-        sandstoneMeta.setDisplayName(ColorUtil.getMessage("&fГладкий песчаник"));
         List<String> sandstoneList = new ArrayList<>();
         sandstoneList.add(ColorUtil.getMessage("&dЦена: &61 бронза"));
         sandstoneMeta.setLore(sandstoneList);
@@ -197,7 +197,6 @@ public class ShopItem {
     public static ItemStack sandstoneStairs(){
         ItemStack sandstoneStairsStack = new ItemStack(Material.SANDSTONE_STAIRS, 2);
         ItemMeta sandstoneStairsMeta = sandstoneStairsStack.getItemMeta();
-        sandstoneStairsMeta.setDisplayName(ColorUtil.getMessage("&fСтупеньки из песчаника"));
         List<String> sandstoneStairsList = new ArrayList<>();
         sandstoneStairsList.add(ColorUtil.getMessage("&dЦена: &63 бронзы"));
         sandstoneStairsMeta.setLore(sandstoneStairsList);
@@ -207,7 +206,6 @@ public class ShopItem {
     public static ItemStack enderStone(){
         ItemStack enderstoneStack = new ItemStack(Material.ENDER_STONE, 1);
         ItemMeta enderstoneMeta = enderstoneStack.getItemMeta();
-        enderstoneMeta.setDisplayName(ColorUtil.getMessage("&fЭндерняк"));
         List<String> enderstoneList = new ArrayList<>();
         enderstoneList.add(ColorUtil.getMessage("&dЦена: &67 бронзы"));
         enderstoneMeta.setLore(enderstoneList);
@@ -217,7 +215,6 @@ public class ShopItem {
     public static ItemStack ironBlock(){
         ItemStack ironblockStack = new ItemStack(Material.IRON_BLOCK, 1);
         ItemMeta ironblockMeta = ironblockStack.getItemMeta();
-        ironblockMeta.setDisplayName(ColorUtil.getMessage("&fЖелезный блок"));
         List<String> ironblockList = new ArrayList<>();
         ironblockList.add(ColorUtil.getMessage("&dЦена: &f3 железа"));
         ironblockMeta.setLore(ironblockList);
@@ -227,7 +224,6 @@ public class ShopItem {
     public static ItemStack glowStone(){
         ItemStack glowstoneStack = new ItemStack(Material.GLOWSTONE, 4);
         ItemMeta glowstoneMeta = glowstoneStack.getItemMeta();
-        glowstoneMeta.setDisplayName(ColorUtil.getMessage("&fСветящийся камень"));
         List<String> glowstoneList = new ArrayList<>();
         glowstoneList.add(ColorUtil.getMessage("&dЦена: &616 бронзы"));
         glowstoneMeta.setLore(glowstoneList);
@@ -244,14 +240,176 @@ public class ShopItem {
             glassStack = new ItemStack(Material.GLASS, 1);
         }
         ItemMeta glassMeta = glassStack.getItemMeta();
-        //glassMeta.setDisplayName(ColorUtil.getMessage("&fСтекло"));
         List<String> glassList = new ArrayList<>();
         glassList.add(ColorUtil.getMessage("&dЦена: &64 бронзы"));
         glassMeta.setLore(glassList);
         glassStack.setItemMeta(glassMeta);
         return glassStack;
     }
+    public static ItemStack slimeBlock(){
+        ItemStack slimeBlockStack = new ItemStack(Material.SLIME_BLOCK, 1);
+        ItemMeta slimeBlockMeta = slimeBlockStack.getItemMeta();
+        List<String> slimeBlockList = new ArrayList<>();
+        slimeBlockList.add(ColorUtil.getMessage("&dЦена: &616 бронзы"));
+        slimeBlockMeta.setLore(slimeBlockList);
+        slimeBlockStack.setItemMeta(slimeBlockMeta);
+        return slimeBlockStack;
+    }
 
+
+    public static ItemStack IronSetMenuStack(){
+        ItemStack ironLegsStack = new ItemStack(Material.IRON_LEGGINGS, 1);
+        ItemMeta ironLegsMeta = ironLegsStack.getItemMeta();
+        ironLegsMeta.setDisplayName(ColorUtil.getMessage("&fЖелезный сет"));
+        List<String> ironLegsList = new ArrayList<>();
+        ironLegsList.add(ColorUtil.getMessage("&7Железный шлем"));
+        ironLegsList.add(ColorUtil.getMessage("&7Железные штаны"));
+        ironLegsList.add(ColorUtil.getMessage("&7Железные ботинки"));
+        ironLegsList.add(ColorUtil.getMessage("&dЦена: &66 бронзы"));
+        ironLegsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        ironLegsMeta.setLore(ironLegsList);
+        ironLegsMeta.spigot().setUnbreakable(true);
+        ironLegsStack.setItemMeta(ironLegsMeta);
+        return ironLegsStack;
+    }
+    public static ItemStack ironChestplate1(){
+        ItemStack ironChestplateStack = new ItemStack(Material.IRON_CHESTPLATE, 1);
+        ItemMeta ironChestplateMeta = ironChestplateStack.getItemMeta();
+        ironChestplateMeta.setDisplayName(ColorUtil.getMessage("&aЖелезка уровень 1"));
+        List<String> ironChestplateList = new ArrayList<>();
+        ironChestplateList.add(ColorUtil.getMessage("&dЦена: &f1 железо"));
+        ironChestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        ironChestplateMeta.setLore(ironChestplateList);
+        ironChestplateMeta.spigot().setUnbreakable(true);
+        ironChestplateStack.setItemMeta(ironChestplateMeta);
+        return ironChestplateStack;
+    }
+    public static ItemStack ironChestplate2(){
+        ItemStack ironChestplateStack = new ItemStack(Material.IRON_CHESTPLATE, 1);
+        ItemMeta ironChestplateMeta = ironChestplateStack.getItemMeta();
+        ironChestplateMeta.setDisplayName(ColorUtil.getMessage("&aЖелезка уровень 2"));
+        List<String> ironChestplateList = new ArrayList<>();
+        ironChestplateList.add(ColorUtil.getMessage("&dЦена: &f3 железо"));
+        ironChestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 2, true);
+        ironChestplateMeta.setLore(ironChestplateList);
+        ironChestplateMeta.spigot().setUnbreakable(true);
+        ironChestplateStack.setItemMeta(ironChestplateMeta);
+        return ironChestplateStack;
+    }
+    public static ItemStack diamondSetMenuStack(){
+        ItemStack diamondLegsStack = new ItemStack(Material.DIAMOND_LEGGINGS, 1);
+        ItemMeta diamondLegsMeta = diamondLegsStack.getItemMeta();
+        diamondLegsMeta.setDisplayName(ColorUtil.getMessage("&fАлмозный сет"));
+        List<String> diamondLegsList = new ArrayList<>();
+        diamondLegsList.add(ColorUtil.getMessage("&7Алмазный шлем"));
+        diamondLegsList.add(ColorUtil.getMessage("&7Алмазные штаны"));
+        diamondLegsList.add(ColorUtil.getMessage("&7Алмазные ботинки"));
+        diamondLegsList.add(ColorUtil.getMessage("&dЦена: &f9 железа"));
+        diamondLegsMeta.setLore(diamondLegsList);
+        diamondLegsMeta.spigot().setUnbreakable(true);
+        diamondLegsStack.setItemMeta(diamondLegsMeta);
+        return diamondLegsStack;
+    }
+    public static ItemStack diamondChestplate0(){
+        int level = 0;
+        ItemStack diamondChestplateStack = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        ItemMeta diamondChestplateMeta = diamondChestplateStack.getItemMeta();
+        diamondChestplateMeta.setDisplayName(ColorUtil.getMessage("&fАлмазка уровень " + level));
+        List<String> diamondChestplateList = new ArrayList<>();
+        diamondChestplateList.add(ColorUtil.getMessage("&dЦена: &f9 железа"));
+        diamondChestplateMeta.setLore(diamondChestplateList);
+        diamondChestplateMeta.spigot().setUnbreakable(true);
+        diamondChestplateStack.setItemMeta(diamondChestplateMeta);
+        return diamondChestplateStack;
+    }
+    public static ItemStack diamondChestplate1(){
+        int level = 1;
+        ItemStack diamondChestplateStack = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        ItemMeta diamondChestplateMeta = diamondChestplateStack.getItemMeta();
+        diamondChestplateMeta.setDisplayName(ColorUtil.getMessage("&aАлмазка уровень " + level));
+        List<String> diamondChestplateList = new ArrayList<>();
+        diamondChestplateList.add(ColorUtil.getMessage("&dЦена: &f20 железа"));
+        diamondChestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, level, true);
+        diamondChestplateMeta.setLore(diamondChestplateList);
+        diamondChestplateMeta.spigot().setUnbreakable(true);
+        diamondChestplateStack.setItemMeta(diamondChestplateMeta);
+        return diamondChestplateStack;
+    }
+    public static ItemStack diamondChestplate2(){
+        int level = 2;
+        ItemStack diamondChestplateStack = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        ItemMeta diamondChestplateMeta = diamondChestplateStack.getItemMeta();
+        diamondChestplateMeta.setDisplayName(ColorUtil.getMessage("&bАлмазка уровень " + level));
+        List<String> diamondChestplateList = new ArrayList<>();
+        diamondChestplateList.add(ColorUtil.getMessage("&dЦена: &e3 золота"));
+        diamondChestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, level, true);
+        diamondChestplateMeta.setLore(diamondChestplateList);
+        diamondChestplateMeta.spigot().setUnbreakable(true);
+        diamondChestplateStack.setItemMeta(diamondChestplateMeta);
+        return diamondChestplateStack;
+    }
+    public static ItemStack diamondChestplate3(){
+        int level = 3;
+        ItemStack diamondChestplateStack = new ItemStack(Material.DIAMOND_CHESTPLATE, 1);
+        ItemMeta diamondChestplateMeta = diamondChestplateStack.getItemMeta();
+        diamondChestplateMeta.setDisplayName(ColorUtil.getMessage("&cАлмазка уровень " + level));
+        List<String> diamondChestplateList = new ArrayList<>();
+        diamondChestplateList.add(ColorUtil.getMessage("&dЦена: &e8 золота"));
+        diamondChestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, level, true);
+        diamondChestplateMeta.setLore(diamondChestplateList);
+        diamondChestplateMeta.spigot().setUnbreakable(true);
+        diamondChestplateStack.setItemMeta(diamondChestplateMeta);
+        return diamondChestplateStack;
+    }
+
+    public static List<ItemStack> IronSetStack(){
+        ItemStack ironBootsStack = new ItemStack(Material.IRON_BOOTS, 1);
+        ItemMeta ironBootsMeta = ironBootsStack.getItemMeta();
+        ironBootsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        ironBootsMeta.spigot().setUnbreakable(true);
+        ironBootsStack.setItemMeta(ironBootsMeta);
+
+        ItemStack ironLegsStack = new ItemStack(Material.IRON_LEGGINGS, 1);
+        ItemMeta ironLegsMeta = ironLegsStack.getItemMeta();
+        ironLegsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        ironLegsMeta.spigot().setUnbreakable(true);
+        ironLegsStack.setItemMeta(ironLegsMeta);
+
+        ItemStack ironHelmetStack = new ItemStack(Material.IRON_HELMET, 1);
+        ItemMeta ironHelmetMeta = ironHelmetStack.getItemMeta();
+        ironHelmetMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
+        ironHelmetMeta.spigot().setUnbreakable(true);
+        ironHelmetStack.setItemMeta(ironHelmetMeta);
+
+        List<ItemStack> ironArmorList = new ArrayList<>();
+        ironArmorList.add(ironBootsStack);
+        ironArmorList.add(ironLegsStack);
+        ironArmorList.add(ironHelmetStack);
+        return ironArmorList;
+    }
+    public static List<ItemStack> diamondSetStack(){
+        ItemStack diamondBootsStack = new ItemStack(Material.DIAMOND_BOOTS, 1);
+        ItemMeta diamondBootsMeta = diamondBootsStack.getItemMeta();
+        diamondBootsMeta.spigot().setUnbreakable(true);
+        diamondBootsStack.setItemMeta(diamondBootsMeta);
+
+        ItemStack diamondLegsStack = new ItemStack(Material.DIAMOND_LEGGINGS, 1);
+        ItemMeta diamondLegsMeta = diamondLegsStack.getItemMeta();
+        diamondLegsMeta.spigot().setUnbreakable(true);
+        diamondLegsStack.setItemMeta(diamondLegsMeta);
+
+        ItemStack diamondHelmetStack = new ItemStack(Material.DIAMOND_HELMET, 1);
+        ItemMeta diamondHelmetMeta = diamondHelmetStack.getItemMeta();
+        diamondHelmetMeta.spigot().setUnbreakable(true);
+        diamondHelmetStack.setItemMeta(diamondHelmetMeta);
+
+        List<ItemStack> diamondArmorList = new ArrayList<>();
+        diamondArmorList.add(diamondBootsStack);
+        diamondArmorList.add(diamondLegsStack);
+        diamondArmorList.add(diamondHelmetStack);
+        return diamondArmorList;
+    }
+    
 //    public static ItemStack (){
 //
 //        return ;

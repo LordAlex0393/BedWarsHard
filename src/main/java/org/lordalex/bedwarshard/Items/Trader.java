@@ -44,42 +44,21 @@ public class Trader {
         inv.setItem(3, ShopItem.ironBlock());
         inv.setItem(4, ShopItem.glowStone());
         inv.setItem(5, ShopItem.coloredGlass(p));
+        inv.setItem(6, ShopItem.slimeBlock());
         inv.setItem(13, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }
     public static void openArmorMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 18, "Броня");
-
-        ItemStack ironLegsStack = new ItemStack(Material.IRON_LEGGINGS, 1);
-        ItemMeta ironLegsMeta = ironLegsStack.getItemMeta();
-        ironLegsMeta.setDisplayName(ColorUtil.getMessage("&fЖелезный сет"));
-        List<String> ironLegsList = new ArrayList<>();
-        ironLegsList.add(ColorUtil.getMessage("&7Железный шлем"));
-        ironLegsList.add(ColorUtil.getMessage("&7Железные штаны"));
-        ironLegsList.add(ColorUtil.getMessage("&7Железные ботинки"));
-        ironLegsList.add(ColorUtil.getMessage("&dЦена: &66 бронзы"));
-        ironLegsMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-        ironLegsMeta.setLore(ironLegsList);
-        ironLegsStack.setItemMeta(ironLegsMeta);
-
-        ItemStack ironChestplateStack = new ItemStack(Material.IRON_CHESTPLATE, 1);
-        ItemMeta ironChestplateMeta = ironChestplateStack.getItemMeta();
-        ironChestplateMeta.setDisplayName(ColorUtil.getMessage("&aЖелезка уровень 1"));
-        List<String> ironChestplateList = new ArrayList<>();
-        ironChestplateList.add(ColorUtil.getMessage("&dЦена: &f1 железо"));
-        ironChestplateMeta.addEnchant(Enchantment.PROTECTION_ENVIRONMENTAL, 1, true);
-        ironChestplateMeta.setLore(ironChestplateList);
-        ironChestplateStack.setItemMeta(ironChestplateMeta);
-
-        ItemStack bedStack = new ItemStack(Material.BED, 1);
-        ItemMeta bedMeta = bedStack.getItemMeta();
-        bedMeta.setDisplayName(ColorUtil.getMessage("&f← &eНазад"));
-        bedStack.setItemMeta(bedMeta);
-
-        inv.setItem(0, ironLegsStack);
-        inv.setItem(1, ironChestplateStack);
-        inv.setItem(13, bedStack);
-
+        inv.setItem(0, ShopItem.IronSetMenuStack());
+        inv.setItem(1, ShopItem.ironChestplate1());
+        inv.setItem(2, ShopItem.ironChestplate2());
+        inv.setItem(3, ShopItem.diamondSetMenuStack());
+        inv.setItem(4, ShopItem.diamondChestplate0());
+        inv.setItem(5, ShopItem.diamondChestplate1());
+        inv.setItem(6, ShopItem.diamondChestplate2());
+        inv.setItem(7, ShopItem.diamondChestplate3());
+        inv.setItem(13, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }
     public static void openPickaxeMenu(Player p){
