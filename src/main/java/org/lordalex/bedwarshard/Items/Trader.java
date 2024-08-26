@@ -106,6 +106,17 @@ public class Trader {
         inv.setItem(13, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }
+    public static void openPotionMenu(Player p){
+        Inventory inv = Bukkit.createInventory(null, 18, "Зелья");
+        inv.setItem(0, ShopItem.potionHeal1());
+        inv.setItem(1, ShopItem.potionHeal2());
+        inv.setItem(2, ShopItem.potionSpeed());
+        inv.setItem(3, ShopItem.potionRegen());
+        inv.setItem(4, ShopItem.potionStrength());
+        inv.setItem(5, ShopItem.potionInvisibility());
+        inv.setItem(13, ShopItem.returnButtonStack());
+        p.openInventory(inv);
+    }
     public static void openSpecialMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 18, "Специальное");
 

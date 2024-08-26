@@ -61,6 +61,8 @@ public class onTrade implements Listener {
                     Trader.openFoodMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.chestsMenuStack())) {
                     Trader.openChestMenu((Player) e.getView().getPlayer());
+                } else if (e.getCurrentItem().equals(ShopItem.potionMenuStack())) {
+                    Trader.openPotionMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.specialMenuStack())) {
                     Trader.openSpecialMenu((Player) e.getView().getPlayer());
                 }
@@ -180,6 +182,25 @@ public class onTrade implements Listener {
                     buyItem(e, IRON, 1, ShopItem.chest(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.enderChest())) {
                     buyItem(e, GOLD, 1, ShopItem.enderChest(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
+                    Trader.openGlobalMenu((Player) e.getView().getPlayer());
+                }
+            }
+        } else if (e.getView().getTitle().equals("Зелья")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
+                if (e.getCurrentItem().equals(ShopItem.potionHeal1())) {
+                    buyItem(e, IRON, 2, ShopItem.potionHeal1(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.potionHeal2())) {
+                    buyItem(e, IRON, 5, ShopItem.potionHeal2(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.potionSpeed())) {
+                    buyItem(e, IRON, 4, ShopItem.potionSpeed(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.potionRegen())) {
+                    buyItem(e, IRON, 7, ShopItem.potionRegen(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.potionStrength())) {
+                    buyItem(e, GOLD, 4, ShopItem.potionStrength(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.potionInvisibility())) {
+                    buyItem(e, GOLD, 50, ShopItem.potionInvisibility(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }

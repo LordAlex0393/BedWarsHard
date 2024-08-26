@@ -6,7 +6,10 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.material.Sandstone;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.config.PlayerInfo;
@@ -660,6 +663,68 @@ public class ShopItem {
         enderChestMeta.setLore(enderChestList);
         enderChestStack.setItemMeta(enderChestMeta);
         return enderChestStack;
+    }
+
+
+    public static ItemStack potionHeal1(){
+        ItemStack potionMenuStack = new ItemStack(Material.POTION, 1, (short) 8197);
+        ItemMeta potionMenuMeta = potionMenuStack.getItemMeta();
+        potionMenuMeta.setDisplayName(ColorUtil.getMessage("&eХилка уровень 1"));
+        List<String> potionMenuList = new ArrayList<>();
+        potionMenuList.add(ColorUtil.getMessage("&dЦена: &f2 железа"));
+        potionMenuMeta.setLore(potionMenuList);
+        potionMenuStack.setItemMeta(potionMenuMeta);
+        return potionMenuStack;
+    }
+    public static ItemStack potionHeal2(){
+        ItemStack potionMenuStack = new ItemStack(Material.POTION, 1, (short) 8229);
+        ItemMeta potionMenuMeta = potionMenuStack.getItemMeta();
+        potionMenuMeta.setDisplayName(ColorUtil.getMessage("&eХилка уровень 2"));
+        List<String> potionMenuList = new ArrayList<>();
+        potionMenuList.add(ColorUtil.getMessage("&dЦена: &f5 железа"));
+        potionMenuMeta.setLore(potionMenuList);
+        potionMenuStack.setItemMeta(potionMenuMeta);
+        return potionMenuStack;
+    }
+    public static ItemStack potionSpeed(){
+        ItemStack potionMenuStack = new ItemStack(Material.POTION, 1, (short) 8194);
+        ItemMeta potionMenuMeta = potionMenuStack.getItemMeta();
+        potionMenuMeta.setDisplayName(ColorUtil.getMessage("&eСкорость"));
+        List<String> potionMenuList = new ArrayList<>();
+        potionMenuList.add(ColorUtil.getMessage("&dЦена: &f4 железа"));
+        potionMenuMeta.setLore(potionMenuList);
+        potionMenuStack.setItemMeta(potionMenuMeta);
+        return potionMenuStack;
+    }
+    public static ItemStack potionRegen(){
+        ItemStack potionMenuStack = new ItemStack(Material.POTION, 1, (short) 8193);
+        ItemMeta potionMenuMeta = potionMenuStack.getItemMeta();
+        potionMenuMeta.setDisplayName(ColorUtil.getMessage("&eЗелье регенерации"));
+        List<String> potionMenuList = new ArrayList<>();
+        potionMenuList.add(ColorUtil.getMessage("&dЦена: &f7 железа"));
+        potionMenuMeta.setLore(potionMenuList);
+        potionMenuStack.setItemMeta(potionMenuMeta);
+        return potionMenuStack;
+    }
+    public static ItemStack potionStrength(){
+        ItemStack potionMenuStack = new ItemStack(Material.POTION, 1, (short) 8201);
+        ItemMeta potionMenuMeta = potionMenuStack.getItemMeta();
+        potionMenuMeta.setDisplayName(ColorUtil.getMessage("&eСила"));
+        List<String> potionMenuList = new ArrayList<>();
+        potionMenuList.add(ColorUtil.getMessage("&dЦена: &e4 золота"));
+        potionMenuMeta.setLore(potionMenuList);
+        potionMenuStack.setItemMeta(potionMenuMeta);
+        return potionMenuStack;
+    }
+    public static ItemStack potionInvisibility(){
+        ItemStack potionStack = new ItemStack(Material.POTION, 1, (short) 8206);
+        ItemMeta potionMeta = potionStack.getItemMeta();
+        potionMeta.setDisplayName(ColorUtil.getMessage("&eЗелье невидимости"));
+        List<String> potionList = new ArrayList<>();
+        potionList.add(ColorUtil.getMessage("&dЦена: &e50 золота"));
+        potionMeta.setLore(potionList);
+        potionStack.setItemMeta(potionMeta);
+        return potionStack;
     }
 
 //    public static ItemStack (){
