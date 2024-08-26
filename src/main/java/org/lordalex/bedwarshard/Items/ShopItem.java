@@ -38,6 +38,7 @@ public class ShopItem {
         return globalMenuStacks;
     }
 
+
     public static ItemStack blocksMenuStack(){
         ItemStack blocksMenuStack = new ItemStack(Material.SANDSTONE, 1, (byte) 2);
         ItemMeta blocksMenuMeta = blocksMenuStack.getItemMeta();
@@ -409,7 +410,128 @@ public class ShopItem {
         diamondArmorList.add(diamondHelmetStack);
         return diamondArmorList;
     }
-    
+
+
+    public static ItemStack stonePickaxe(){
+        ItemStack stonePickaxeStack = new ItemStack(Material.STONE_PICKAXE, 1);
+        ItemMeta stonePickaxeMeta = stonePickaxeStack.getItemMeta();
+        stonePickaxeMeta.setDisplayName(ColorUtil.getMessage("&bКаменная кирка"));
+        List<String> stonePickaxeList = new ArrayList<>();
+        stonePickaxeList.add(ColorUtil.getMessage("&dЦена: &64 бронзы"));
+        stonePickaxeMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+        stonePickaxeMeta.setLore(stonePickaxeList);
+        stonePickaxeMeta.spigot().setUnbreakable(true);
+        stonePickaxeStack.setItemMeta(stonePickaxeMeta);
+        return stonePickaxeStack;
+    }
+    public static ItemStack ironPickaxe(){
+        ItemStack ironPickaxeStack = new ItemStack(Material.IRON_PICKAXE, 1);
+        ItemMeta ironPickaxeMeta = ironPickaxeStack.getItemMeta();
+        ironPickaxeMeta.setDisplayName(ColorUtil.getMessage("&bЖелезная кирка"));
+        List<String> ironPickaxeList = new ArrayList<>();
+        ironPickaxeList.add(ColorUtil.getMessage("&dЦена: &f2 железа"));
+        ironPickaxeMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+        ironPickaxeMeta.setLore(ironPickaxeList);
+        ironPickaxeMeta.spigot().setUnbreakable(true);
+        ironPickaxeStack.setItemMeta(ironPickaxeMeta);
+        return ironPickaxeStack;
+    }
+    public static ItemStack diamondPickaxe1(){
+        ItemStack diamond1PickaxeStack = new ItemStack(Material.DIAMOND_PICKAXE, 1);
+        ItemMeta diamond1PickaxeMeta = diamond1PickaxeStack.getItemMeta();
+        diamond1PickaxeMeta.setDisplayName(ColorUtil.getMessage("&bАлмазная кирка"));
+        List<String> diamond1PickaxeList = new ArrayList<>();
+        diamond1PickaxeList.add(ColorUtil.getMessage("&dЦена: &e2 золота"));
+        diamond1PickaxeMeta.addEnchant(Enchantment.DIG_SPEED, 1, true);
+        diamond1PickaxeMeta.setLore(diamond1PickaxeList);
+        diamond1PickaxeMeta.spigot().setUnbreakable(true);
+        diamond1PickaxeStack.setItemMeta(diamond1PickaxeMeta);
+        return diamond1PickaxeStack;
+    }
+    public static ItemStack diamondPickaxe3(){
+        ItemStack diamond2PickaxeStack = new ItemStack(Material.DIAMOND_PICKAXE, 1);
+        ItemMeta diamond2PickaxeMeta = diamond2PickaxeStack.getItemMeta();
+        diamond2PickaxeMeta.setDisplayName(ColorUtil.getMessage("&bАлмазная кирка"));
+        List<String> diamond2PickaxeList = new ArrayList<>();
+        diamond2PickaxeList.add(ColorUtil.getMessage("&dЦена: &e8 золота"));
+        diamond2PickaxeMeta.addEnchant(Enchantment.DIG_SPEED, 3, true);
+        diamond2PickaxeMeta.setLore(diamond2PickaxeList);
+        diamond2PickaxeMeta.spigot().setUnbreakable(true);
+        diamond2PickaxeStack.setItemMeta(diamond2PickaxeMeta);
+        return diamond2PickaxeStack;
+    }
+
+
+    public static ItemStack ironSword(){
+        ItemStack ironSwordStack = new ItemStack(Material.IRON_SWORD, 1);
+        ItemMeta ironSwordMeta = ironSwordStack.getItemMeta();
+        ironSwordMeta.setDisplayName(ColorUtil.getMessage("&bЖелезный меч"));
+        List<String> ironSwordList = new ArrayList<>();
+        ironSwordList.add(ColorUtil.getMessage("&dЦена: &63 бронзы"));
+        ironSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+        ironSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        ironSwordMeta.setLore(ironSwordList);
+        ironSwordMeta.spigot().setUnbreakable(true);
+        ironSwordStack.setItemMeta(ironSwordMeta);
+        return ironSwordStack;
+    }
+    public static ItemStack diamondSword(){
+        ItemStack diamondSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
+        ItemMeta diamondSwordMeta = diamondSwordStack.getItemMeta();
+        diamondSwordMeta.setDisplayName(ColorUtil.getMessage("&aАлмеч"));
+        List<String> diamondSwordList = new ArrayList<>();
+        diamondSwordList.add(ColorUtil.getMessage("&dЦена: &f1 железо"));
+        diamondSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
+        diamondSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        diamondSwordMeta.setLore(diamondSwordList);
+        diamondSwordMeta.spigot().setUnbreakable(true);
+        diamondSwordStack.setItemMeta(diamondSwordMeta);
+        return diamondSwordStack;
+    }
+    public static ItemStack excalibur(){
+        ItemStack excaliburSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
+        ItemMeta excaliburSwordMeta = excaliburSwordStack.getItemMeta();
+        excaliburSwordMeta.setDisplayName(ColorUtil.getMessage("&bЭкскалибур"));
+        List<String> excaliburSwordList = new ArrayList<>();
+        excaliburSwordList.add(ColorUtil.getMessage("&dЦена: &f5 железа"));
+        excaliburSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 2, true);
+        excaliburSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        excaliburSwordMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
+        excaliburSwordMeta.setLore(excaliburSwordList);
+        excaliburSwordMeta.spigot().setUnbreakable(true);
+        excaliburSwordStack.setItemMeta(excaliburSwordMeta);
+        return excaliburSwordStack;
+    }
+    public static ItemStack deathBringer(){
+        ItemStack deathBringerSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
+        ItemMeta deathBringerSwordMeta = deathBringerSwordStack.getItemMeta();
+        deathBringerSwordMeta.setDisplayName(ColorUtil.getMessage("&6Смертоносец"));
+        List<String> deathBringerSwordList = new ArrayList<>();
+        deathBringerSwordList.add(ColorUtil.getMessage("&dЦена: &e6 золота"));
+        deathBringerSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 3, true);
+        deathBringerSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        deathBringerSwordMeta.addEnchant(Enchantment.KNOCKBACK, 1, true);
+        deathBringerSwordMeta.setLore(deathBringerSwordList);
+        deathBringerSwordMeta.spigot().setUnbreakable(true);
+        deathBringerSwordStack.setItemMeta(deathBringerSwordMeta);
+        return deathBringerSwordStack;
+    }
+    public static ItemStack killmagedon(){
+        ItemStack killmagedonSwordStack = new ItemStack(Material.DIAMOND_SWORD, 1);
+        ItemMeta killmagedonSwordMeta = killmagedonSwordStack.getItemMeta();
+        killmagedonSwordMeta.setDisplayName(ColorUtil.getMessage("&cКиллмагедон"));
+        List<String> killmagedonSwordList = new ArrayList<>();
+        killmagedonSwordList.add(ColorUtil.getMessage("&dЦена: &e30 золота"));
+        killmagedonSwordMeta.addEnchant(Enchantment.DAMAGE_ALL, 5, true);
+        killmagedonSwordMeta.addEnchant(Enchantment.DURABILITY, 1, true);
+        killmagedonSwordMeta.addEnchant(Enchantment.KNOCKBACK, 2, true);
+        killmagedonSwordMeta.addEnchant(Enchantment.FIRE_ASPECT, 1, true);
+        killmagedonSwordMeta.setLore(killmagedonSwordList);
+        killmagedonSwordMeta.spigot().setUnbreakable(true);
+        killmagedonSwordStack.setItemMeta(killmagedonSwordMeta);
+        return killmagedonSwordStack;
+    }
+
 //    public static ItemStack (){
 //
 //        return ;
