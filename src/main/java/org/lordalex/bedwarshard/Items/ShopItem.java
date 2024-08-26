@@ -597,6 +597,49 @@ public class ShopItem {
         arrowStack.setItemMeta(arrowMeta);
         return arrowStack;
     }
+
+
+    public static ItemStack apple(){
+        ItemStack appleStack = new ItemStack(Material.APPLE, 1);
+        ItemMeta appleMeta = appleStack.getItemMeta();
+        appleMeta.setDisplayName(ColorUtil.getMessage("&fЕда чемпионов"));
+        List<String> appleList = new ArrayList<>();
+        appleList.add(ColorUtil.getMessage("&dЦена: &61 бронза"));
+        appleMeta.setLore(appleList);
+        appleStack.setItemMeta(appleMeta);
+        return appleStack;
+    }
+    public static ItemStack pork(){
+        ItemStack porkStack = new ItemStack(Material.GRILLED_PORK, 1);
+        ItemMeta porkMeta = porkStack.getItemMeta();
+        porkMeta.setDisplayName(ColorUtil.getMessage("&fЖареная свинина"));
+        List<String> porkList = new ArrayList<>();
+        porkList.add(ColorUtil.getMessage("&dЦена: &62 бронзы"));
+        porkMeta.setLore(porkList);
+        porkStack.setItemMeta(porkMeta);
+        return porkStack;
+    }
+    public static ItemStack cake(){
+        ItemStack cakeStack = new ItemStack(Material.CAKE, 1);
+        ItemMeta cakeMeta = cakeStack.getItemMeta();
+        cakeMeta.setDisplayName(ColorUtil.getMessage("&fТорт"));
+        List<String> cakeList = new ArrayList<>();
+        cakeList.add(ColorUtil.getMessage("&dЦена: &f1 железо"));
+        cakeMeta.setLore(cakeList);
+        cakeStack.setItemMeta(cakeMeta);
+        return cakeStack;
+    }
+    public static ItemStack goldenApple(){
+        ItemStack goldenAppleStack = new ItemStack(Material.GOLDEN_APPLE, 1);
+        ItemMeta goldenAppleMeta = goldenAppleStack.getItemMeta();
+        goldenAppleMeta.setDisplayName(ColorUtil.getMessage("&bЗолотое яблоко"));
+        List<String> goldenAppleList = new ArrayList<>();
+        goldenAppleList.add(ColorUtil.getMessage("&dЦена: &e2 золота"));
+        goldenAppleMeta.setLore(goldenAppleList);
+        goldenAppleStack.setItemMeta(goldenAppleMeta);
+        return goldenAppleStack;
+    }
+
 //    public static ItemStack (){
 //
 //        return ;

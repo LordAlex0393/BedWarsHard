@@ -92,33 +92,11 @@ public class Trader {
     }
     public static void openFoodMenu(Player p){
         Inventory inv = Bukkit.createInventory(null, 18, "Еда");
-
-        ItemStack appleStack = new ItemStack(Material.APPLE, 1);
-        ItemMeta appleMeta = appleStack.getItemMeta();
-        appleMeta.setDisplayName(ColorUtil.getMessage("&fЕда чемпионов"));
-        List<String> appleList = new ArrayList<>();
-        appleList.add(ColorUtil.getMessage("&dЦена: &61 бронза"));
-        appleMeta.setLore(appleList);
-        appleStack.setItemMeta(appleMeta);
-
-        ItemStack porkStack = new ItemStack(Material.GRILLED_PORK, 1);
-        ItemMeta porkMeta = porkStack.getItemMeta();
-        porkMeta.setDisplayName(ColorUtil.getMessage("&fЖареная свинина"));
-        List<String> porkList = new ArrayList<>();
-        porkList.add(ColorUtil.getMessage("&dЦена: &62 бронзы"));
-        porkMeta.setLore(porkList);
-        porkStack.setItemMeta(porkMeta);
-
-
-        ItemStack bedStack = new ItemStack(Material.BED, 1);
-        ItemMeta bedMeta = bedStack.getItemMeta();
-        bedMeta.setDisplayName(ColorUtil.getMessage("&f← &eНазад"));
-        bedStack.setItemMeta(bedMeta);
-
-        inv.setItem(0, appleStack);
-        inv.setItem(1, porkStack);
-        inv.setItem(13, bedStack);
-
+        inv.setItem(0, ShopItem.apple());
+        inv.setItem(1, ShopItem.pork());
+        inv.setItem(2, ShopItem.cake());
+        inv.setItem(3, ShopItem.goldenApple());
+        inv.setItem(13, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }
     public static void openSpecialMenu(Player p){

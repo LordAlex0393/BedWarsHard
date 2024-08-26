@@ -159,15 +159,17 @@ public class onTrade implements Listener {
         } else if (e.getView().getTitle().equals("Еда")) {
             e.setCancelled(true);
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
-
-                if (isEqualsItem(e, "&fЕда чемпионов")) {
-                    buyItem(e, BRONZE, 1, new ItemStack(Material.APPLE), 1);
-                } else if (isEqualsItem(e, "&fЖареная свинина")) {
-                    buyItem(e, BRONZE, 2, new ItemStack(Material.GRILLED_PORK), 1);
-                } else if (isEqualsItem(e, "&f← &eНазад")) {
+                if (e.getCurrentItem().equals(ShopItem.apple())) {
+                    buyItem(e, BRONZE, 1, ShopItem.apple(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.pork())) {
+                    buyItem(e, BRONZE, 2, ShopItem.pork(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.cake())) {
+                    buyItem(e, IRON, 1, ShopItem.cake(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.goldenApple())) {
+                    buyItem(e, GOLD, 2, ShopItem.goldenApple(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }
-                e.setCancelled(true);
             }
         } else if (e.getView().getTitle().equals("Специальное")) {
             e.setCancelled(true);
