@@ -20,9 +20,16 @@ import org.lordalex.bedwarshard.config.PlayerInfo;
 public class onBlockInteraction implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent e) {
+        if(BedWarsHard.getGame().getGameState() != GameState.GAME) return;
         Player player = e.getPlayer();
         if (BedWarsHard.getGame().getBlocksLocationsSet().contains(e.getBlock().getLocation())) {
             BedWarsHard.getGame().removeBlockLocation(e.getBlock().getLocation());
+            if(e.getBlock().getType() == Material.WEB){
+                e.getBlock().setType(Material.AIR);
+            }
+        }
+        else if(e.getBlock().getType() == Material.LONG_GRASS){
+            e.getBlock().setType(Material.AIR);
         }
         else if(e.getBlock().getType() == Material.BED_BLOCK){
             for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
