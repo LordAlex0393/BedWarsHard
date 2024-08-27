@@ -728,6 +728,175 @@ public class ShopItem {
         return potionStack;
     }
 
+
+    public static ItemStack ladder(){
+        ItemStack ladderStack = new ItemStack(Material.LADDER, 1);
+        ItemMeta ladderMeta = ladderStack.getItemMeta();
+        ladderMeta.setDisplayName(ColorUtil.getMessage("&fЛестница"));
+        List<String> ladderList = new ArrayList<>();
+        ladderList.add(ColorUtil.getMessage("&dЦена: &61 бронза"));
+        ladderMeta.setLore(ladderList);
+        ladderStack.setItemMeta(ladderMeta);
+        return ladderStack;
+    }
+    public static ItemStack web(){
+        ItemStack webStack = new ItemStack(Material.WEB, 1);
+        ItemMeta webMeta = webStack.getItemMeta();
+        webMeta.setDisplayName(ColorUtil.getMessage("&fПаутина"));
+        List<String> webList = new ArrayList<>();
+        webList.add(ColorUtil.getMessage("&dЦена: &624 бронзы"));
+        webMeta.setLore(webList);
+        webStack.setItemMeta(webMeta);
+        return webStack;
+    }
+    public static ItemStack fishingRod(){
+        ItemStack fishingRodStack = new ItemStack(Material.FISHING_ROD, 1);
+        ItemMeta fishingRodMeta = fishingRodStack.getItemMeta();
+        fishingRodMeta.setDisplayName(ColorUtil.getMessage("&fУдочка"));
+        List<String> fishingRodList = new ArrayList<>();
+        fishingRodList.add(ColorUtil.getMessage("&dЦена: &f5 железа"));
+        fishingRodMeta.setLore(fishingRodList);
+        fishingRodMeta.spigot().setUnbreakable(true);
+        fishingRodStack.setItemMeta(fishingRodMeta);
+        return fishingRodStack;
+    }
+    public static ItemStack lighter(){
+        ItemStack lighterStack = new ItemStack(Material.FLINT_AND_STEEL, 1);
+        ItemMeta lighterMeta = lighterStack.getItemMeta();
+        lighterMeta.setDisplayName(ColorUtil.getMessage("&fОгниво"));
+        List<String> lighterList = new ArrayList<>();
+        lighterList.add(ColorUtil.getMessage("&dЦена: &f7 железа"));
+        lighterMeta.setLore(lighterList);
+        lighterMeta.spigot().setUnbreakable(true);
+        lighterStack.setItemMeta(lighterMeta);
+        return lighterStack;
+    }
+    public static ItemStack TNT(){
+        ItemStack TNTStack = new ItemStack(Material.TNT, 1);
+        ItemMeta TNTMeta = TNTStack.getItemMeta();
+        TNTMeta.setDisplayName(ColorUtil.getMessage("&Динамит"));
+        List<String> TNTList = new ArrayList<>();
+        TNTList.add(ColorUtil.getMessage("&dЦена: &e7 золота"));
+        TNTMeta.setLore(TNTList);
+        TNTStack.setItemMeta(TNTMeta);
+        return TNTStack;
+    }
+    public static ItemStack enderPearl(){
+        ItemStack enderPearlStack = new ItemStack(Material.ENDER_PEARL, 1);
+        ItemMeta enderPearlMeta = enderPearlStack.getItemMeta();
+        enderPearlMeta.setDisplayName(ColorUtil.getMessage("&fЖемчуг Эндера"));
+        List<String> enderPearlList = new ArrayList<>();
+        enderPearlList.add(ColorUtil.getMessage("&dЦена: &e13 золота"));
+        enderPearlMeta.setLore(enderPearlList);
+        enderPearlStack.setItemMeta(enderPearlMeta);
+        return enderPearlStack;
+    }
+    public static ItemStack teleportHome(){
+        ItemStack teleportHomeStack = new ItemStack(Material.SULPHUR, 1);
+        ItemMeta teleportHomeMeta = teleportHomeStack.getItemMeta();
+        teleportHomeMeta.setDisplayName(ColorUtil.getMessage("&bТелепорт домой (&e6 сек.&b)"));
+        List<String> teleportHomeList = new ArrayList<>();
+        teleportHomeList.add(ColorUtil.getMessage("&7 Нажмите правой кнопкой и через"));
+        teleportHomeList.add(ColorUtil.getMessage("&f6 секунд&7 Вы телепортируетесь домой."));
+        teleportHomeList.add(ColorUtil.getMessage("&cВнимание:&f Перемещение отменяет телепортацию"));
+        teleportHomeList.add(ColorUtil.getMessage("&dЦена: &f3 железа"));
+        teleportHomeMeta.setLore(teleportHomeList);
+        teleportHomeStack.setItemMeta(teleportHomeMeta);
+        return teleportHomeStack;
+    }
+    public static ItemStack thorBone(){
+        ItemStack thorBoneStack = new ItemStack(Material.BONE, 1);
+        ItemMeta thorBoneMeta = thorBoneStack.getItemMeta();
+        thorBoneMeta.setDisplayName(ColorUtil.getMessage("&bКость Тора"));
+        List<String> thorBoneList = new ArrayList<>();
+        thorBoneList.add(ColorUtil.getMessage("&7Метает молнии"));
+        thorBoneList.add(ColorUtil.getMessage("&dЦена: &f5 железа"));
+        thorBoneMeta.setLore(thorBoneList);
+        thorBoneStack.setItemMeta(thorBoneMeta);
+        return thorBoneStack;
+    }
+    public static ItemStack trackerGPS(){
+        ItemStack trackerGPSStack = new ItemStack(Material.COMPASS, 1);
+        ItemMeta trackerGPSMeta = trackerGPSStack.getItemMeta();
+        trackerGPSMeta.setDisplayName(ColorUtil.getMessage("&eGPS трекер"));
+        List<String> trackerGPSList = new ArrayList<>();
+        trackerGPSList.add(ColorUtil.getMessage("&7Укажет вам на ближайшего врага"));
+        trackerGPSList.add(ColorUtil.getMessage("&dЦена: &f10 железа"));
+        trackerGPSMeta.setLore(trackerGPSList);
+        trackerGPSStack.setItemMeta(trackerGPSMeta);
+        return trackerGPSStack;
+    }
+    public static ItemStack savingPlatform(){
+        ItemStack platformStack = new ItemStack(Material.BLAZE_ROD, 1);
+        ItemMeta platformMeta = platformStack.getItemMeta();
+        platformMeta.setDisplayName(ColorUtil.getMessage("&bСпасательная платформа"));
+        List<String> platformList = new ArrayList<>();
+        platformList.add(ColorUtil.getMessage("&7 Спаси себя от падения!"));
+        platformList.add(ColorUtil.getMessage("&7В течение &f10 секунд &7вы будете"));
+        platformList.add(ColorUtil.getMessage("&7стоять на стеклянной платформе."));
+        platformList.add(ColorUtil.getMessage("&7 Время перезарядки -&e 20 секунд"));
+        platformList.add(ColorUtil.getMessage("&dЦена: &f14 железа"));
+        platformMeta.setLore(platformList);
+        platformStack.setItemMeta(platformMeta);
+        return platformStack;
+    }
+    public static ItemStack trap(){
+        ItemStack platformStack = new ItemStack(Material.STRING, 1);
+        ItemMeta platformMeta = platformStack.getItemMeta();
+        platformMeta.setDisplayName(ColorUtil.getMessage("&bЛовушка"));
+        List<String> platformList = new ArrayList<>();
+        platformList.add(ColorUtil.getMessage("&7 Информирует вас о том, когда"));
+        platformList.add(ColorUtil.getMessage("&7противник наступает на ловушку."));
+        platformList.add(ColorUtil.getMessage("&7 Также он получает отрицательные"));
+        platformList.add(ColorUtil.getMessage("&7эффекты на&f 10 секунд"));
+        platformList.add(ColorUtil.getMessage("&dЦена: &e2 золота"));
+        platformMeta.setLore(platformList);
+        platformStack.setItemMeta(platformMeta);
+        return platformStack;
+    }
+
+
+    public static ItemStack bronzeToIronStack(){
+        ItemStack changerStack = new ItemStack(Material.IRON_INGOT, 1);
+        ItemMeta changerMeta = changerStack.getItemMeta();
+        changerMeta.setDisplayName(ColorUtil.getMessage("&f1 железо за&6 48 бронзы"));
+        List<String> changerList = new ArrayList<>();
+        changerList.add(ColorUtil.getMessage("&dЦена:&6 48 бронзы"));
+        changerMeta.setLore(changerList);
+        changerStack.setItemMeta(changerMeta);
+        return changerStack;
+    }
+    public static ItemStack ironToGoldStack(){
+        ItemStack changerStack = new ItemStack(Material.GOLD_INGOT, 1);
+        ItemMeta changerMeta = changerStack.getItemMeta();
+        changerMeta.setDisplayName(ColorUtil.getMessage("&e1 золото&f за 14 железа"));
+        List<String> changerList = new ArrayList<>();
+        changerList.add(ColorUtil.getMessage("&dЦена:&f 14 железа"));
+        changerMeta.setLore(changerList);
+        changerStack.setItemMeta(changerMeta);
+        return changerStack;
+    }
+    public static ItemStack ironToBronzeStack(){
+        ItemStack changerStack = new ItemStack(Material.CLAY_BRICK, 1);
+        ItemMeta changerMeta = changerStack.getItemMeta();
+        changerMeta.setDisplayName(ColorUtil.getMessage("&632 бронзы&f за 1 железо"));
+        List<String> changerList = new ArrayList<>();
+        changerList.add(ColorUtil.getMessage("&dЦена:&f 1 железо"));
+        changerMeta.setLore(changerList);
+        changerStack.setItemMeta(changerMeta);
+        return changerStack;
+    }
+    public static ItemStack goldToIronStack(){
+        ItemStack changerStack = new ItemStack(Material.IRON_INGOT, 1);
+        ItemMeta changerMeta = changerStack.getItemMeta();
+        changerMeta.setDisplayName(ColorUtil.getMessage("&f7 железа за&e 1 золото"));
+        List<String> changerList = new ArrayList<>();
+        changerList.add(ColorUtil.getMessage("&dЦена:&f 1 золото"));
+        changerMeta.setLore(changerList);
+        changerStack.setItemMeta(changerMeta);
+        return changerStack;
+    }
+
 //    public static ItemStack (){
 //
 //        return ;

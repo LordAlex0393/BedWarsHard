@@ -65,6 +65,8 @@ public class onTrade implements Listener {
                     Trader.openPotionMenu((Player) e.getView().getPlayer());
                 } else if (e.getCurrentItem().equals(ShopItem.specialMenuStack())) {
                     Trader.openSpecialMenu((Player) e.getView().getPlayer());
+                } else if (e.getCurrentItem().equals(ShopItem.exchangerMenuStack())) {
+                    Trader.openExchangerMenu((Player) e.getView().getPlayer());
                 }
             }
         } else if (e.getView().getTitle().equals("Блоки")) {
@@ -83,7 +85,7 @@ public class onTrade implements Listener {
                 } else if (e.getCurrentItem().equals(ShopItem.coloredGlass(p))) {
                     buyItem(e, BRONZE, 4, ShopItem.coloredGlass(p), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.slimeBlock())) {
-                    buyItem(e, BRONZE, 32,  new ItemStack(Material.SLIME_BLOCK), 1);
+                    buyItem(e, BRONZE, 32, new ItemStack(Material.SLIME_BLOCK), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }
@@ -94,19 +96,19 @@ public class onTrade implements Listener {
                 if (e.getCurrentItem().equals(ShopItem.IronSetMenuStack())) {
                     buyArmor(e, BRONZE, 6, ShopItem.IronSetStack(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.ironChestplate1())) {
-                    buyArmor(e, IRON, 1,ShopItem.ironChestplate1(), 1);
+                    buyArmor(e, IRON, 1, ShopItem.ironChestplate1(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.ironChestplate2())) {
-                    buyArmor(e, IRON, 3,ShopItem.ironChestplate2(), 1);
+                    buyArmor(e, IRON, 3, ShopItem.ironChestplate2(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.diamondSetMenuStack())) {
-                    buyArmor(e, IRON, 9,ShopItem.diamondSetStack(), 1);
+                    buyArmor(e, IRON, 9, ShopItem.diamondSetStack(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.diamondChestplate0())) {
-                    buyArmor(e, IRON, 9,ShopItem.diamondChestplate0(), 1);
+                    buyArmor(e, IRON, 9, ShopItem.diamondChestplate0(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.diamondChestplate1())) {
-                    buyArmor(e, IRON, 20,ShopItem.diamondChestplate1(), 1);
+                    buyArmor(e, IRON, 20, ShopItem.diamondChestplate1(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.diamondChestplate2())) {
-                    buyArmor(e, GOLD, 3,ShopItem.diamondChestplate2(), 1);
+                    buyArmor(e, GOLD, 3, ShopItem.diamondChestplate2(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.diamondChestplate3())) {
-                    buyArmor(e, GOLD, 8,ShopItem.diamondChestplate3(), 1);
+                    buyArmor(e, GOLD, 8, ShopItem.diamondChestplate3(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }
@@ -208,33 +210,46 @@ public class onTrade implements Listener {
         } else if (e.getView().getTitle().equals("Специальное")) {
             e.setCancelled(true);
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
-
-                if (isEqualsItem(e, "&fПаутинка")) {
-                    buyItem(e, BRONZE, 24, new ItemStack(Material.WEB), 1);
-                } else if (isEqualsItem(e, "&fУдочка")) {
-                    buyItem(e, IRON, 5, new ItemStack(Material.FISHING_ROD), 1);
-                } else if (isEqualsItem(e, "&bТелепорт домой")) {
-                    ItemStack teleportStack = new ItemStack(Material.SULPHUR, 1);
-                    ItemMeta teleportMeta = teleportStack.getItemMeta();
-                    teleportMeta.setDisplayName(ColorUtil.getMessage("&bТелепорт домой"));
-                    teleportStack.setItemMeta(teleportMeta);
-                    buyItem(e, IRON, 3, teleportStack, 1);
-                } else if (isEqualsItem(e, "&eGPS трекер")) {
-                    ItemStack gpsStack = new ItemStack(Material.COMPASS, 1);
-                    ItemMeta gpsMeta = gpsStack.getItemMeta();
-                    gpsMeta.setDisplayName(ColorUtil.getMessage("&eGPS трекер"));
-                    gpsStack.setItemMeta(gpsMeta);
-                    buyItem(e, IRON, 3, gpsStack, 1);
-                } else if (isEqualsItem(e, "&bСпасательная платформа")) {
-                    ItemStack platformStack = new ItemStack(Material.BLAZE_ROD, 1);
-                    ItemMeta platformMeta = platformStack.getItemMeta();
-                    platformMeta.setDisplayName(ColorUtil.getMessage("&bСпасательная платформа"));
-                    platformStack.setItemMeta(platformMeta);
-                    buyItem(e, IRON, 14, platformStack, 1);
-                } else if (isEqualsItem(e, "&f← &eНазад")) {
+                if (e.getCurrentItem().equals(ShopItem.ladder())) {
+                    buyItem(e, BRONZE, 1, ShopItem.ladder(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.web())) {
+                    buyItem(e, BRONZE, 24, ShopItem.web(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.fishingRod())) {
+                    buyItem(e, IRON, 5, ShopItem.fishingRod(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.lighter())) {
+                    buyItem(e, IRON, 7, ShopItem.lighter(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.TNT())) {
+                    buyItem(e, GOLD, 7, ShopItem.TNT(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.enderPearl())) {
+                    buyItem(e, GOLD, 13, ShopItem.enderPearl(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.teleportHome())) {
+                    buyItem(e, IRON, 3, ShopItem.teleportHome(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.thorBone())) {
+                    buyItem(e, IRON, 5, ShopItem.thorBone(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.trackerGPS())) {
+                    buyItem(e, IRON, 10, ShopItem.trackerGPS(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.savingPlatform())) {
+                    buyItem(e, IRON, 14, ShopItem.savingPlatform(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.trap())) {
+                    buyItem(e, GOLD, 2, ShopItem.trap(), 1);
+                } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }
-                e.setCancelled(true);
+            }
+        } else if (e.getView().getTitle().equals("Обмен валют")) {
+            e.setCancelled(true);
+            if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
+                if (e.getCurrentItem().equals(ShopItem.bronzeToIronStack())) {
+                    buyItem(e, BRONZE, 48, IRON, 1);
+                } else if (e.getCurrentItem().equals(ShopItem.ironToGoldStack())) {
+                    buyItem(e, IRON, 14, GOLD, 1);
+                } else if (e.getCurrentItem().equals(ShopItem.ironToBronzeStack())) {
+                    buyItem(e, IRON, 1, BRONZE, 32);
+                } else if (e.getCurrentItem().equals(ShopItem.goldToIronStack())) {
+                    buyItem(e, GOLD, 1, IRON, 7);
+                } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
+                    Trader.openGlobalMenu((Player) e.getView().getPlayer());
+                }
             }
         }
     }
@@ -263,10 +278,9 @@ public class onTrade implements Listener {
 //    }
 
     private boolean checkItem(Player p, ItemStack itemStack, int amount) {
-        if(p.getInventory().firstEmpty() != -1){
+        if (p.getInventory().firstEmpty() != -1) {
             return p.getInventory().containsAtLeast(itemStack, amount);
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -296,7 +310,7 @@ public class onTrade implements Listener {
             p.getInventory().removeItem(resourceItemStack);
             productItemStack.setAmount(productAmount);
             ItemMeta productItemMeta = productItemStack.getItemMeta();
-            if(productItemMeta.hasLore()){
+            if (productItemMeta.hasLore()) {
                 List<String> lore = productItemMeta.getLore();
                 lore.removeIf(s -> s.contains("Цена: "));
                 productItemMeta.setLore(lore);
@@ -367,13 +381,13 @@ public class onTrade implements Listener {
             p.getInventory().removeItem(resourceItemStack);
             productItemStack.setAmount(productAmount);
             ItemMeta productItemMeta = productItemStack.getItemMeta();
-            if(productItemMeta.hasLore()){
+            if (productItemMeta.hasLore()) {
                 List<String> lore = productItemMeta.getLore();
                 lore.removeIf(s -> s.contains("Цена: "));
                 productItemMeta.setLore(lore);
                 productItemStack.setItemMeta(productItemMeta);
             }
-            if (p.getInventory().getChestplate() == null || p.getInventory().getChestplate().getType()==Material.LEATHER_CHESTPLATE) {
+            if (p.getInventory().getChestplate() == null || p.getInventory().getChestplate().getType() == Material.LEATHER_CHESTPLATE) {
                 p.getInventory().setChestplate(productItemStack);
             } else {
                 p.getInventory().addItem(productItemStack);
@@ -389,7 +403,7 @@ public class onTrade implements Listener {
             p.getInventory().removeItem(resourceItemStack);
             productItemStack.setAmount(productAmount);
             ItemMeta productItemMeta = productItemStack.getItemMeta();
-            if(productItemMeta.hasLore()){
+            if (productItemMeta.hasLore()) {
                 List<String> lore = productItemMeta.getLore();
                 lore.removeIf(s -> s.contains("Цена: "));
                 productItemMeta.setLore(lore);
