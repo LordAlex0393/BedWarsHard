@@ -135,7 +135,6 @@ public class GameUtil {
 
     public static void giveKit(Player player) {
         player.getInventory().clear();
-        player.setGameMode(GameMode.SURVIVAL);
         for (PotionEffect pe : player.getActivePotionEffects()) {
             player.removePotionEffect(pe.getType());
         }
