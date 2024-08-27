@@ -65,7 +65,7 @@ public class onDamage implements Listener {
         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(e.getPlayer());
         if(playerInfo != null) {
             if (playerInfo.getTeam().getBedStatus()) {
-                GameUtil.giveKit(e.getPlayer());
+                GameUtil.playerRespawn(playerInfo);
             } else {
                 e.getPlayer().setGameMode(GameMode.SPECTATOR);
             }
