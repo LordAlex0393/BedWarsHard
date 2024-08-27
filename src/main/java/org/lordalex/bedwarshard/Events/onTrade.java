@@ -200,7 +200,7 @@ public class onTrade implements Listener {
                 } else if (e.getCurrentItem().equals(ShopItem.potionStrength())) {
                     buyItem(e, GOLD, 4, ShopItem.potionStrength(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.potionInvisibility())) {
-                    buyItem(e, GOLD, 50, ShopItem.potionInvisibility(), 1);
+                    buyItem(e, IRON, 50, ShopItem.potionInvisibility(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }

@@ -718,10 +718,11 @@ public class ShopItem {
     }
     public static ItemStack potionInvisibility(){
         ItemStack potionStack = new ItemStack(Material.POTION, 1, (short) 8206);
-        ItemMeta potionMeta = potionStack.getItemMeta();
+        PotionMeta potionMeta = (PotionMeta) potionStack.getItemMeta();
         potionMeta.setDisplayName(ColorUtil.getMessage("&eЗелье невидимости"));
+        potionMeta.addCustomEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 15 * 20, 0), true);
         List<String> potionList = new ArrayList<>();
-        potionList.add(ColorUtil.getMessage("&dЦена: &e50 золота"));
+        potionList.add(ColorUtil.getMessage("&dЦена: &f50 железа"));
         potionMeta.setLore(potionList);
         potionStack.setItemMeta(potionMeta);
         return potionStack;
