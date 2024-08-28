@@ -1,6 +1,7 @@
 org\lordalex\bedwarshard\Commands\GameTabCompleter.class
 org\lordalex\bedwarshard\Items\TeamSelector.class
 org\lordalex\bedwarshard\Utils\GameUtil$2.class
+org\lordalex\bedwarshard\Events\onChestInteract.class
 org\lordalex\bedwarshard\Items\ShopItem.class
 org\lordalex\bedwarshard\Utils\ResourceUtil$1.class
 org\lordalex\bedwarshard\config\PlayerInfo.class

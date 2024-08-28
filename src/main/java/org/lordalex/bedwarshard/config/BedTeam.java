@@ -1,6 +1,8 @@
 package org.lordalex.bedwarshard.config;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import org.lordalex.bedwarshard.BedWarsHard;
 
 import java.util.HashSet;
@@ -17,6 +19,15 @@ public class BedTeam {
     private List<String> ironSpawns;
     private HashSet<Player> playerSet = new HashSet<>();
     private boolean BedStatus = true;
+    private Inventory teamChestInventory = Bukkit.createInventory(null, 27, "Командный сундук");
+
+    public Inventory getTeamChestInventory() {
+        return teamChestInventory;
+    }
+
+    public void setTeamChestInventory(Inventory teamChestInventory) {
+        this.teamChestInventory = teamChestInventory;
+    }
 
     public HashSet<Player> getPlayerSet() {
         return playerSet;
