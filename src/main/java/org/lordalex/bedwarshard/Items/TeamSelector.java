@@ -53,8 +53,8 @@ public class TeamSelector implements Listener {
         HashMap<String, BedTeam> teamMap = BedWarsHard.getMapConfig().getTeams();
 
         if (e.getView().getTitle().equals("Выбор команды")) {
+            e.setCancelled(true);
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
-                e.setCancelled(true);
                 for (String key : teamMap.keySet()) {
                     BedTeam team = teamMap.get(key);
                     String[] teamNames = team.getNames().split(",");
