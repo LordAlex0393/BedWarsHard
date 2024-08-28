@@ -9,6 +9,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Sandstone;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.config.PlayerInfo;
@@ -29,10 +31,6 @@ public class Trader {
         inv.setItem(7, ShopItem.potionMenuStack());
         inv.setItem(8, ShopItem.specialMenuStack());
         inv.setItem(13, ShopItem.exchangerMenuStack());
-//        for(int i = 0; i < ShopItem.globalMenuStacks().size()-1; i++){
-//            inv.setItem(i, ShopItem.globalMenuStacks().get(i));
-//        }
-//        inv.setItem(13, ShopItem.globalMenuStacks().get(ShopItem.globalMenuStacks().size()-1));
         p.openInventory(inv);
     }
 
@@ -148,6 +146,8 @@ public class Trader {
         vil.setCustomName(ChatColor.YELLOW + "Торговец");
         vil.setCustomNameVisible(true);
         vil.setAdult();
-        vil.setNoDamageTicks(216000);
+        vil.setRemoveWhenFarAway(false);
+        vil.setNoDamageTicks(20000 * 20);
+        vil.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20000 * 20, 10, false, false));
     }
 }

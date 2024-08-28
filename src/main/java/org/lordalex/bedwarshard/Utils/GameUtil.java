@@ -87,25 +87,21 @@ public class GameUtil {
     public static void game() {
         BedWarsHard.getGame().setGameState(GameState.GAME);
         BedWarsHard.getGame().setStartTime(System.currentTimeMillis() / 1000L);
-        System.out.println(System.currentTimeMillis() / 1000L);
         for (Player all : Bukkit.getOnlinePlayers()) {
             CustomScoreboard.updateScoreboard(all);
             clearPlayer(all);
 
             if (BedWarsHard.getGame().getPlayer(all) != null) {
                 playerRespawn(BedWarsHard.getGame().getPlayer(all));
-                all.setGameMode(GameMode.SURVIVAL);
             }
         }
         ResourceUtil.clearAllEntities();
-
-        ResourceUtil.activateBronzeSpawners();
-        ResourceUtil.activateIronSpawners();
-        ResourceUtil.activateGoldSpawners();
-
         Bukkit.getScheduler().scheduleSyncDelayedTask(BedWarsHard.getInstance(), new Runnable() {
             @Override
             public void run() {
+                ResourceUtil.activateBronzeSpawners();
+                ResourceUtil.activateIronSpawners();
+                ResourceUtil.activateGoldSpawners();
                 spawnTraders();
             }
         }, 20);
@@ -196,6 +192,7 @@ public class GameUtil {
     public static void playerRespawn(PlayerInfo playerInfo) {
         Player player = playerInfo.getPlayer();
         player.getInventory().clear();
+        player.setGameMode(GameMode.SURVIVAL);
 
         giveKit(playerInfo.getPlayer());
         Location loc = getRandomSpawnLocation(playerInfo);
