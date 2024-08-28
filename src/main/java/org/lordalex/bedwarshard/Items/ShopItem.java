@@ -774,7 +774,7 @@ public class ShopItem {
     public static ItemStack TNT(){
         ItemStack TNTStack = new ItemStack(Material.TNT, 1);
         ItemMeta TNTMeta = TNTStack.getItemMeta();
-        TNTMeta.setDisplayName(ColorUtil.getMessage("&Динамит"));
+        TNTMeta.setDisplayName(ColorUtil.getMessage("&fДинамит"));
         List<String> TNTList = new ArrayList<>();
         TNTList.add(ColorUtil.getMessage("&dЦена: &e7 золота"));
         TNTMeta.setLore(TNTList);

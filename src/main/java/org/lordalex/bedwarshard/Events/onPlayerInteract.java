@@ -10,7 +10,7 @@ import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.config.GameState;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
-public class onChestInteract implements Listener {
+public class onPlayerInteract implements Listener {
     @EventHandler
     public void onTeamChestInteract(PlayerInteractEvent e) {
         if(BedWarsHard.getGame().getGameState() == GameState.GAME) {
@@ -20,6 +20,16 @@ public class onChestInteract implements Listener {
                 PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
                 if (playerInfo != null) {
                     player.openInventory(playerInfo.getTeam().getTeamChestInventory());
+                }
+            }
+        }
+    }
+    @EventHandler
+    public void onFireTNT(PlayerInteractEvent e) {
+        if(BedWarsHard.getGame().getGameState() == GameState.GAME) {
+            if(e.getMaterial() == Material.FLINT_AND_STEEL){
+                if(e.getClickedBlock().getType() != Material.TNT){
+                    e.setCancelled(true);
                 }
             }
         }
