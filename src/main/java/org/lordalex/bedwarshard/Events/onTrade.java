@@ -149,15 +149,15 @@ public class onTrade implements Listener {
             e.setCancelled(true);
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
                 if (e.getCurrentItem().equals(ShopItem.bow1())) {
-                    buyItem(e, IRON, 4, ShopItem.bow1(), 1);
+                    buyItem(e, IRON, 7, ShopItem.bow1(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.bow2())) {
-                    buyItem(e, GOLD, 4, ShopItem.bow2(), 1);
+                    buyItem(e, GOLD, 1, ShopItem.bow2(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.bow3())) {
-                    buyItem(e, GOLD, 4, ShopItem.bow3(), 1);
+                    buyItem(e, GOLD, 9, ShopItem.bow3(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.bow4())) {
-                    buyItem(e, GOLD, 4, ShopItem.bow4(), 1);
+                    buyItem(e, GOLD, 30, ShopItem.bow4(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.arrow())) {
-                    buyItem(e, GOLD, 4, ShopItem.arrow(), 1);
+                    buyItem(e, GOLD, 1, ShopItem.arrow(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
                     Trader.openGlobalMenu((Player) e.getView().getPlayer());
                 }

@@ -82,7 +82,12 @@ public class onDamage implements Listener {
 
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent e) {
-        e.getDrops().clear();
+        if(BedWarsHard.getGame().isPlayerDrop()){
+            e.getDrops().removeIf(drop -> drop.getType() != Material.CLAY_BRICK && drop.getType() != Material.IRON_INGOT && drop.getType() != Material.GOLD_INGOT);
+        }
+        else{
+            e.getDrops().clear();
+        }
         Player victim = e.getEntity();
         Player killer = e.getEntity().getKiller();
 

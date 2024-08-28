@@ -25,6 +25,7 @@ public class Game {
     private int gameLength = 60;
     private int startingDelay = 1;
     private boolean bedDrop = false;
+    private boolean playerDrop = false;
     private long startTime = -1;
 
     public Game() {
@@ -32,6 +33,14 @@ public class Game {
         playerSet = new HashSet<>();
         spectatorSet = new HashSet<>();
         blocksLocationSet = new HashSet<>();
+    }
+
+    public boolean isPlayerDrop() {
+        return playerDrop;
+    }
+
+    public void setPlayerDrop(boolean playerDrop) {
+        this.playerDrop = playerDrop;
     }
 
     public long getStartTime() {

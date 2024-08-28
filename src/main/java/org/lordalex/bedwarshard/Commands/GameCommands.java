@@ -1,6 +1,7 @@
 package org.lordalex.bedwarshard.Commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,8 +44,10 @@ public class GameCommands implements CommandExecutor{
                 if (args[1].equalsIgnoreCase("kick-on-lose") && args.length == 3) {
                     if (args[2].equalsIgnoreCase("on")) {
                         BedWarsHard.getGame().setKickOnLose(true);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (args[2].equalsIgnoreCase("off")) {
-                        BedWarsHard.getGame().setKickOnLose(true);
+                        BedWarsHard.getGame().setKickOnLose(false);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dkick-on-lose&f:&a on&f,&c off"));
@@ -52,8 +55,10 @@ public class GameCommands implements CommandExecutor{
                 } else if (args[1].equalsIgnoreCase("protected-world") && args.length == 3) {
                     if (args[2].equalsIgnoreCase("on")) {
                         BedWarsHard.getGame().setProtectedWorld(true);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (args[2].equalsIgnoreCase("off")) {
-                        BedWarsHard.getGame().setProtectedWorld(true);
+                        BedWarsHard.getGame().setProtectedWorld(false);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dprotected-world&f:&a on&f,&c off"));
@@ -61,8 +66,10 @@ public class GameCommands implements CommandExecutor{
                 } else if (args[1].equalsIgnoreCase("edit-shop") && args.length == 3) {
                     if (args[2].equalsIgnoreCase("on")) {
                         BedWarsHard.getGame().setEditShop(true);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (args[2].equalsIgnoreCase("off")) {
-                        BedWarsHard.getGame().setEditShop(true);
+                        BedWarsHard.getGame().setEditShop(false);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dedit-shop&f:&a on&f,&c off"));
@@ -70,8 +77,10 @@ public class GameCommands implements CommandExecutor{
                 } else if (args[1].equalsIgnoreCase("limit-players") && args.length == 3) {
                     if (args[2].equalsIgnoreCase("on")) {
                         BedWarsHard.getGame().setLimitPlayers(true);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (args[2].equalsIgnoreCase("off")) {
-                        BedWarsHard.getGame().setLimitPlayers(true);
+                        BedWarsHard.getGame().setLimitPlayers(false);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dlimit-players&f:&a on&f,&c off"));
@@ -79,8 +88,10 @@ public class GameCommands implements CommandExecutor{
                 } else if (args[1].equalsIgnoreCase("bed-drop") && args.length == 3) {
                     if (args[2].equalsIgnoreCase("on")) {
                         BedWarsHard.getGame().setBedDrop(true);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (args[2].equalsIgnoreCase("off")) {
-                        BedWarsHard.getGame().setBedDrop(true);
+                        BedWarsHard.getGame().setBedDrop(false);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dbed-drop&f:&a on&f,&c off"));
@@ -89,6 +100,7 @@ public class GameCommands implements CommandExecutor{
                     float input = Float.parseFloat(args[2]);
                     if (input >= LOWEST_RATE && input <= HIGHEST_RATE) {
                         BedWarsHard.getGame().setBronzeRate(input);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от " + decimalFormat.format(LOWEST_RATE) + " до " + decimalFormat.format(HIGHEST_RATE)));
@@ -97,6 +109,7 @@ public class GameCommands implements CommandExecutor{
                     float input = Float.parseFloat(args[2]);
                     if (input >= LOWEST_RATE && input <= HIGHEST_RATE) {
                         BedWarsHard.getGame().setIronRate(input);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от " + decimalFormat.format(LOWEST_RATE) + " до " + decimalFormat.format(HIGHEST_RATE)));
@@ -105,6 +118,7 @@ public class GameCommands implements CommandExecutor{
                     float input = Float.parseFloat(args[2]);
                     if (input >= LOWEST_RATE && input <= HIGHEST_RATE) {
                         BedWarsHard.getGame().setGoldRate(input);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от " + decimalFormat.format(LOWEST_RATE) + " до " + decimalFormat.format(HIGHEST_RATE)));
@@ -113,6 +127,7 @@ public class GameCommands implements CommandExecutor{
                     int input = Integer.parseInt(args[2]);
                     if (input >= 0 && input <= MAX_DM_LENGTH) {
                         BedWarsHard.getGame().setFinalDM(input);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0 до " + MAX_DM_LENGTH));
@@ -121,6 +136,7 @@ public class GameCommands implements CommandExecutor{
                     int input = Integer.parseInt(args[2]);
                     if (input >= 1 && input <= MAX_GAME_LENGTH) {
                         BedWarsHard.getGame().setGameLength(input);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до " + MAX_GAME_LENGTH));
@@ -129,9 +145,21 @@ public class GameCommands implements CommandExecutor{
                     int input = Integer.parseInt(args[2]);
                     if (input >= 1 && input <= MAX_DELAY) {
                         BedWarsHard.getGame().setStartingDelay(input);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
                         p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до " + MAX_DELAY));
+                    }
+                } else if (args[1].equalsIgnoreCase("player-drop") && args.length == 3) {
+                    if (args[2].equalsIgnoreCase("on")) {
+                        BedWarsHard.getGame().setPlayerDrop(true);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
+                    } else if (args[2].equalsIgnoreCase("off")) {
+                        BedWarsHard.getGame().setPlayerDrop(false);
+                        sender.sendMessage(ChatColor.GREEN + "Флаг успешно изменен");
+                    } else if (sender instanceof Player) {
+                        Player p = (Player) sender;
+                        p.sendMessage(ColorUtil.getMessage("&fДопустимые значения для флага: &dplayer-drop&f:&a on&f,&c off"));
                     }
                 }
             } else if (sender instanceof Player) {
@@ -170,6 +198,10 @@ public class GameCommands implements CommandExecutor{
         String bedDrop = "&dbed-drop&f (&7Выпадение кровати при ломании&f): ";
         bedDrop += BedWarsHard.getGame().isBedDrop() ? yes : no;
 
+        String playerDrop = "&dplayer-drop&f (&7Выпадение ресурсов с игроков&f): ";
+        playerDrop += BedWarsHard.getGame().isPlayerDrop() ? yes : no;
+
+
         DecimalFormat decimalFormat = new DecimalFormat("#.#");
 
         p.sendMessage(ColorUtil.getMessage("&e---------- &dНастройки сервера&f (&e/game flag&f)&e ---------------"));
@@ -184,5 +216,6 @@ public class GameCommands implements CommandExecutor{
         p.sendMessage(ColorUtil.getMessage("&dgame-length&f (&7Установить длительность игры (минуты)&f): " + BedWarsHard.getGame().getGameLength()));
         p.sendMessage(ColorUtil.getMessage("&dstarting-delay&f (&7Установить время до старта (секунды)&f): " + BedWarsHard.getGame().getStartingDelay()));
         p.sendMessage(ColorUtil.getMessage(bedDrop));
+        p.sendMessage(ColorUtil.getMessage(playerDrop));
     }
 }
