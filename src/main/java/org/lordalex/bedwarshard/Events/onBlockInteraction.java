@@ -69,9 +69,7 @@ public class onBlockInteraction implements Listener {
     @EventHandler
     public void onBlockPlaceEvent(BlockPlaceEvent e) {
         Player player = e.getPlayer();
-        if (BedWarsHard.getGame().getGameState() == GameState.WAITING || BedWarsHard.getGame().getGameState() == GameState.STARTING && player.getGameMode() != GameMode.CREATIVE) {
-            e.setCancelled(true);
-        } else if (e.getBlock().getType() == Material.BED_BLOCK) {
+        if (e.getBlock().getType() == Material.BED_BLOCK) {
             for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
                 BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
                 for (String loc : team.getBed()) {
