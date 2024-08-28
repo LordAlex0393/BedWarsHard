@@ -48,6 +48,7 @@ public final class BedWarsHard extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new onTrade(), this);
         Bukkit.getPluginManager().registerEvents(new onPlayerInteract(), this);
         Bukkit.getPluginManager().registerEvents(new onEntityExplode(), this);
+        Bukkit.getPluginManager().registerEvents(new onConsume(), this);
     }
     public static Plugin getInstance(){
         return instance;
