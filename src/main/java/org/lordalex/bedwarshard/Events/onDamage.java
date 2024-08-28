@@ -29,7 +29,10 @@ public class onDamage implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent e) {
-        if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
+        if(!(e.getEntity() instanceof Player)){
+            e.setCancelled(true);
+        }
+        else if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
             Player victim = (Player) e.getEntity();
             PlayerInfo victimInfo = BedWarsHard.getGame().getPlayer(victim);
             if ((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)) {

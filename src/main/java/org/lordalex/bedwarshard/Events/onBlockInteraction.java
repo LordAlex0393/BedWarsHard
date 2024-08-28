@@ -12,6 +12,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.CustomScoreboard;
+import org.lordalex.bedwarshard.Utils.GameUtil;
 import org.lordalex.bedwarshard.Utils.YmlParser;
 import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.GameState;
@@ -84,8 +85,10 @@ public class onBlockInteraction implements Listener {
 
                         team.setBedStatus(true);
                         for (Player teamPlayer : team.getPlayerSet()) {
-                            if (teamPlayer.getGameMode() == GameMode.SPECTATOR) {
-                                teamPlayer.spigot().respawn();
+                            PlayerInfo teamPlayerInfo = BedWarsHard.getGame().getPlayer(teamPlayer);
+                            if (!teamPlayerInfo.isAlive()) {
+                                GameUtil.playerRespawn(teamPlayerInfo);
+                                teamPlayerInfo.setAlive(true);
                             }
                         }
                         for (Player all : e.getBlock().getWorld().getPlayers()) {

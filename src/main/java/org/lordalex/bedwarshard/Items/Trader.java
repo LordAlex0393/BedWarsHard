@@ -142,12 +142,14 @@ public class Trader {
     }
 
     public static void spawn(Location location){
-        Villager vil = (Villager) location.getWorld().spawnEntity(location, EntityType.VILLAGER);
+        //Bukkit.getWorld("world").spawnEntity(location, EntityType.VILLAGER);
+        Villager vil = (Villager) Bukkit.getWorld("world").spawnEntity(location, EntityType.VILLAGER);
         vil.setCustomName(ChatColor.YELLOW + "Торговец");
         vil.setCustomNameVisible(true);
         vil.setAdult();
         vil.setRemoveWhenFarAway(false);
         vil.setNoDamageTicks(20000 * 20);
+        System.out.println("Trader spawned on loc: " + location.toString());
         vil.addPotionEffect(new PotionEffect(PotionEffectType.SLOW, 20000 * 20, 10, false, false));
     }
 }
