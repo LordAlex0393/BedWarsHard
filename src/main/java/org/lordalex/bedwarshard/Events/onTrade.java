@@ -359,17 +359,24 @@ public class onTrade implements Listener {
 
         resourceItemsStack.setAmount(resourceAmount);
         p.getInventory().removeItem(resourceItemsStack);
+        boolean wasChanged = false;
         for (ItemStack product : productItemStack) {
             product.setAmount(productAmount);
             if (bootsMaterials.contains(product.getType()) && (p.getInventory().getBoots() == null || p.getInventory().getBoots().getType() == Material.LEATHER_BOOTS)) {
                 p.getInventory().setBoots(product);
+                wasChanged = true;
             } else if (leggingsMaterials.contains(product.getType()) && (p.getInventory().getLeggings() == null || p.getInventory().getLeggings().getType() == Material.LEATHER_LEGGINGS)) {
                 p.getInventory().setLeggings(product);
+                wasChanged = true;
             } else if (helmetMaterials.contains(product.getType()) && (p.getInventory().getHelmet() == null || p.getInventory().getHelmet().getType() == Material.LEATHER_HELMET)) {
                 p.getInventory().setHelmet(product);
+                wasChanged = true;
             } else {
                 p.getInventory().addItem(product);
             }
+        }
+        if(wasChanged){
+            p.sendMessage(ColorUtil.getMessage("&aВаша броня заменена на новую"));
         }
         p.updateInventory();
     }
@@ -389,6 +396,7 @@ public class onTrade implements Listener {
             }
             if (p.getInventory().getChestplate() == null || p.getInventory().getChestplate().getType() == Material.LEATHER_CHESTPLATE) {
                 p.getInventory().setChestplate(productItemStack);
+                p.sendMessage(ColorUtil.getMessage("&aВаш нагрудник заменен на новый"));
             } else {
                 p.getInventory().addItem(productItemStack);
             }
@@ -415,6 +423,7 @@ public class onTrade implements Listener {
                         slotStack.setType(productItemStack.getType());
                         slotStack.setItemMeta(productItemMeta);
                         p.updateInventory();
+                        p.sendMessage(ColorUtil.getMessage("&aВаш меч заменен на новый"));
                         return;
                     }
                 }
