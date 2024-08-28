@@ -8,11 +8,14 @@ import org.bukkit.entity.Player;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.GameUtil;
-
 import java.text.DecimalFormat;
 
-
 public class GameCommands implements CommandExecutor{
+    private static final float LOWEST_RATE = 0.25f;
+    private static final float HIGHEST_RATE = 20.0f;
+    private static final int MAX_DM_LENGTH = 30;
+    private static final int MAX_GAME_LENGTH = 120;
+    private static final int MAX_DELAY = 300;
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
         if (args == null || args.length < 1) {
             if (sender instanceof Player) {
@@ -35,6 +38,7 @@ public class GameCommands implements CommandExecutor{
                 p.sendMessage(all.getName());
             }
         } else if (args[0].equalsIgnoreCase("flag")) {
+            DecimalFormat decimalFormat = new DecimalFormat("#.##");
             if (args.length > 1) {
                 if (args[1].equalsIgnoreCase("kick-on-lose") && args.length == 3) {
                     if (args[2].equalsIgnoreCase("on")) {
@@ -83,51 +87,51 @@ public class GameCommands implements CommandExecutor{
                     }
                 } else if (args[1].equalsIgnoreCase("bronze-rate") && args.length == 3) {
                     float input = Float.parseFloat(args[2]);
-                    if (input >= 0.25f && input <= 10.0f) {
+                    if (input >= LOWEST_RATE && input <= HIGHEST_RATE) {
                         BedWarsHard.getGame().setBronzeRate(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 10.0"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от " + decimalFormat.format(LOWEST_RATE) + " до " + decimalFormat.format(HIGHEST_RATE)));
                     }
                 } else if (args[1].equalsIgnoreCase("iron-rate") && args.length == 3) {
                     float input = Float.parseFloat(args[2]);
-                    if (input >= 0.25f && input <= 50.0f) {
+                    if (input >= LOWEST_RATE && input <= HIGHEST_RATE) {
                         BedWarsHard.getGame().setIronRate(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 50.0"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от " + decimalFormat.format(LOWEST_RATE) + " до " + decimalFormat.format(HIGHEST_RATE)));
                     }
                 } else if (args[1].equalsIgnoreCase("gold-rate") && args.length == 3) {
                     float input = Float.parseFloat(args[2]);
-                    if (input >= 0.25f && input <= 100.0f) {
+                    if (input >= LOWEST_RATE && input <= HIGHEST_RATE) {
                         BedWarsHard.getGame().setGoldRate(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0.25 до 100.0"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от " + decimalFormat.format(LOWEST_RATE) + " до " + decimalFormat.format(HIGHEST_RATE)));
                     }
                 } else if (args[1].equalsIgnoreCase("final-dm") && args.length == 3) {
                     int input = Integer.parseInt(args[2]);
-                    if (input >= 0 && input <= 30) {
+                    if (input >= 0 && input <= MAX_DM_LENGTH) {
                         BedWarsHard.getGame().setFinalDM(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0 до 30"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 0 до " + MAX_DM_LENGTH));
                     }
                 } else if (args[1].equalsIgnoreCase("game-length") && args.length == 3) {
                     int input = Integer.parseInt(args[2]);
-                    if (input >= 1 && input <= 90) {
+                    if (input >= 1 && input <= MAX_GAME_LENGTH) {
                         BedWarsHard.getGame().setGameLength(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до 90"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до " + MAX_GAME_LENGTH));
                     }
                 } else if (args[1].equalsIgnoreCase("starting-delay") && args.length == 3) {
                     int input = Integer.parseInt(args[2]);
-                    if (input >= 1 && input <= 300) {
+                    if (input >= 1 && input <= MAX_DELAY) {
                         BedWarsHard.getGame().setStartingDelay(input);
                     } else if (sender instanceof Player) {
                         Player p = (Player) sender;
-                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до 300"));
+                        p.sendMessage(ColorUtil.getMessage("&cЗначение флага может быть только в границах от 1 до " + MAX_DELAY));
                     }
                 }
             } else if (sender instanceof Player) {
