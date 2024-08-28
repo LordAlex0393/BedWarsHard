@@ -11,6 +11,7 @@ org\lordalex\bedwarshard\config\MapConfig.class
 org\lordalex\bedwarshard\Events\onDamage$1.class
 org\lordalex\bedwarshard\Events\OnQuit.class
 org\lordalex\bedwarshard\Utils\ResourceUtil$3.class
+org\lordalex\bedwarshard\Events\onEntityExplode.class
 org\lordalex\bedwarshard\BedWarsHard.class
 org\lordalex\bedwarshard\Utils\CustomScoreboard.class
 org\lordalex\bedwarshard\Events\onDropItem.class
