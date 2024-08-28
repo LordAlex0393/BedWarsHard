@@ -59,8 +59,13 @@ public class onDamage implements Listener {
     public void onEntityDamage(EntityDamageEvent e) {
         if (BedWarsHard.getGame().getGameState() != GameState.GAME) {
             e.setCancelled(true);
-        } else if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
+        }
+        if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
             e.setDamage(99999);
+            Player player = (Player) e.getEntity();
+            if(BedWarsHard.getGame().getPlayer(player) == null){
+                player.teleport(YmlParser.parseLocation(player.getWorld(), BedWarsHard.getMapConfig().getLobby()));
+            }
         }
     }
     @EventHandler
