@@ -26,8 +26,8 @@ public class TeleportHome implements Listener {
     private final int DELAY = 1000;
     private BukkitTask teleport;
     private boolean waitingForTP = true;
-    private final double range = 0.2;
-    private double high = 0.017;
+    private final double range = 0.1;
+    private double high = 0;
 
     public TeleportHome() {
         this.cooldownsMap = new HashMap<UUID, Long>();
@@ -36,11 +36,9 @@ public class TeleportHome implements Listener {
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
         if (e.getItem() == null) return;
-        Player p = e.getPlayer();
-
         if (!(e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)) return;
         if (e.getItem().getType() != Material.SULPHUR) return;
-
+        Player p = e.getPlayer();
         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(p);
         if (playerInfo == null) {
             p.sendMessage(ColorUtil.getMessage("&cИ куда я тебя должен телепортировать?!"));
@@ -48,51 +46,48 @@ public class TeleportHome implements Listener {
             //cooldownsMap.put(p.getUniqueId(), System.currentTimeMillis());
             p.sendMessage("Начало телепортации");
             waitingForTP = true;
+            high=0.012;
             Location standLoc = p.getLocation();
 
 
             BukkitTask teleport = new BukkitRunnable() {
                 @Override
                 public void run() {
-                    if(waitingForTP) {
+                    if (waitingForTP) {
                         p.teleport(GameUtil.getRandomSpawnLocation(playerInfo));
                         p.sendMessage(ColorUtil.getMessage("&aВы телепортированы домой"));
                         waitingForTP = false;
-                    }
-                    else{
+                    } else {
                         cancel();
                     }
                 }
-            }.runTaskLater(BedWarsHard.getInstance(), 20 * 3);
-
+            }.runTaskLater(BedWarsHard.getInstance(), 20 * 6);
+//            Effect ef = Effect.values()[(int)Math.floor(Math.random() * Effect.values().length)];
+//            System.out.println(ef.toString());
+//            p.sendMessage(ef.toString());
 
             new BukkitRunnable() {
                 @Override
                 public void run() {
                     if (waitingForTP) {
-//                        Effect ef = Effect.SPELL;
-//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.1, 0), ef, 0);
-//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.2, 0), ef, 0);
-//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.3, 0), ef, 1);
-//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.4, 0), ef, 10000);
-
-                        //Location loc = p.getLocation();
-                        Location flameloc = p.getLocation();
-                        for(int i = 0; i <360; i+=5){
-                            flameloc.setZ(flameloc.getZ() + Math.cos(i)*0.1);
-                            flameloc.setX(flameloc.getX() + Math.sin(i)*0.1);
-                            flameloc.setY(flameloc.getY() + high);
-                            flameloc.getWorld().playEffect(flameloc, Effect.INSTANT_SPELL, -1);
+                        Effect ef = Effect.SNOWBALL_BREAK;
+                        int up = 1;
+                        for(int i = 0; i < BedWarsHard.getGame().getGameLength(); i++){
+                            p.getWorld().playEffect(p.getLocation().clone().add(0, high, 0), ef, 0);
                         }
-                        flameloc.setY(flameloc.getY() + high);
+                        high+=0.012;
+
+
+
                         //high+=0.017;
-                        if(Math.abs(standLoc.getX() - p.getLocation().getX()) > range || Math.abs(standLoc.getY() - p.getLocation().getY()) > range || Math.abs(standLoc.getZ() - p.getLocation().getZ()) > range){
+                        if (Math.abs(standLoc.getX() - p.getLocation().getX()) > range || Math.abs(standLoc.getY() - p.getLocation().getY()) > range || Math.abs(standLoc.getZ() - p.getLocation().getZ()) > range) {
                             p.sendMessage(ColorUtil.getMessage("&cТелепортация отменена"));
                             teleport.cancel();
                             waitingForTP = false;
                             cancel();
                         }
                     } else {
+                        high=0.014;
                         cancel();
                     }
                 }
@@ -103,6 +98,7 @@ public class TeleportHome implements Listener {
             p.sendMessage("Reloading: " + (COOLDOWN - (System.currentTimeMillis() - cooldownsMap.get(p.getUniqueId()))) / 1000 + "s");
         }
     }
+
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
         if (cooldownsMap.containsKey(e.getEntity().getUniqueId())) {
