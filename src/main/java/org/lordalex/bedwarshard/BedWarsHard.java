@@ -8,6 +8,7 @@ import org.lordalex.bedwarshard.Commands.GameCommands;
 import org.lordalex.bedwarshard.Commands.GameTabCompleter;
 import org.lordalex.bedwarshard.Events.*;
 import org.lordalex.bedwarshard.Items.TeamSelector;
+import org.lordalex.bedwarshard.Items.TeleportHome;
 import org.lordalex.bedwarshard.config.MapConfig;
 import org.lordalex.bedwarshard.config.Game;
 import org.lordalex.bedwarshard.Utils.YmlParser;

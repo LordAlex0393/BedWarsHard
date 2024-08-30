@@ -181,7 +181,7 @@ public class onTrade implements Listener {
             e.setCancelled(true);
             if (e.getCurrentItem() != null && e.getCurrentItem().getItemMeta() != null) {
                 if (e.getCurrentItem().equals(ShopItem.chest())) {
-                    buyItem(e, IRON, 1, ShopItem.chest(), 1);
+                    buyItem(e, IRON, 1, new ItemStack(Material.CHEST), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.enderChest())) {
                     buyItem(e, GOLD, 1, ShopItem.enderChest(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.returnButtonStack())) {
@@ -219,7 +219,7 @@ public class onTrade implements Listener {
                 } else if (e.getCurrentItem().equals(ShopItem.lighter())) {
                     buyItem(e, IRON, 7, ShopItem.lighter(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.TNT())) {
-                    buyItem(e, GOLD, 7, ShopItem.TNT(), 1);
+                    buyItem(e, GOLD, 7, new ItemStack(Material.TNT), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.enderPearl())) {
                     buyItem(e, GOLD, 13, ShopItem.enderPearl(), 1);
                 } else if (e.getCurrentItem().equals(ShopItem.teleportHome())) {
@@ -424,7 +424,6 @@ public class onTrade implements Listener {
                         slotStack.setItemMeta(productItemMeta);
                         p.updateInventory();
                         p.sendMessage(ColorUtil.getMessage("&aВаш меч заменен на новый"));
-                        return;
                     }
                 }
             } else {
