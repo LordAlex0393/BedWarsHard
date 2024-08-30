@@ -1,5 +1,7 @@
 package org.lordalex.bedwarshard.Items;
 
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +14,7 @@ import org.bukkit.scheduler.BukkitTask;
 import org.lordalex.bedwarshard.BedWarsHard;
 import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.GameUtil;
+import org.lordalex.bedwarshard.config.GameState;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
 import java.util.HashMap;
@@ -22,6 +25,9 @@ public class TeleportHome implements Listener {
     private final int COOLDOWN = 5000;
     private final int DELAY = 1000;
     private BukkitTask teleport;
+    private boolean waitingForTP = true;
+    private final double range = 0.2;
+    private double high = 0.017;
 
     public TeleportHome() {
         this.cooldownsMap = new HashMap<UUID, Long>();
@@ -39,15 +45,58 @@ public class TeleportHome implements Listener {
         if (playerInfo == null) {
             p.sendMessage(ColorUtil.getMessage("&cИ куда я тебя должен телепортировать?!"));
         } else if (!cooldownsMap.containsKey(p.getUniqueId()) || System.currentTimeMillis() - cooldownsMap.get(p.getUniqueId()) >= COOLDOWN) {
-            cooldownsMap.put(p.getUniqueId(), System.currentTimeMillis());
-            p.sendMessage("Starting teleportation");
+            //cooldownsMap.put(p.getUniqueId(), System.currentTimeMillis());
+            p.sendMessage("Начало телепортации");
+            waitingForTP = true;
+            Location standLoc = p.getLocation();
+
+
             BukkitTask teleport = new BukkitRunnable() {
                 @Override
                 public void run() {
-                    p.teleport(GameUtil.getRandomSpawnLocation(playerInfo));
-                    p.sendMessage("Вы телепортированы домой");
+                    if(waitingForTP) {
+                        p.teleport(GameUtil.getRandomSpawnLocation(playerInfo));
+                        p.sendMessage(ColorUtil.getMessage("&aВы телепортированы домой"));
+                        waitingForTP = false;
+                    }
+                    else{
+                        cancel();
+                    }
                 }
-            }.runTaskLater(BedWarsHard.getInstance(), 20 * 5);
+            }.runTaskLater(BedWarsHard.getInstance(), 20 * 3);
+
+
+            new BukkitRunnable() {
+                @Override
+                public void run() {
+                    if (waitingForTP) {
+//                        Effect ef = Effect.SPELL;
+//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.1, 0), ef, 0);
+//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.2, 0), ef, 0);
+//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.3, 0), ef, 1);
+//                        p.getWorld().playEffect(p.getLocation().clone().add(0, 0.4, 0), ef, 10000);
+
+                        //Location loc = p.getLocation();
+                        Location flameloc = p.getLocation();
+                        for(int i = 0; i <360; i+=5){
+                            flameloc.setZ(flameloc.getZ() + Math.cos(i)*0.1);
+                            flameloc.setX(flameloc.getX() + Math.sin(i)*0.1);
+                            flameloc.setY(flameloc.getY() + high);
+                            flameloc.getWorld().playEffect(flameloc, Effect.INSTANT_SPELL, -1);
+                        }
+                        flameloc.setY(flameloc.getY() + high);
+                        //high+=0.017;
+                        if(Math.abs(standLoc.getX() - p.getLocation().getX()) > range || Math.abs(standLoc.getY() - p.getLocation().getY()) > range || Math.abs(standLoc.getZ() - p.getLocation().getZ()) > range){
+                            p.sendMessage(ColorUtil.getMessage("&cТелепортация отменена"));
+                            teleport.cancel();
+                            waitingForTP = false;
+                            cancel();
+                        }
+                    } else {
+                        cancel();
+                    }
+                }
+            }.runTaskTimer(BedWarsHard.getInstance(), 0, 1);
 
         } else {
             //if the cooldown is not over, send the player a message
@@ -56,8 +105,7 @@ public class TeleportHome implements Listener {
     }
     @EventHandler
     public void onDamage(EntityDamageEvent e) {
-        if (cooldownsMap.containsKey(e.getEntity().getUniqueId())
-                && System.currentTimeMillis() - cooldownsMap.get(e.getEntity().getUniqueId()) < DELAY) {
+        if (cooldownsMap.containsKey(e.getEntity().getUniqueId())) {
             teleport.cancel();
         }
     }
