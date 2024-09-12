@@ -43,10 +43,9 @@ public class TeleportHome implements Listener {
         if (playerInfo == null) {
             p.sendMessage(ColorUtil.getMessage("&cИ куда я тебя должен телепортировать?!"));
         } else if (!cooldownsMap.containsKey(p.getUniqueId()) || System.currentTimeMillis() - cooldownsMap.get(p.getUniqueId()) >= COOLDOWN) {
-            //cooldownsMap.put(p.getUniqueId(), System.currentTimeMillis());
+            cooldownsMap.put(p.getUniqueId(), System.currentTimeMillis());
             p.sendMessage("Начало телепортации");
             waitingForTP = true;
-            high=0.012;
             Location standLoc = p.getLocation();
 
 
@@ -57,6 +56,7 @@ public class TeleportHome implements Listener {
                         p.teleport(GameUtil.getRandomSpawnLocation(playerInfo));
                         p.sendMessage(ColorUtil.getMessage("&aВы телепортированы домой"));
                         waitingForTP = false;
+                        high=0.012;
                     } else {
                         cancel();
                     }
@@ -83,11 +83,13 @@ public class TeleportHome implements Listener {
                         if (Math.abs(standLoc.getX() - p.getLocation().getX()) > range || Math.abs(standLoc.getY() - p.getLocation().getY()) > range || Math.abs(standLoc.getZ() - p.getLocation().getZ()) > range) {
                             p.sendMessage(ColorUtil.getMessage("&cТелепортация отменена"));
                             teleport.cancel();
+                            cooldownsMap.remove(p.getUniqueId());
                             waitingForTP = false;
+                            high=0.012;
                             cancel();
                         }
                     } else {
-                        high=0.014;
+                        high=0.012;
                         cancel();
                     }
                 }

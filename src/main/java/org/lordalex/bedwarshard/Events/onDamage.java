@@ -67,6 +67,7 @@ public class onDamage implements Listener {
                 player.teleport(YmlParser.parseLocation(player.getWorld(), BedWarsHard.getMapConfig().getLobby()));
             }
         }
+        System.out.println(e.getCause());
     }
     @EventHandler
     public void onPlayerRespawnEvent(PlayerRespawnEvent e) {
