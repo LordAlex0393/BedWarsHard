@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
 import org.lordalex.bedwarshard.BedWarsHard;
@@ -22,8 +23,7 @@ import java.util.UUID;
 
 public class TeleportHome implements Listener {
     private final HashMap<UUID, Long> cooldownsMap;
-    private final int COOLDOWN = 5000;
-    private final int DELAY = 1000;
+    private final int COOLDOWN = 12000;
     private BukkitTask teleport;
     private boolean waitingForTP = true;
     private final double range = 0.1;
@@ -55,6 +55,12 @@ public class TeleportHome implements Listener {
                     if (waitingForTP) {
                         p.teleport(GameUtil.getRandomSpawnLocation(playerInfo));
                         p.sendMessage(ColorUtil.getMessage("&aВы телепортированы домой"));
+
+                        int platformSlot = p.getInventory().getHeldItemSlot();
+                        ItemStack platformStack = p.getInventory().getItem(platformSlot);
+                        platformStack.setAmount(platformStack.getAmount()-1);
+                        p.getInventory().setItem(platformSlot, platformStack);
+
                         waitingForTP = false;
                         high=0.012;
                     } else {

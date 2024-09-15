@@ -7,6 +7,7 @@ import org.lordalex.bedwarshard.Commands.BedWarsCommands;
 import org.lordalex.bedwarshard.Commands.GameCommands;
 import org.lordalex.bedwarshard.Commands.GameTabCompleter;
 import org.lordalex.bedwarshard.Events.*;
+import org.lordalex.bedwarshard.Items.SavingPlatform;
 import org.lordalex.bedwarshard.Items.TeamSelector;
 import org.lordalex.bedwarshard.Items.TeleportHome;
 import org.lordalex.bedwarshard.config.MapConfig;
@@ -51,6 +52,7 @@ public final class BedWarsHard extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new onEntityExplode(), this);
         Bukkit.getPluginManager().registerEvents(new onConsume(), this);
         Bukkit.getPluginManager().registerEvents(new TeleportHome(), this);
+        Bukkit.getPluginManager().registerEvents(new SavingPlatform(), this);
     }
     public static Plugin getInstance(){
         return instance;
