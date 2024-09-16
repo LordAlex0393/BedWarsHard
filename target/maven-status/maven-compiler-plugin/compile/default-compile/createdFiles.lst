@@ -26,6 +26,7 @@ org\lordalex\bedwarshard\Events\onDropItem.class
 org\lordalex\bedwarshard\Items\SavingPlatform.class
 org\lordalex\bedwarshard\Events\onConsume.class
 org\lordalex\bedwarshard\Events\onBlockInteraction.class
+org\lordalex\bedwarshard\Items\TrackerGPS.class
 org\lordalex\bedwarshard\Events\onTrade.class
 org\lordalex\bedwarshard\Items\TeleportHome$1.class
 org\lordalex\bedwarshard\Utils\YmlParser.class
