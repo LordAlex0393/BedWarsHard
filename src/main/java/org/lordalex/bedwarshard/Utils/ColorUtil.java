@@ -16,10 +16,10 @@ public class ColorUtil {
                 return Color.BLACK;
             case "BLUE":
                 return Color.BLUE;
-            case "DARK_AQUA":
-                return Color.BLUE;
-            case "DARK_BLUE":
-                return Color.BLUE;
+            case "CYAN":
+                return Color.AQUA;
+            case "PINK":
+                return Color.FUCHSIA;
             case "DARK_GRAY":
                 return Color.GRAY;
             case "DARK_GREEN":
@@ -28,13 +28,13 @@ public class ColorUtil {
                 return Color.PURPLE;
             case "DARK_RED":
                 return Color.RED;
-            case "GOLD":
-                return Color.YELLOW;
+            case "ORANGE":
+                return Color.ORANGE;
             case "GRAY":
                 return Color.GRAY;
             case "GREEN":
                 return Color.GREEN;
-            case "LIGHT_PURPLE":
+            case "PURPLE":
                 return Color.PURPLE;
             case "RED":
                 return Color.RED;

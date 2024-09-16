@@ -3,6 +3,7 @@ C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarsha
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Items\TeleportHome.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Items\ShopItem.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Events\onPlayerInteract.java
+C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Items\Thor.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Commands\GameCommands.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Events\OnJoin.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Utils\ColorUtil.java
@@ -12,6 +13,7 @@ C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarsha
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Events\onDropItem.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Utils\CustomScoreboard.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Utils\GameUtil.java
+C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Items\TrackerGPS.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\Commands\BedWarsCommands.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\config\MapConfig.java
 C:\Users\Lord_Alex\IdeaProjects\BedWarsHard\src\main\java\org\lordalex\bedwarshard\config\GameState.java

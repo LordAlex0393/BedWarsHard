@@ -58,7 +58,6 @@ public class onBlockInteraction implements Listener {
                 }
             }
             player.sendMessage(ColorUtil.getMessage("&cСовсем хардкорщик?! Нельзя ломать свою кровать!"));
-            e.setCancelled(true);
         } else if (player.getGameMode() != GameMode.CREATIVE) {
             e.setCancelled(true);
         }
@@ -68,34 +67,36 @@ public class onBlockInteraction implements Listener {
     public void onBlockPlaceEvent(BlockPlaceEvent e) {
         Player player = e.getPlayer();
         if (e.getBlock().getType() == Material.BED_BLOCK) {
-            for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
-                BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-                for (String loc : team.getBed()) {
-                    Location bedLocation = YmlParser.parseLocation(Bukkit.getWorld("world"), loc);
-                    if (bedLocation.getBlockX() == e.getBlock().getLocation().getBlockX()
-                            && bedLocation.getBlockY() == e.getBlock().getLocation().getBlockY()
-                            && bedLocation.getBlockZ() == e.getBlock().getLocation().getBlockZ()) {
-                        PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
-                        String colorCode = "";
-                        if (playerInfo != null) colorCode += ("&" + playerInfo.getTeam().getColor());
+            if (BedWarsHard.getGame().isBedDrop()) {
+                for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
+                    BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
+                    for (String loc : team.getBed()) {
+                        Location bedLocation = YmlParser.parseLocation(Bukkit.getWorld("world"), loc);
+                        if (bedLocation.getBlockX() == e.getBlock().getLocation().getBlockX()
+                                && bedLocation.getBlockY() == e.getBlock().getLocation().getBlockY()
+                                && bedLocation.getBlockZ() == e.getBlock().getLocation().getBlockZ()) {
+                            PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(player);
+                            String colorCode = "";
+                            if (playerInfo != null) colorCode += ("&" + playerInfo.getTeam().getColor());
 
-                        team.setBedStatus(true);
-                        for (Player teamPlayer : team.getPlayerSet()) {
-                            PlayerInfo teamPlayerInfo = BedWarsHard.getGame().getPlayer(teamPlayer);
-                            if (!teamPlayerInfo.isAlive()) {
-                                GameUtil.playerRespawn(teamPlayerInfo);
-                                teamPlayerInfo.setAlive(true);
+                            team.setBedStatus(true);
+                            for (Player teamPlayer : team.getPlayerSet()) {
+                                PlayerInfo teamPlayerInfo = BedWarsHard.getGame().getPlayer(teamPlayer);
+                                if (!teamPlayerInfo.isAlive()) {
+                                    GameUtil.playerRespawn(teamPlayerInfo);
+                                    teamPlayerInfo.setAlive(true);
+                                }
                             }
+                            for (Player all : e.getBlock().getWorld().getPlayers()) {
+                                all.sendMessage(ColorUtil.getMessage("Игрок " + colorCode + player.getName() + "&f восстановил&" + team.getColor() + team.getNames().split(",")[1]) + " кровать");
+                                CustomScoreboard.updateScoreboard(all);
+                            }
+                            return;
                         }
-                        for (Player all : e.getBlock().getWorld().getPlayers()) {
-                            all.sendMessage(ColorUtil.getMessage("Игрок " + colorCode + player.getName() + "&f восстановил&" + team.getColor() + team.getNames().split(",")[1]) + " кровать");
-                            CustomScoreboard.updateScoreboard(all);
-                        }
-                        return;
                     }
                 }
+                player.sendMessage(ColorUtil.getMessage("&cКого пытаешься обмануть?! Кровать нельзя ставить в другое место!"));
             }
-            player.sendMessage(ColorUtil.getMessage("&cКого пытаешься обмануть?! Кровать нельзя ставить в другое место!"));
             e.setCancelled(true);
         } else {
             BedWarsHard.getGame().addBlock(e.getBlock().getLocation());

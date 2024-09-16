@@ -30,10 +30,9 @@ public class onDamage implements Listener {
 
     @EventHandler
     public void onEntityDamageByEntityEvent(EntityDamageByEntityEvent e) {
-        if(!(e.getEntity() instanceof Player)){
+        if (!(e.getEntity() instanceof Player)) {
             e.setCancelled(true);
-        }
-        else if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
+        } else if (BedWarsHard.getGame().getGameState() == GameState.GAME) {
             Player victim = (Player) e.getEntity();
             PlayerInfo victimInfo = BedWarsHard.getGame().getPlayer(victim);
             if ((e.getDamager() instanceof Player) && (e.getEntity() instanceof Player)) {
@@ -64,16 +63,17 @@ public class onDamage implements Listener {
         if (e.getCause() == EntityDamageEvent.DamageCause.VOID) {
             e.setDamage(99999);
             Player player = (Player) e.getEntity();
-            if(BedWarsHard.getGame().getPlayer(player) == null){
+            if (BedWarsHard.getGame().getPlayer(player) == null) {
                 player.teleport(YmlParser.parseLocation(player.getWorld(), BedWarsHard.getMapConfig().getLobby()));
             }
         }
         System.out.println(e.getCause());
     }
+
     @EventHandler
     public void onPlayerRespawnEvent(PlayerRespawnEvent e) {
         PlayerInfo playerInfo = BedWarsHard.getGame().getPlayer(e.getPlayer());
-        if(playerInfo != null) {
+        if (playerInfo != null) {
             if (playerInfo.getTeam().getBedStatus()) {
                 GameUtil.playerRespawn(playerInfo);
             } else {
@@ -84,10 +84,9 @@ public class onDamage implements Listener {
 
     @EventHandler
     public void onPlayerDeathEvent(PlayerDeathEvent e) {
-        if(BedWarsHard.getGame().isPlayerDrop()){
+        if (BedWarsHard.getGame().isPlayerDrop()) {
             e.getDrops().removeIf(drop -> drop.getType() != Material.CLAY_BRICK && drop.getType() != Material.IRON_INGOT && drop.getType() != Material.GOLD_INGOT);
-        }
-        else{
+        } else {
             e.getDrops().clear();
         }
         Player victim = e.getEntity();
@@ -110,7 +109,7 @@ public class onDamage implements Listener {
 
             if (!victimInfo.getTeam().getBedStatus()) {
                 victimInfo.setAlive(false);
-                victimInfo.setAliveTime((int) ((System.currentTimeMillis()/1000) - BedWarsHard.getGame().getStartTime()));
+                victimInfo.setAliveTime((int) ((System.currentTimeMillis() / 1000) - BedWarsHard.getGame().getStartTime()));
                 for (Player all : Bukkit.getOnlinePlayers()) {
                     CustomScoreboard.updateScoreboard(all);
                 }
@@ -118,6 +117,9 @@ public class onDamage implements Listener {
             Bukkit.getScheduler().scheduleSyncDelayedTask(BedWarsHard.getInstance(), new Runnable() {
                 @Override
                 public void run() {
+                    if (victimInfo.getTeam().getBedStatus()) {
+                        victimInfo.setAlive(false);
+                    }
                     victim.spigot().respawn();
                 }
             }, 20);
