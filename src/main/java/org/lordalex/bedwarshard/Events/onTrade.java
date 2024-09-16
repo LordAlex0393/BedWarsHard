@@ -316,6 +316,18 @@ public class onTrade implements Listener {
                 productItemMeta.setLore(lore);
                 productItemStack.setItemMeta(productItemMeta);
             }
+            PlayerInfo pi = BedWarsHard.getGame().getPlayer(p);
+            if(pi != null) {
+                if (resourceItemStack.getType() == Material.CLAY_BRICK) {
+                    pi.setSpentBronze(pi.getSpentBronze()+resourceAmount);
+                }
+                else if (resourceItemStack.getType() == Material.IRON_INGOT) {
+                    pi.setSpentIron(pi.getSpentIron()+resourceAmount);
+                }
+                else if (resourceItemStack.getType() == Material.GOLD_INGOT) {
+                    pi.setSpentGold(pi.getSpentGold()+resourceAmount);
+                }
+            }
             p.getInventory().addItem(productItemStack);
         }
     }

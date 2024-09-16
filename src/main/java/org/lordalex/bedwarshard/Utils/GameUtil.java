@@ -124,7 +124,6 @@ public class GameUtil {
         if(BedWarsHard.getGame().getGameState()!=GameState.ENDING){
             BedWarsHard.getGame().setGameState(GameState.ENDING);
             for(Player p : Bukkit.getOnlinePlayers()) {
-                //Bukkit.getWorld("world").playSound(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWardHard.config.getLobby()), Sound.LEVEL_UP, 3.0F, 1F);
                 p.playSound(p.getLocation(), Sound.LEVEL_UP, 3.0F, 1F);
             }
             for (String str : getWinnerStrings(winner)) {
@@ -147,6 +146,10 @@ public class GameUtil {
                         p.sendMessage(ColorUtil.getMessage("&e Убийств&f: " + pi.getKills()));
                         p.sendMessage(ColorUtil.getMessage("&e Смертей&f: " + pi.getDeaths()));
                         p.sendMessage(ColorUtil.getMessage("&e Кроватей&f: " + pi.getBrokenBeds()));
+                        p.sendMessage(ColorUtil.getMessage(" "));
+                        p.sendMessage(ColorUtil.getMessage("&e Золота&f: " + pi.getSpentGold()));
+                        p.sendMessage(ColorUtil.getMessage("&f Железа&f: " + pi.getSpentIron()));
+                        p.sendMessage(ColorUtil.getMessage("&6 Бронзы&f: " + pi.getSpentBronze()));
                         p.sendMessage(ColorUtil.getMessage("&a&l-------------------------"));
                         p.playSound(p.getLocation(), Sound.ORB_PICKUP, 3.0F, 1F);
                     }
@@ -161,7 +164,7 @@ public class GameUtil {
         if (winner != null) {
 
             finishStrings.add(ColorUtil.getMessage(line));
-            finishStrings.add(ColorUtil.getMessage("&7#&f Победила &" + winner.getColor() + winner.getNames().split(", ")[0] + " команда&f!"));
+            finishStrings.add(ColorUtil.getMessage("&7&l#&f&l Победила &" + winner.getColor() + "&l" + winner.getNames().split(", ")[0] + " команда&f&l!"));
 
             finishStrings.add(ColorUtil.getMessage("&7# "));
             for (Player winnerPlayer : winner.getPlayerSet()) {

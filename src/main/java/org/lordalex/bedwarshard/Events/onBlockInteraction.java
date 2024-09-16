@@ -1,9 +1,6 @@
 package org.lordalex.bedwarshard.Events;
 
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -52,6 +49,7 @@ public class onBlockInteraction implements Listener {
                             playerInfo.setBrokenBeds(playerInfo.getBrokenBeds() + 1);
                             for (Player all : e.getBlock().getWorld().getPlayers()) {
                                 all.sendMessage(ColorUtil.getMessage("Игрок " + colorCode + player.getName() + "&f сломал&" + team.getColor() + team.getNames().split(",")[1]) + " кровать");
+                                all.playSound(all.getLocation(), Sound.ENDERDRAGON_GROWL, 0.3F, 1.2F);
                                 CustomScoreboard.updateScoreboard(all);
                             }
                             return;
