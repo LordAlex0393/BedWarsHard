@@ -436,6 +436,7 @@ public class onTrade implements Listener {
                         slotStack.setItemMeta(productItemMeta);
                         p.updateInventory();
                         p.sendMessage(ColorUtil.getMessage("&aВаш меч заменен на новый"));
+                        return;
                     }
                 }
             } else {
