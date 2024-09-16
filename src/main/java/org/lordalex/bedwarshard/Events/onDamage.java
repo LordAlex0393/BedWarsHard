@@ -17,6 +17,7 @@ import org.lordalex.bedwarshard.Utils.ColorUtil;
 import org.lordalex.bedwarshard.Utils.CustomScoreboard;
 import org.lordalex.bedwarshard.Utils.GameUtil;
 import org.lordalex.bedwarshard.Utils.YmlParser;
+import org.lordalex.bedwarshard.config.BedTeam;
 import org.lordalex.bedwarshard.config.GameState;
 import org.lordalex.bedwarshard.config.PlayerInfo;
 
@@ -95,14 +96,6 @@ public class onDamage implements Listener {
 
         if (BedWarsHard.getGame().getPlayerInfoMap().containsKey(victim.getUniqueId())) {
             PlayerInfo victimInfo = BedWarsHard.getGame().getPlayer(victim);
-            if (!victimInfo.getTeam().getBedStatus()) {
-                victimInfo.setAlive(false);
-                victimInfo.setAliveTime((int) ((System.currentTimeMillis()/1000) - BedWarsHard.getGame().getStartTime()));
-                for (Player all : Bukkit.getOnlinePlayers()) {
-                    CustomScoreboard.updateScoreboard(all);
-                }
-            }
-
             if (e.getEntity().getKiller() instanceof Player && BedWarsHard.getGame().getPlayerInfoMap().containsKey(killer.getUniqueId())) {
                 PlayerInfo killerInfo = BedWarsHard.getGame().getPlayer(killer);
                 e.setDeathMessage(ColorUtil.getMessage("Игрок &" + victimInfo.getTeam().getColor() + victim.getName() + "&f убит игроком &" + killerInfo.getTeam().getColor() + killer.getName()));
@@ -113,6 +106,14 @@ public class onDamage implements Listener {
                 CustomScoreboard.updateScoreboard(killer);
             } else {
                 e.setDeathMessage(null);
+            }
+
+            if (!victimInfo.getTeam().getBedStatus()) {
+                victimInfo.setAlive(false);
+                victimInfo.setAliveTime((int) ((System.currentTimeMillis()/1000) - BedWarsHard.getGame().getStartTime()));
+                for (Player all : Bukkit.getOnlinePlayers()) {
+                    CustomScoreboard.updateScoreboard(all);
+                }
             }
             Bukkit.getScheduler().scheduleSyncDelayedTask(BedWarsHard.getInstance(), new Runnable() {
                 @Override

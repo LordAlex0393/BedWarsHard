@@ -106,10 +106,76 @@ public class GameUtil {
             }
         }, 20);
 
+        new BukkitRunnable(){
+            @Override
+            public void run(){
+                finish(null);
+            }
+        }.runTaskLater(BedWarsHard.getInstance(), 20 * 60 * BedWarsHard.getGame().getGameLength());
+
+
     }
 
     public static void stop() {
         BedWarsHard.getGame().setGameState(GameState.ENDING);
+    }
+
+    public static void finish(BedTeam winner) {
+        if(BedWarsHard.getGame().getGameState()!=GameState.ENDING){
+            BedWarsHard.getGame().setGameState(GameState.ENDING);
+            for(Player p : Bukkit.getOnlinePlayers()) {
+                //Bukkit.getWorld("world").playSound(YmlParser.parseLocation(Bukkit.getWorld("world"), BedWardHard.config.getLobby()), Sound.LEVEL_UP, 3.0F, 1F);
+                p.playSound(p.getLocation(), Sound.LEVEL_UP, 3.0F, 1F);
+            }
+            for (String str : getWinnerStrings(winner)) {
+                for(Player p : Bukkit.getOnlinePlayers()) {
+                    p.sendMessage(str);
+                }
+            }
+
+            new BukkitRunnable(){
+                @Override
+                public void run(){
+                    for(Player p : Bukkit.getOnlinePlayers()){
+                        if(BedWarsHard.getGame().getPlayer(p)==null){
+                            return;
+                        }
+                        PlayerInfo pi = BedWarsHard.getGame().getPlayer(p);
+                        p.sendMessage(ColorUtil.getMessage("&a&l-------------------------"));
+                        p.sendMessage(ColorUtil.getMessage("&e&l   Ваша статистика:"));
+                        p.sendMessage(ColorUtil.getMessage(" "));
+                        p.sendMessage(ColorUtil.getMessage("&e Убийств&f: " + pi.getKills()));
+                        p.sendMessage(ColorUtil.getMessage("&e Смертей&f: " + pi.getDeaths()));
+                        p.sendMessage(ColorUtil.getMessage("&e Кроватей&f: " + pi.getBrokenBeds()));
+                        p.sendMessage(ColorUtil.getMessage("&a&l-------------------------"));
+                        p.playSound(p.getLocation(), Sound.ORB_PICKUP, 3.0F, 1F);
+                    }
+                }
+            }.runTaskLater(BedWarsHard.getInstance(), 20 * 3);
+        }
+    }
+
+    private static List<String> getWinnerStrings(BedTeam winner) {
+        ArrayList<String> finishStrings = new ArrayList<>();
+        String line = "&7###################################";
+        if (winner != null) {
+
+            finishStrings.add(ColorUtil.getMessage(line));
+            finishStrings.add(ColorUtil.getMessage("&7#&f Победила &" + winner.getColor() + winner.getNames().split(", ")[0] + " команда&f!"));
+
+            finishStrings.add(ColorUtil.getMessage("&7# "));
+            for (Player winnerPlayer : winner.getPlayerSet()) {
+                finishStrings.add(ColorUtil.getMessage("&7#   &" + winner.getColor() + winnerPlayer.getName()));
+            }
+            finishStrings.add(ColorUtil.getMessage("&7# "));
+
+            finishStrings.add(ColorUtil.getMessage(line));
+        } else {
+            finishStrings.add(ColorUtil.getMessage(line));
+            finishStrings.add(ColorUtil.getMessage(" &f&l НИЧЬЯ"));
+            finishStrings.add(ColorUtil.getMessage(line));
+        }
+        return finishStrings;
     }
 
     public static void clearPlayer(Player player) {
@@ -121,7 +187,6 @@ public class GameUtil {
         player.setHealth(20);
         player.setFoodLevel(20);
         player.setGameMode(GameMode.ADVENTURE);
-        player.setCustomName("§f" + player.getName());
         player.setCustomNameVisible(true);
     }
 
@@ -200,10 +265,10 @@ public class GameUtil {
         playerInfo.getPlayer().setBedSpawnLocation(loc, true);
     }
 
-    public static void spawnTraders(){
+    public static void spawnTraders() {
         for (String key : BedWarsHard.getMapConfig().getTeams().keySet()) {
             BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
-            for(String position : team.getVillagers()){
+            for (String position : team.getVillagers()) {
                 Location traderSpawnLocation = YmlParser.parseLocation(Bukkit.getWorld("world"), position);
                 Trader.spawn(traderSpawnLocation);
             }

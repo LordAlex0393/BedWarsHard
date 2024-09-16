@@ -23,7 +23,7 @@ public class Game {
     private boolean editShop = false;
     private boolean limitPlayers = true;
     private int gameLength = 60;
-    private int startingDelay = 1;
+    private int startingDelay = 3;
     private boolean bedDrop = false;
     private boolean playerDrop = false;
     private long startTime = -1;

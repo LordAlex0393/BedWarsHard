@@ -172,7 +172,6 @@ public class TeamSelector implements Listener {
 
     public static void setPlayerTeam(Player player, BedTeam team){
         BedWarsHard.getGame().addPlayerInfo(new PlayerInfo(player, team));
-
         player.setCustomName("§" + team.getColor() + player.getName());
         player.setCustomNameVisible(true);
         player.setPlayerListName(ColorUtil.getMessage("&" + team.getColor() + player.getName()));

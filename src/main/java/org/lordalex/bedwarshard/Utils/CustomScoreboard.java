@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class CustomScoreboard {
     public static Scoreboard createScoreboard(ArrayList<String> scores) {
         ScoreboardManager manager = Bukkit.getScoreboardManager();
-        org.bukkit.scoreboard.Scoreboard scoreboard = manager.getNewScoreboard();
+        Scoreboard scoreboard = manager.getNewScoreboard();
 
         Objective objective = scoreboard.registerNewObjective(ColorUtil.getMessage("&b&lBedWars"), "Test");
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
@@ -102,6 +102,8 @@ public class CustomScoreboard {
         ArrayList<String> scores = new ArrayList<>();
         scores.add(ColorUtil.getMessage("Карта: &f&l" + BedWarsHard.getMapConfig().getName()));
         scores.add(" ");
+        int teamsCount = 0;
+        BedTeam winner = null;
         for(String key : BedWarsHard.getMapConfig().getTeams().keySet()){
             BedTeam team = BedWarsHard.getMapConfig().getTeams().get(key);
             if(team.getAlivePlayersInfo().size() > 0) {
@@ -111,7 +113,12 @@ public class CustomScoreboard {
                     teamStr += "&7 ⇐ Вы";
                 }
                 scores.add(ColorUtil.getMessage(teamStr));
+                winner = team;
+                teamsCount++;
             }
+        }
+        if(teamsCount <= 1){
+            GameUtil.finish(winner);
         }
         scores.add("  ");
         if(BedWarsHard.getGame().getPlayer(p) != null){
