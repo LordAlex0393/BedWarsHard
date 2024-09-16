@@ -36,5 +36,6 @@ org\lordalex\bedwarshard\Utils\ResourceUtil.class
 org\lordalex\bedwarshard\Events\OnJoin.class
 org\lordalex\bedwarshard\Events\onDamage.class
 org\lordalex\bedwarshard\Items\Trader.class
+org\lordalex\bedwarshard\Events\AsyncChatEvent.class
 org\lordalex\bedwarshard\Items\Thor.class
 org\lordalex\bedwarshard\Utils\ColorUtil.class

@@ -169,7 +169,7 @@ public class ShopItem {
         specialMenuList.add(ColorUtil.getMessage("&e-&b Кость тора"));
         specialMenuList.add(ColorUtil.getMessage("&e- GPS трекер"));
         specialMenuList.add(ColorUtil.getMessage("&e-&b Спасательная платформа"));
-        specialMenuList.add(ColorUtil.getMessage("&e-&b Ловушка"));
+        //specialMenuList.add(ColorUtil.getMessage("&e-&b Ловушка"));
         specialMenuMeta.setLore(specialMenuList);
         specialMenuStack.setItemMeta(specialMenuMeta);
         return specialMenuStack;

@@ -127,7 +127,7 @@ public class Trader {
         inv.setItem(10, ShopItem.thorBone());
         inv.setItem(11, ShopItem.trackerGPS());
         inv.setItem(12, ShopItem.savingPlatform());
-        inv.setItem(13, ShopItem.trap());
+        //inv.setItem(13, ShopItem.trap());
         inv.setItem(22, ShopItem.returnButtonStack());
         p.openInventory(inv);
     }

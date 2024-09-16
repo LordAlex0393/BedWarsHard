@@ -53,6 +53,7 @@ public final class BedWarsHard extends JavaPlugin {
         Bukkit.getPluginManager().registerEvents(new SavingPlatform(), this);
         Bukkit.getPluginManager().registerEvents(new TrackerGPS(), this);
         Bukkit.getPluginManager().registerEvents(new Thor(), this);
+        Bukkit.getPluginManager().registerEvents(new AsyncChatEvent(), this);
     }
     public static Plugin getInstance(){
         return instance;
